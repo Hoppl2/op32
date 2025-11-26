@@ -1,0 +1,59 @@
+########################################
+# VB6 / Visual Basic 6 .gitignore
+########################################
+
+# --- VB6 project & form binary parts ---
+# FRX: Binary companion files to FRM (Images, Binary data)
+#*.frx
+
+# CTL binary companion files
+*.ctx
+
+# --- Build artifacts & compiled binaries ---
+*.exe
+*.dll
+*.ocx
+*.tlb
+*.lib
+*.exp
+*.pdb
+*.obj
+*.res  # wenn du .res per VB6 erzeugen lässt (optional)
+
+# --- VB6 Group Projects ---
+# Enthalten oft absolute Pfade → besser ignorieren
+*.vbg
+
+# --- VB6 designer & other binary junk ---
+*.vbw     # Workspace (Layout, breakpoints...)
+*.log
+*.tmp
+
+# --- Installer / Packaging outputs ---
+*.cab
+*.msi
+*.vdd
+
+# --- Version control / backups created by VB6 ---
+*.bak
+*.old
+
+# --- Build folder ---
+/build/
+/bin/
+/dist/
+/output/
+/100128/
+/101022_winrezk/
+/130128/
+/130219/
+/140410_no_msv/
+/gs/
+/msv3/
+/save/
+/save_241201/
+*.idx
+*.ix1
+
+# --- IDE caches ---
+*.scc  # SourceSafe

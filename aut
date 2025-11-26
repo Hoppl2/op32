@@ -1,0 +1,66 @@
+Vergleichen der Dateien F:\140320\VB5SRC\WINWAWI\OP32\RueckKauf.cls und RUECKKAUF.CLS
+***** F:\140320\VB5SRC\WINWAWI\OP32\RueckKauf.cls
+    OrgZeit As Integer
+    dummy As String * 8
+End Type
+***** RUECKKAUF.CLS
+    OrgZeit As Integer
+    
+    BestellSupportId As Long
+    dummy As String * 4
+End Type
+*****
+
+***** F:\140320\VB5SRC\WINWAWI\OP32\RueckKauf.cls
+
+
+Public Property Get dummy$()
+dummy$ = ww.dummy
+End Property
+Public Property Let dummy(ByVal vNewValue$)
+ww.dummy = vNewValue$
+End Property
+***** RUECKKAUF.CLS
+
+Public Property Get BestellSupportId&()
+BestellSupportId& = ww.BestellSupportId
+End Property
+Public Property Let BestellSupportId(ByVal vNewValue&)
+ww.BestellSupportId = vNewValue
+End Property
+*****
+
+***** F:\140320\VB5SRC\WINWAWI\OP32\RueckKauf.cls
+
+Public Property Get RawData$()
+Dim temp$
+
+temp$ = String(SATZLEN, 0)
+CopyMemory ByVal temp$, ww, SATZLEN
+RawData$ = temp$
+
+End Property
+***** RUECKKAUF.CLS
+
+
+Public Property Get dummy$()
+dummy$ = ww.dummy
+End Property
+*****
+
+***** F:\140320\VB5SRC\WINWAWI\OP32\RueckKauf.cls
+***** RUECKKAUF.CLS
+Public Property Let dummy(ByVal vNewValue$)
+ww.dummy = vNewValue$
+End Property
+
+Public Property Get RawData$()
+Dim temp$
+
+temp$ = String(SATZLEN, 0)
+CopyMemory ByVal temp$, ww, SATZLEN
+RawData$ = temp$
+
+End Property
+*****
+

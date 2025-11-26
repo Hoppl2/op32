@@ -1,0 +1,192 @@
+Verglichen werden WinPvs.bas und i:winpvs.bas.
+****** WinPvs.bas
+Public NORMTAGZEIT%, PauseKl%, PauseGr%
+'Public TagAnf%, TagEnd%
+Public chkSPANNE As Boolean
+****** i:winpvs.bas
+Public NORMTAGZEIT%, PauseKl%, PauseGr%
+Public TagAnf%, TagEnd%
+Public chkSPANNE As Boolean
+******
+
+****** WinPvs.bas
+spb# = p3.SndPrm / 100#
+PrämBasis$ = p3.PrmBas
+****** i:winpvs.bas
+spb# = p3.SndPrm / 100#
+TagEnd = p3.TagEnd
+PrämBasis$ = p3.PrmBas
+******
+
+****** WinPvs.bas
+PauseGr% = p3.PauseGr: If PauseGr% = 0 Then PauseGr% = 60
+'TagAnf% = p3.TagAnf: If TagAnf% = 0 Then TagAnf% = 745
+'TagEnd% = p3.TagEnd: If TagEnd% = 0 Then TagEnd% = 1815
+
+****** i:winpvs.bas
+PauseGr% = p3.PauseGr: If PauseGr% = 0 Then PauseGr% = 60
+TagAnf% = p3.TagAnf: If TagAnf% = 0 Then TagAnf% = 745
+TagEnd% = p3.TagEnd: If TagEnd% = 0 Then TagEnd% = 1815
+
+******
+
+****** WinPvs.bas
+
+If (Dir$("fistam.dat") = "") Then ChDir "\user"
+****** i:winpvs.bas
+
+'If (Dir$("fistam.dat") = "") Then
+'  ChDrive "C:"
+'  ChDir "\user"
+'End If
+
+If (Dir$("fistam.dat") = "") Then ChDir "\user"
+******
+
+****** WinPvs.bas
+Call para.HoleFirmenStamm
+If (InStr(Oem2Ansi(para.Benutz), "Ä") <= 0) Then
+    Call iMsgBox("Dieses Programm hat Ihre Apotheke nicht gekauft !", vbCritical)
+    wpara.ExitEndSub
+'    Call frmAction.frmActionUnload
+    End
+    Call DefErrPop: Exit Sub
+End If
+
+****** i:winpvs.bas
+Call para.HoleFirmenStamm
+'If (InStr(para.Benutz, "ä") <= 0) Then
+'    Call iMsgBox("Dieses Programm hat Ihre Apotheke nicht gekauft !", vbCritical)
+'    wpara.ExitEndSub
+'    Call frmAction.frmActionUnload
+'    End
+'    Call DefErrPop: Exit Sub
+'End If
+
+******
+
+****** WinPvs.bas
+
+Call StopAnimation(frmAction)
+****** i:winpvs.bas
+
+
+
+Call StopAnimation(frmAction)
+******
+
+****** WinPvs.bas
+Call AnfangsBedingungen
+
+****** i:winpvs.bas
+Call AnfangsBedingungen
+'Call AuslesenFlexOffen(OffenRec())
+
+******
+
+****** WinPvs.bas
+Dim KdUmsatz#, ZusatzBasis#, Zusatzumsatz#, SonderBasis#
+Dim TagAnf%, TagEnd%, zw%
+Dim FeierTag As Boolean
+****** i:winpvs.bas
+Dim KdUmsatz#, ZusatzBasis#, Zusatzumsatz#, SonderBasis#
+Dim FeierTag As Boolean
+******
+
+****** WinPvs.bas
+      FeierTag = IstFeiertag(datum)
+      
+      If WoTag% <> vbSunday Then
+        TagAnf% = OffenRec(WoTag% - 2).iAbOffen
+        If TagAnf% Mod 100 > ToleranzOffen% Then
+          TagAnf% = TagAnf% \ 100 + (TagAnf% Mod 100 - ToleranzOffen%)
+        Else
+          zw% = TagAnf% Mod 100 + 60 - ToleranzOffen%
+          TagAnf% = (TagAnf% \ 100 - 1) * 100 + zw%
+        End If
+        TagEnd% = OffenRec(WoTag% - 2).iBisOffen
+        If (TagEnd% Mod 100 + ToleranzOffen%) < 60 Then
+          TagEnd% = TagEnd% + ToleranzOffen%
+        Else
+          TagEnd% = (TagEnd% \ 100 + 1) * 100
+        End If
+      End If
+    End If
+****** i:winpvs.bas
+      FeierTag = IstFeiertag(datum)
+    End If
+******
+
+****** WinPvs.bas
+Loop
+asatz = xMitte: If asatz < 64 Then asatz = 64
+Get #fpss, (asatz * 64!) + 1, p
+****** i:winpvs.bas
+Loop
+asatz = xMitte: If asatz < 1 Then asatz = 1
+Get #fpss, (asatz * 64!) + 1, p
+******
+
+****** WinPvs.bas
+    End If
+    GesamtOffen% = GesamtOffen% + OffenTagMinuten%
+Next i%
+****** i:winpvs.bas
+    End If
+    GesamtOffen% = GesamtOffen% + iOffenTagMinuten%
+Next i%
+******
+
+****** WinPvs.bas
+
+'s$ = frmWinPvsOptionen!txtOptionen0(0).Text
+'i% = InStr(s$, ":")
+'Do While i% > 0
+'  s$ = Left$(s$, i% - 1) + Mid$(s$, i% + 1)
+'  i% = InStr(s$, ":")
+'Loop
+''TagAnf% = Val(s$)
+'
+'
+'s$ = frmWinPvsOptionen!txtOptionen0(1).Text
+'i% = InStr(s$, ":")
+'Do While i% > 0
+'  s$ = Left$(s$, i% - 1) + Mid$(s$, i% + 1)
+'  i% = InStr(s$, ":")
+'Loop
+''TagEnd% = Val(s$)
+
+****** i:winpvs.bas
+
+s$ = frmWinPvsOptionen!txtOptionen0(0).Text
+i% = InStr(s$, ":")
+Do While i% > 0
+  s$ = Left$(s$, i% - 1) + Mid$(s$, i% + 1)
+  i% = InStr(s$, ":")
+Loop
+TagAnf% = Val(s$)
+
+
+s$ = frmWinPvsOptionen!txtOptionen0(1).Text
+i% = InStr(s$, ":")
+Do While i% > 0
+  s$ = Left$(s$, i% - 1) + Mid$(s$, i% + 1)
+  i% = InStr(s$, ":")
+Loop
+TagEnd% = Val(s$)
+
+******
+
+****** WinPvs.bas
+p3.SndPrm = fnx(spb#) * 100#
+'p3.TagAnf = TagAnf%
+'p3.TagEnd = TagEnd%
+p3.Normtag = NORMTAGZEIT%
+****** i:winpvs.bas
+p3.SndPrm = fnx(spb#) * 100#
+p3.TagAnf = TagAnf%
+p3.TagEnd = TagEnd%
+p3.Normtag = NORMTAGZEIT%
+******
+
+

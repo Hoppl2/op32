@@ -1,0 +1,616 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "clsPasswort"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Option Explicit
+
+Const SATZLEN = 40
+
+Private Type PasswordStruct
+    PASSWORD As String * 20
+    Name As String * 20
+End Type
+Dim pw As PasswordStruct
+
+Dim iName$(2)
+Dim iHandle%(2)
+Dim iAnzIndex%
+
+Dim dKurz$
+Dim dBezeichnung$
+Dim dName$
+Dim dZugriff$
+Dim dModus$
+Dim dSatzLen%
+Dim dHandle%
+Dim dAnzFields%
+
+Dim fKurz$()
+Dim fBezeichnung$()
+Dim fStart%()
+Dim fLaenge%()
+Dim fTyp$()
+Dim fKonv%()
+
+Dim FabsErrf%
+Dim iFabsRecno&
+
+Dim AktData As String * SATZLEN
+
+
+
+
+Private Const DefErrModul = "PASSWORT.CLS"
+
+Private Sub Class_Initialize()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("Class_Initialize")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+dKurz$ = "PASSWORT"
+dBezeichnung$ = "Passwort"
+dName$ = "password.dat"
+dZugriff$ = "R"
+dModus$ = "R"
+dSatzLen% = SATZLEN 'Len(PasswordRec)
+
+dAnzFields% = 2
+ReDim fKurz$(dAnzFields% - 1)
+ReDim fBezeichnung$(dAnzFields% - 1)
+ReDim fStart%(dAnzFields% - 1)
+ReDim fLaenge%(dAnzFields% - 1)
+ReDim fTyp$(dAnzFields% - 1)
+ReDim fKonv%(dAnzFields% - 1)
+
+fKurz$(0) = "PASSWORT"
+fBezeichnung$(0) = "Passwort"
+fStart%(0) = 1
+fLaenge%(0) = 20
+fTyp$(0) = "T"
+fKonv%(0) = 0
+
+fKurz$(1) = "NAME"
+fBezeichnung$(1) = "Name"
+fStart%(1) = 21
+fLaenge%(1) = 20
+fTyp$(1) = "T"
+fKonv%(1) = 0
+
+
+iAnzIndex% = 0
+
+    
+Set Pass1 = Me
+
+Call clsError.DefErrPop
+End Sub
+
+Sub FreeClass()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("FreeClass")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Set Pass1 = Nothing
+Call clsError.DefErrPop
+End Sub
+
+Sub OpenDatei()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("OpenDatei")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%
+
+If (RTrim$(dName$) <> "") Then
+    dHandle% = clsDat.FileOpen(RTrim$(dName$), RTrim$(dZugriff$), dModus$, dSatzLen%)
+End If
+For i% = 0 To (iAnzIndex% - 1)
+     FabsErrf% = clsDat.IndexOpen(iName$(i%), iHandle%(i%))
+Next i%
+
+Call clsError.DefErrPop
+End Sub
+
+Sub CloseDatei()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("CloseDatei")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%
+
+If (dHandle% > 0) Then
+    Close #dHandle%
+End If
+For i% = 0 To (iAnzIndex% - 1)
+     FabsErrf% = clsDat.IndexClose(iHandle%(i%))
+Next i%
+
+Call clsError.DefErrPop
+End Sub
+
+Sub SatzLock(Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("SatzLock")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsDat.iLock(dHandle%, Recno&)
+Call clsError.DefErrPop
+End Sub
+
+Sub SatzUnLock(Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("SatzUnLock")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsDat.iUnLock(dHandle%, Recno&)
+Call clsError.DefErrPop
+End Sub
+
+Sub GetRecord(Optional Recno& = 0)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("GetRecord")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+If (Recno& > 0) Then
+    Seek #dHandle%, Recno&
+End If
+Get #dHandle%, , pw
+Call clsError.DefErrPop
+End Sub
+
+Sub PutRecord(Optional Recno& = 0)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("PutRecord")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+If (Recno& > 0) Then
+    Seek #dHandle%, Recno&
+End If
+Put #dHandle%, , pw
+Call clsError.DefErrPop
+End Sub
+
+Sub GetInfoRecord(Optional Recno& = 0)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("GetInfoRecord")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+If (Recno& > 0) Then
+    Seek #dHandle%, Recno&
+End If
+Get #dHandle%, , AktData
+Call clsError.DefErrPop
+End Sub
+
+Function IndexSearch%(ind%, key$, Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("IndexSearch%")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FabsErrf% = clsDat.IndexSearch%(iHandle%(ind%), key$, Recno&)
+iFabsRecno& = Recno&
+IndexSearch% = FabsErrf%
+Call clsError.DefErrPop
+End Function
+
+Function IndexGeneric%(ind%, key$, Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("IndexGeneric%")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FabsErrf% = clsDat.IndexGeneric%(iHandle%(ind%), key$, Recno&)
+iFabsRecno& = Recno&
+IndexGeneric% = FabsErrf%
+Call clsError.DefErrPop
+End Function
+
+Function IndexNext%(ind%, AltRecno&, key$, Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("IndexNext%")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FabsErrf% = clsDat.IndexNext%(iHandle%(ind%), AltRecno&, key$, Recno&)
+iFabsRecno& = Recno&
+IndexNext% = FabsErrf%
+Call clsError.DefErrPop
+End Function
+
+Function IndexPrevious%(ind%, AltRecno&, key$, Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("IndexPrevious%")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FabsErrf% = clsDat.IndexPrevious%(iHandle%(ind%), AltRecno&, key$, Recno&)
+iFabsRecno& = Recno&
+IndexPrevious% = FabsErrf%
+Call clsError.DefErrPop
+End Function
+
+Function IndexInsert%(ind%, key$, Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("IndexInsert%")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FabsErrf% = clsDat.IndexInsert%(iHandle%(ind%), key$, Recno&)
+iFabsRecno& = Recno&
+IndexInsert% = FabsErrf%
+Call clsError.DefErrPop
+End Function
+
+Function IndexDelete%(ind%, AltRecno&, key$, Recno&)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("IndexDelete%")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FabsErrf% = clsDat.IndexDelete%(iHandle%(ind%), AltRecno&, key$, Recno&)
+iFabsRecno& = Recno&
+IndexDelete% = FabsErrf%
+Call clsError.DefErrPop
+End Function
+
+Function SucheFeldInd%(Typ%, SuchFeld$)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("SucheFeldInd%")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, ret%
+
+ret% = -1
+
+For i% = 0 To (dAnzFields% - 1)
+    If (Typ%) Then
+        If (fBezeichnung$(i%) = SuchFeld$) Then
+            ret% = i%
+            Exit For
+        End If
+    Else
+        If (fKurz$(i%) = SuchFeld$) Then
+            ret% = i%
+            Exit For
+        End If
+    End If
+Next i%
+
+SucheFeldInd% = ret%
+
+Call clsError.DefErrPop
+End Function
+
+Function Info$(iFeld$)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call clsError.DefErrFnc("Info$")
+Call clsError.DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case clsError.DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call ProjektForm.EndeDll
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim iValue As Variant
+Dim ind%
+Dim ret$, s$
+
+ret$ = ""
+
+s$ = UCase$(iFeld$)
+
+ind% = SucheFeldInd%(0, s$)
+If (ind% >= 0) Then
+    iValue = clsDat.FeldValue(Mid$(AktData$, fStart%(ind%), fLaenge%(ind%)), fTyp$(ind%), fKonv%(ind%))
+    ret$ = clsDat.DecodFeld(iValue, fTyp$(ind%), fKonv%(ind%))
+End If
+
+Info$ = ret$
+
+Call clsError.DefErrPop
+End Function
+
+Public Property Get FeldBezeichnung$(iFeld As Variant)
+Dim ind%
+Dim ret$, s$
+
+ret$ = ""
+
+If (VarType(iFeld) = vbString) Then
+    s$ = UCase$(iFeld)
+    ind% = SucheFeldInd%(0, s$)
+Else
+    ind% = iFeld
+End If
+If (ind% >= 0) Then
+    ret$ = fBezeichnung$(ind%)
+End If
+
+FeldBezeichnung$ = ret$
+
+End Property
+
+Public Property Get FeldKurz$(iFeld As Variant)
+Dim ind%
+Dim ret$, s$
+
+ret$ = ""
+
+If (VarType(iFeld) = vbString) Then
+    s$ = UCase$(iFeld)
+    ind% = SucheFeldInd%(1, s$)
+Else
+    ind% = iFeld
+End If
+If (ind% >= 0) Then
+    ret$ = fKurz$(ind%)
+End If
+
+FeldKurz = ret$
+
+End Property
+
+Public Property Get DateiBezeichnung$()
+DateiBezeichnung$ = dBezeichnung$
+End Property
+
+Public Property Get DateiKurz$()
+DateiKurz$ = dKurz$
+End Property
+
+Public Property Get AnzFelder%()
+AnzFelder% = dAnzFields%
+End Property
+
+Public Property Get DateiLen&()
+DateiLen& = LOF(dHandle%)
+End Property
+
+Public Property Get wert(iFeld$, Optional iIndex% = -1) As Variant
+Dim ind%
+Dim s$
+Dim ret As Variant
+
+ret = ""
+
+s$ = UCase$(iFeld$)
+
+If (iIndex% >= 0) Then
+    s$ = s$ + "(" + Mid$(Str$(iIndex%), 2) + ")"
+End If
+
+ind% = SucheFeldInd%(0, s$)
+If (ind% >= 0) Then
+    ret = clsDat.FeldValue(Mid$(AktData$, fStart%(ind%), fLaenge%(ind%)), fTyp$(ind%), fKonv%(ind%))
+End If
+
+wert = ret
+End Property
+
+Public Property Let wert(iFeld$, Optional iIndex% = -1, vNewValue As Variant)
+Dim ind%
+Dim s$, ret$
+
+ret$ = ""
+
+s$ = UCase$(iFeld$)
+
+If (iIndex% >= 0) Then
+    s$ = s$ + "(" + Mid$(Str$(iIndex%), 2) + ")"
+End If
+
+ind% = SucheFeldInd%(0, s$)
+If (ind% >= 0) Then
+    ret$ = clsDat.MakeFeld(vNewValue, fTyp$(ind%), fKonv%(ind%))
+    Mid$(AktData$, fStart%(ind%), fLaenge%(ind%)) = Left$(ret$ + Space$(fLaenge%(ind%)), fLaenge%(ind%))
+End If
+
+End Property
+
+
+Public Property Get code$()
+code$ = pw.PASSWORD
+End Property
+Public Property Let code(ByVal vNewValue$)
+pw.PASSWORD = vNewValue$
+End Property
+
+Public Property Get Name$()
+Name$ = pw.Name
+End Property
+Public Property Let Name(ByVal vNewValue$)
+pw.Name = vNewValue$
+End Property
+
+
+
+
+Public Property Get FabsRecno&()
+FabsRecno& = iFabsRecno&
+End Property
+
+
+
+

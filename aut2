@@ -1,0 +1,34 @@
+Verglichen werden include.bas und z:include.bas.
+****** include.bas
+
+Type RowaLsStruct
+    Beleg As String * 12
+    LifDat As String * 9
+    Ln As String * 1
+    pos As Integer
+End Type
+****** z:include.bas
+
+Type FeiertageStruct
+    Name As String * 25
+    KalenderTag As String * 10
+    Aktiv As String * 1
+End Type
+******
+
+****** include.bas
+
+
+****** z:include.bas
+
+Type RowaLsStruct
+    Beleg As String * 12
+    LifDat As String * 9
+    Ln As String * 1
+    pos As Integer
+End Type
+
+
+******
+
+

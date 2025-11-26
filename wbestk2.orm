@@ -1,0 +1,2979 @@
+VERSION 5.00
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.2#0"; "COMCTL32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.1#0"; "COMDLG32.OCX"
+Object = "{FE0065C0-1B7B-11CF-9D53-00AA003C9CB6}#1.0#0"; "COMCT232.OCX"
+Object = "{648A5603-2C6E-101B-82B6-000000000014}#1.1#0"; "MSCOMM32.OCX"
+Begin VB.Form frmAction 
+   BorderStyle     =   0  'Kein
+   Caption         =   "Wbestk2"
+   ClientHeight    =   7890
+   ClientLeft      =   285
+   ClientTop       =   645
+   ClientWidth     =   10860
+   BeginProperty Font 
+      Name            =   "Arial"
+      Size            =   9.75
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "wbestk2.frx":0000
+   KeyPreview      =   -1  'True
+   LinkMode        =   1  'Quelle
+   LinkTopic       =   "Fernsteuerung"
+   ScaleHeight     =   7890
+   ScaleWidth      =   10860
+   ShowInTaskbar   =   0   'False
+   WindowState     =   1  'Minimimiert
+   Begin VB.PictureBox picBack 
+      BorderStyle     =   0  'Kein
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   8640
+      Index           =   0
+      Left            =   0
+      ScaleHeight     =   8640
+      ScaleWidth      =   10695
+      TabIndex        =   0
+      TabStop         =   0   'False
+      Top             =   840
+      Visible         =   0   'False
+      Width           =   10695
+      Begin VB.CommandButton cmdOk 
+         Caption         =   "OK"
+         Default         =   -1  'True
+         Height          =   450
+         Index           =   0
+         Left            =   1680
+         TabIndex        =   72
+         TabStop         =   0   'False
+         Top             =   0
+         Width           =   1200
+      End
+      Begin VB.CommandButton cmdEsc 
+         Cancel          =   -1  'True
+         Caption         =   "ESC"
+         Height          =   450
+         Index           =   0
+         Left            =   0
+         TabIndex        =   71
+         TabStop         =   0   'False
+         Top             =   0
+         Width           =   1200
+      End
+      Begin MSCommLib.MSComm comSenden 
+         Left            =   8400
+         Top             =   6240
+         _ExtentX        =   1005
+         _ExtentY        =   1005
+         _Version        =   327681
+         DTREnable       =   -1  'True
+      End
+      Begin VB.PictureBox picArbeitBack 
+         BackColor       =   &H00C0E0FF&
+         BorderStyle     =   0  'Kein
+         Height          =   4935
+         Index           =   0
+         Left            =   75
+         ScaleHeight     =   4935
+         ScaleWidth      =   9900
+         TabIndex        =   9
+         Top             =   90
+         Width           =   9900
+         Begin VB.PictureBox picBestellWerte 
+            AutoRedraw      =   -1  'True
+            Height          =   615
+            Left            =   1320
+            ScaleHeight     =   555
+            ScaleWidth      =   1035
+            TabIndex        =   28
+            Top             =   3480
+            Visible         =   0   'False
+            Width           =   1095
+         End
+         Begin MSFlexGridLib.MSFlexGrid flxarbeit 
+            Height          =   3960
+            Index           =   0
+            Left            =   240
+            TabIndex        =   12
+            Top             =   720
+            Width           =   9480
+            _ExtentX        =   16722
+            _ExtentY        =   6985
+            _Version        =   65541
+            Rows            =   0
+            Cols            =   0
+            FixedRows       =   0
+            FixedCols       =   0
+            BackColor       =   -2147483633
+            BackColorBkg    =   16514774
+            ScrollTrack     =   -1  'True
+            FocusRect       =   0
+            GridLines       =   0
+            ScrollBars      =   2
+            SelectionMode   =   1
+         End
+         Begin VB.Label lblArbeit 
+            Alignment       =   2  'Zentriert
+            BackColor       =   &H00C0C0FF&
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   0
+            Left            =   90
+            TabIndex        =   13
+            Top             =   195
+            Width           =   9615
+         End
+      End
+      Begin VB.PictureBox picInfoBack 
+         BackColor       =   &H00E8FFFE&
+         BorderStyle     =   0  'Kein
+         Height          =   2415
+         Index           =   0
+         Left            =   75
+         ScaleHeight     =   2415
+         ScaleWidth      =   9900
+         TabIndex        =   10
+         Top             =   5280
+         Width           =   9900
+         Begin VB.PictureBox picInfo 
+            AutoRedraw      =   -1  'True
+            Height          =   615
+            Index           =   0
+            Left            =   1560
+            ScaleHeight     =   555
+            ScaleWidth      =   1035
+            TabIndex        =   27
+            Top             =   1200
+            Visible         =   0   'False
+            Width           =   1095
+         End
+         Begin VB.Timer tmrAction 
+            Interval        =   5000
+            Left            =   720
+            Top             =   1080
+         End
+         Begin MSFlexGridLib.MSFlexGrid flxInfo 
+            Height          =   1500
+            Index           =   0
+            Left            =   600
+            TabIndex        =   14
+            Top             =   840
+            Width           =   9480
+            _ExtentX        =   16722
+            _ExtentY        =   2646
+            _Version        =   65541
+            Rows            =   0
+            Cols            =   1
+            FixedRows       =   0
+            FixedCols       =   0
+            BackColor       =   -2147483633
+            BackColorBkg    =   -2147483633
+            FocusRect       =   0
+            HighLight       =   2
+            GridLinesFixed  =   1
+            ScrollBars      =   2
+            SelectionMode   =   1
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Zentriert
+            BackColor       =   &H00C0C0FF&
+            Caption         =   "Information zu Artikel"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   0
+            Left            =   90
+            TabIndex        =   15
+            Top             =   270
+            Width           =   9615
+         End
+      End
+      Begin VB.CommandButton cmdDummy 
+         Caption         =   "OK"
+         Height          =   240
+         Index           =   2
+         Left            =   8040
+         TabIndex        =   1
+         TabStop         =   0   'False
+         Top             =   1200
+         Width           =   240
+      End
+   End
+   Begin VB.PictureBox picToolbar 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   3240
+      ScaleHeight     =   300
+      ScaleWidth      =   1275
+      TabIndex        =   2
+      TabStop         =   0   'False
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   1335
+      Begin VB.CommandButton cmdToolbar 
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   120
+         Style           =   1  'Grafisch
+         TabIndex        =   3
+         TabStop         =   0   'False
+         Top             =   120
+         Width           =   495
+      End
+      Begin VB.Label lblTasten 
+         Alignment       =   2  'Zentriert
+         Caption         =   "Label1"
+         BeginProperty Font 
+            Name            =   "Small Fonts"
+            Size            =   6.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   840
+         TabIndex        =   16
+         Top             =   0
+         Width           =   375
+      End
+   End
+   Begin VB.PictureBox picBack 
+      BorderStyle     =   0  'Kein
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   8520
+      Index           =   7
+      Left            =   0
+      ScaleHeight     =   8520
+      ScaleWidth      =   10095
+      TabIndex        =   41
+      TabStop         =   0   'False
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   10095
+      Begin VB.PictureBox picArbeitBack 
+         BorderStyle     =   0  'Kein
+         Height          =   7500
+         Index           =   7
+         Left            =   0
+         ScaleHeight     =   7500
+         ScaleWidth      =   9900
+         TabIndex        =   46
+         Top             =   600
+         Width           =   9900
+         Begin VB.CommandButton cmdEsc 
+            Caption         =   "ESC"
+            Height          =   450
+            Index           =   7
+            Left            =   3600
+            TabIndex        =   66
+            Top             =   6480
+            Width           =   1200
+         End
+         Begin VB.CommandButton cmdOk 
+            Caption         =   "Senden"
+            Height          =   450
+            Index           =   7
+            Left            =   2160
+            TabIndex        =   65
+            Top             =   6480
+            Width           =   1200
+         End
+         Begin VB.Frame fmeAuftrag 
+            Caption         =   "Auftrag"
+            Height          =   3615
+            Left            =   360
+            TabIndex        =   58
+            Top             =   1080
+            Width           =   5055
+            Begin VB.OptionButton optSendeModus 
+               Caption         =   "Warten auf Anruf"
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   12
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   375
+               Index           =   1
+               Left            =   360
+               TabIndex        =   62
+               Top             =   2640
+               Width           =   3655
+            End
+            Begin VB.OptionButton optSendeModus 
+               Caption         =   "Anruf durchführen"
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   12
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   375
+               Index           =   0
+               Left            =   360
+               TabIndex        =   61
+               Top             =   2160
+               Width           =   3655
+            End
+            Begin VB.TextBox txtAuftragsArt 
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   12
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   405
+               Left            =   3840
+               MaxLength       =   2
+               TabIndex        =   60
+               Top             =   1200
+               Width           =   735
+            End
+            Begin VB.TextBox txtAuftragsErg 
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   12
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   405
+               Left            =   3840
+               MaxLength       =   2
+               TabIndex        =   59
+               Top             =   480
+               Width           =   735
+            End
+            Begin VB.Label LblAuftragsArt 
+               Caption         =   "Auftragsart"
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   12
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   375
+               Left            =   360
+               TabIndex        =   64
+               Top             =   1200
+               Width           =   3495
+            End
+            Begin VB.Label lblAuftragsErg 
+               Caption         =   "Auftragsergänzung"
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   12
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   375
+               Left            =   360
+               TabIndex        =   63
+               Top             =   480
+               Width           =   3495
+            End
+         End
+         Begin VB.Frame fmeLieferant 
+            Caption         =   "Lieferant"
+            Height          =   3615
+            Left            =   5640
+            TabIndex        =   47
+            Top             =   1080
+            Width           =   5055
+            Begin VB.Label lblSendLieferant 
+               Caption         =   "IDF-Apotheke"
+               Height          =   300
+               Index           =   0
+               Left            =   360
+               TabIndex        =   57
+               Top             =   480
+               Width           =   1935
+            End
+            Begin VB.Label lblSendLieferant 
+               Caption         =   "IDF-Lieferant"
+               Height          =   300
+               Index           =   1
+               Left            =   360
+               TabIndex        =   56
+               Top             =   840
+               Width           =   2535
+            End
+            Begin VB.Label lblSendLieferant 
+               Caption         =   "Tel-Lieferant"
+               Height          =   300
+               Index           =   2
+               Left            =   360
+               TabIndex        =   55
+               Top             =   1440
+               Width           =   2535
+            End
+            Begin VB.Label lblSendLieferant 
+               Height          =   300
+               Index           =   3
+               Left            =   360
+               TabIndex        =   54
+               Top             =   1980
+               Width           =   3975
+            End
+            Begin VB.Label lblSendLieferant 
+               Height          =   300
+               Index           =   4
+               Left            =   360
+               TabIndex        =   53
+               Top             =   2340
+               Width           =   3975
+            End
+            Begin VB.Label lblSendLieferant 
+               Height          =   300
+               Index           =   5
+               Left            =   360
+               TabIndex        =   52
+               Top             =   2700
+               Width           =   3975
+            End
+            Begin VB.Label lblSendLieferant 
+               Height          =   300
+               Index           =   6
+               Left            =   360
+               TabIndex        =   51
+               Top             =   3060
+               Width           =   3975
+            End
+            Begin VB.Label lblSendLieferant2 
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   300
+               Index           =   0
+               Left            =   2400
+               TabIndex        =   50
+               Top             =   480
+               Width           =   1695
+            End
+            Begin VB.Label lblSendLieferant2 
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   300
+               Index           =   1
+               Left            =   2400
+               TabIndex        =   49
+               Top             =   840
+               Width           =   1695
+            End
+            Begin VB.Label lblSendLieferant2 
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   300
+               Index           =   2
+               Left            =   2400
+               TabIndex        =   48
+               Top             =   1440
+               Width           =   1695
+            End
+         End
+         Begin MSFlexGridLib.MSFlexGrid flxarbeit 
+            Height          =   420
+            Index           =   7
+            Left            =   480
+            TabIndex        =   67
+            TabStop         =   0   'False
+            Top             =   6600
+            Visible         =   0   'False
+            Width           =   1455
+            _ExtentX        =   2566
+            _ExtentY        =   741
+            _Version        =   65541
+            Rows            =   0
+            Cols            =   0
+            FixedRows       =   0
+            FixedCols       =   0
+            BackColor       =   -2147483633
+            BackColorBkg    =   -2147483633
+            FocusRect       =   0
+            GridLines       =   0
+            ScrollBars      =   2
+            SelectionMode   =   1
+         End
+         Begin VB.Label lblArbeit 
+            Alignment       =   2  'Zentriert
+            Caption         =   "Lieferant auswählen"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   7
+            Left            =   120
+            TabIndex        =   70
+            Top             =   240
+            Width           =   9615
+         End
+         Begin VB.Label lblModemTyp 
+            Caption         =   "Modem:"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Left            =   480
+            TabIndex        =   69
+            Top             =   5040
+            Width           =   1335
+         End
+         Begin VB.Label lblModemTypAnzeige 
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Left            =   2010
+            TabIndex        =   68
+            Top             =   5040
+            Width           =   4575
+         End
+      End
+      Begin VB.PictureBox picInfoBack 
+         BackColor       =   &H00E8FFFE&
+         BorderStyle     =   0  'Kein
+         Height          =   1455
+         Index           =   7
+         Left            =   120
+         ScaleHeight     =   1455
+         ScaleWidth      =   9900
+         TabIndex        =   42
+         Top             =   6240
+         Width           =   9900
+         Begin VB.PictureBox picInfo 
+            AutoRedraw      =   -1  'True
+            Height          =   615
+            Index           =   7
+            Left            =   3000
+            ScaleHeight     =   555
+            ScaleWidth      =   1035
+            TabIndex        =   43
+            Top             =   720
+            Visible         =   0   'False
+            Width           =   1095
+         End
+         Begin MSFlexGridLib.MSFlexGrid flxInfo 
+            Height          =   540
+            Index           =   7
+            Left            =   240
+            TabIndex        =   44
+            TabStop         =   0   'False
+            Top             =   840
+            Width           =   2160
+            _ExtentX        =   3810
+            _ExtentY        =   953
+            _Version        =   65541
+            Rows            =   0
+            Cols            =   1
+            FixedRows       =   0
+            FixedCols       =   0
+            BackColor       =   -2147483633
+            BackColorBkg    =   -2147483633
+            FocusRect       =   0
+            HighLight       =   2
+            GridLines       =   0
+            GridLinesFixed  =   1
+            ScrollBars      =   2
+            SelectionMode   =   1
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Zentriert
+            BackColor       =   &H00C0C0FF&
+            Caption         =   "Information zu Artikel"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   7
+            Left            =   120
+            TabIndex        =   45
+            Top             =   270
+            Width           =   9615
+         End
+      End
+   End
+   Begin VB.PictureBox picBack 
+      BorderStyle     =   0  'Kein
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   8640
+      Index           =   1
+      Left            =   0
+      ScaleHeight     =   8640
+      ScaleWidth      =   10695
+      TabIndex        =   32
+      TabStop         =   0   'False
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   10695
+      Begin VB.PictureBox picInfoBack 
+         BackColor       =   &H00E8FFFE&
+         BorderStyle     =   0  'Kein
+         Height          =   2415
+         Index           =   1
+         Left            =   75
+         ScaleHeight     =   2415
+         ScaleWidth      =   9900
+         TabIndex        =   33
+         Top             =   5280
+         Width           =   9900
+         Begin VB.PictureBox picInfo 
+            AutoRedraw      =   -1  'True
+            Height          =   615
+            Index           =   1
+            Left            =   1560
+            ScaleHeight     =   555
+            ScaleWidth      =   1035
+            TabIndex        =   34
+            Top             =   1200
+            Visible         =   0   'False
+            Width           =   1095
+         End
+         Begin MSFlexGridLib.MSFlexGrid flxInfo 
+            Height          =   1500
+            Index           =   1
+            Left            =   600
+            TabIndex        =   35
+            Top             =   840
+            Width           =   9480
+            _ExtentX        =   16722
+            _ExtentY        =   2646
+            _Version        =   65541
+            Rows            =   0
+            Cols            =   1
+            FixedRows       =   0
+            FixedCols       =   0
+            BackColor       =   -2147483633
+            BackColorBkg    =   -2147483633
+            FocusRect       =   0
+            HighLight       =   2
+            GridLinesFixed  =   1
+            ScrollBars      =   2
+            SelectionMode   =   1
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Zentriert
+            BackColor       =   &H00C0C0FF&
+            Caption         =   "Information zu Artikel"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   1
+            Left            =   90
+            TabIndex        =   36
+            Top             =   270
+            Width           =   9615
+         End
+      End
+      Begin VB.PictureBox picArbeitBack 
+         BackColor       =   &H00C0E0FF&
+         BorderStyle     =   0  'Kein
+         Height          =   4935
+         Index           =   1
+         Left            =   75
+         ScaleHeight     =   4935
+         ScaleWidth      =   9900
+         TabIndex        =   37
+         Top             =   90
+         Width           =   9900
+         Begin MSFlexGridLib.MSFlexGrid flxarbeit 
+            Height          =   3960
+            Index           =   1
+            Left            =   240
+            TabIndex        =   38
+            Top             =   720
+            Width           =   9480
+            _ExtentX        =   16722
+            _ExtentY        =   6985
+            _Version        =   65541
+            Rows            =   0
+            Cols            =   0
+            FixedRows       =   0
+            FixedCols       =   0
+            BackColor       =   -2147483633
+            BackColorBkg    =   16514774
+            ScrollTrack     =   -1  'True
+            FocusRect       =   0
+            GridLines       =   0
+            ScrollBars      =   2
+            SelectionMode   =   1
+         End
+         Begin VB.Label lblArbeit 
+            Alignment       =   2  'Zentriert
+            BackColor       =   &H00C0C0FF&
+            Caption         =   "Geplante Sendevorgänge laut Rufzeitentabelle"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   1
+            Left            =   120
+            TabIndex        =   39
+            Top             =   195
+            Width           =   9615
+         End
+      End
+   End
+   Begin VB.PictureBox picStartBack 
+      AutoSize        =   -1  'True
+      Height          =   6420
+      Left            =   120
+      ScaleHeight     =   6360
+      ScaleWidth      =   9600
+      TabIndex        =   8
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   9660
+      Begin VB.PictureBox picStartProzent 
+         Appearance      =   0  '2D
+         BackColor       =   &H80000005&
+         ForeColor       =   &H80000008&
+         Height          =   375
+         Left            =   720
+         ScaleHeight     =   345
+         ScaleWidth      =   8505
+         TabIndex        =   31
+         Top             =   5880
+         Width           =   8535
+      End
+      Begin VB.Label lblStartProzent 
+         Alignment       =   2  'Zentriert
+         BackStyle       =   0  'Transparent
+         Caption         =   "Programm wird geladen ..."
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   2400
+         TabIndex        =   20
+         Top             =   5400
+         Width           =   5415
+      End
+      Begin VB.Label lblStartText 
+         Alignment       =   2  'Zentriert
+         BackStyle       =   0  'Transparent
+         Caption         =   "Der Sendevorgang für Windows"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   20.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   1095
+         Left            =   240
+         TabIndex        =   18
+         Top             =   4080
+         Width           =   9135
+      End
+      Begin VB.Label lblStartWinInfo 
+         Alignment       =   2  'Zentriert
+         BackStyle       =   0  'Transparent
+         Caption         =   "Wbestk2"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   72
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   1335
+         Left            =   1200
+         TabIndex        =   17
+         Top             =   1440
+         Width           =   7815
+      End
+      Begin VB.Image imgStart 
+         Height          =   855
+         Left            =   120
+         Stretch         =   -1  'True
+         Top             =   120
+         Width           =   1095
+      End
+   End
+   Begin VB.PictureBox picToolTip 
+      Appearance      =   0  '2D
+      BackColor       =   &H80000018&
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   495
+      Left            =   1920
+      ScaleHeight     =   465
+      ScaleWidth      =   825
+      TabIndex        =   11
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   855
+   End
+   Begin VB.TextBox txtForm 
+      Height          =   495
+      Left            =   5040
+      TabIndex        =   29
+      Text            =   "Text1"
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.PictureBox picAnimationBack 
+      Appearance      =   0  '2D
+      BackColor       =   &H80000018&
+      ForeColor       =   &H80000008&
+      Height          =   1800
+      Left            =   3360
+      ScaleHeight     =   1770
+      ScaleWidth      =   3480
+      TabIndex        =   5
+      Top             =   4440
+      Visible         =   0   'False
+      Width           =   3510
+      Begin ComCtl2.Animation aniSuchen 
+         Height          =   1095
+         Left            =   1200
+         TabIndex        =   6
+         Top             =   600
+         Width           =   1095
+         _ExtentX        =   1931
+         _ExtentY        =   1931
+         _Version        =   327681
+         Center          =   -1  'True
+         BackColor       =   -2147483624
+         FullWidth       =   73
+         FullHeight      =   73
+      End
+      Begin VB.Label lblAnimation 
+         Alignment       =   2  'Zentriert
+         BackColor       =   &H80000018&
+         Caption         =   "Aufgabe wird bearbeitet ..."
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   120
+         TabIndex        =   7
+         Top             =   180
+         Width           =   3195
+      End
+   End
+   Begin VB.PictureBox picAnimationBack2 
+      Appearance      =   0  '2D
+      BackColor       =   &H80000018&
+      ForeColor       =   &H80000008&
+      Height          =   2640
+      Left            =   3360
+      ScaleHeight     =   2610
+      ScaleWidth      =   4545
+      TabIndex        =   23
+      Top             =   960
+      Visible         =   0   'False
+      Width           =   4575
+      Begin ComCtl2.Animation aniSuchen2 
+         Height          =   1095
+         Left            =   120
+         TabIndex        =   24
+         Top             =   720
+         Width           =   4335
+         _ExtentX        =   7646
+         _ExtentY        =   1931
+         _Version        =   327681
+         Center          =   -1  'True
+         BackColor       =   -2147483624
+         FullWidth       =   289
+         FullHeight      =   73
+      End
+      Begin VB.Label lblAnimation2 
+         Alignment       =   2  'Zentriert
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Index           =   1
+         Left            =   120
+         TabIndex        =   26
+         Top             =   2040
+         Width           =   4275
+      End
+      Begin VB.Label lblAnimation2 
+         Alignment       =   2  'Zentriert
+         BackColor       =   &H80000018&
+         Caption         =   "Plattenkopie wird erstellt ..."
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Index           =   0
+         Left            =   720
+         TabIndex        =   25
+         Top             =   240
+         Width           =   3195
+      End
+   End
+   Begin VB.ListBox lstBestellSort 
+      Height          =   300
+      Left            =   840
+      Sorted          =   -1  'True
+      TabIndex        =   40
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   855
+   End
+   Begin VB.PictureBox picZusatzBack 
+      Appearance      =   0  '2D
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H80000018&
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   495
+      Index           =   0
+      Left            =   8760
+      ScaleHeight     =   465
+      ScaleWidth      =   825
+      TabIndex        =   30
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   855
+      Begin VB.PictureBox picZusatzSymbol 
+         Appearance      =   0  '2D
+         BackColor       =   &H80000005&
+         ForeColor       =   &H80000008&
+         Height          =   375
+         Index           =   0
+         Left            =   0
+         ScaleHeight     =   345
+         ScaleWidth      =   375
+         TabIndex        =   19
+         Top             =   0
+         Width           =   405
+      End
+   End
+   Begin VB.TextBox txtDDEServer 
+      Height          =   375
+      Left            =   6240
+      TabIndex        =   22
+      TabStop         =   0   'False
+      Text            =   "Text1"
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.ListBox lstSortierung 
+      Height          =   300
+      Left            =   7800
+      Sorted          =   -1  'True
+      TabIndex        =   4
+      Top             =   240
+      Visible         =   0   'False
+      Width           =   855
+   End
+   Begin MSComDlg.CommonDialog dlg 
+      Left            =   360
+      Top             =   120
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   327681
+   End
+   Begin VB.CommandButton cmdHotkeyHidden 
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   0
+      Left            =   1200
+      Style           =   1  'Grafisch
+      TabIndex        =   21
+      TabStop         =   0   'False
+      Top             =   0
+      Width           =   495
+   End
+   Begin ComctlLib.ImageList imgToolbar 
+      Index           =   0
+      Left            =   5040
+      Top             =   0
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   12632256
+      _Version        =   327682
+      BeginProperty Images {0713E8C2-850A-101B-AFC0-4210102A8DA7} 
+         NumListImages   =   21
+         BeginProperty ListImage1 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":030A
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage2 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":041C
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage3 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":052E
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage4 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0640
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage5 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0752
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage6 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0864
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage7 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0976
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage8 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0A88
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage9 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0B9A
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage10 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0CAC
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage11 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0DBE
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage12 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0ED0
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage13 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":0FE2
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage14 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":1274
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage15 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":1506
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage16 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":1798
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage17 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":1AB2
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage18 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":1D44
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage19 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":E2D96
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage20 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":E32E8
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage21 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
+            Picture         =   "wbestk2.frx":E33FA
+            Key             =   ""
+         EndProperty
+      EndProperty
+   End
+   Begin VB.Menu mnuDatei 
+      Caption         =   "&Datei"
+      Begin VB.Menu mnuBeenden 
+         Caption         =   "&Beenden"
+         Shortcut        =   ^Q
+      End
+   End
+   Begin VB.Menu mnuBearbeiten 
+      Caption         =   "&Bearbeiten"
+   End
+   Begin VB.Menu mnuExtras 
+      Caption         =   "E&xtras"
+      Begin VB.Menu mnuInfo 
+         Caption         =   "&Info ..."
+      End
+   End
+End
+Attribute VB_Name = "frmAction"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+
+''''''''''''''''''''''
+Const INI_DATEI = "\user\winop.ini"
+
+Const INI_SECTION = "Wbestk2"
+Const INFO_SECTION = "Infobereich Wbestk2"
+
+
+Dim InRowColChange%
+
+Dim WithEvents opToolbar As clsToolbar
+Attribute opToolbar.VB_VarHelpID = -1
+Dim opBereich As clsOpBereiche
+Dim InfoMain As clsInfoBereich
+
+Dim HochfahrenAktiv%
+
+Dim Standard%
+
+Private Const DefErrModul = "wbestk2.frm"
+''''''''''''''''''''''
+
+Dim FontPoints!(1, 30)
+
+Sub Uebergabe(NeuProgrammChar$)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Uebergabe")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim h$, i%, KeyStr$, ArtikelZeileKey$, ArtikelZeileVal$
+
+UebergabeStr$ = ""
+
+Call DefErrPop
+End Sub
+
+Public Sub WechselModus(NeuerModus%, Optional NeuMachen% = True)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("WechselModus")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, j%, k%, l%, ind%, HatEingabe%, FeldInd%, f%, row%
+Dim h$, h2$, h3$, mName$, ActMenuName$, OrgFontName$, OrgFontSize%
+
+Select Case ProgrammModus%
+    Case SENDEANZEIGE
+        If (seriell% And (comSenden.PortOpen)) Then comSenden.PortOpen = False
+        picBack(0).Visible = False
+    Case RUFZEITENANZEIGE
+        picBack(1).Visible = False
+End Select
+        
+Select Case NeuerModus%
+    Case SENDEANZEIGE
+        mnuDatei.Enabled = True
+        mnuBearbeiten.Enabled = False
+        mnuExtras.Enabled = True
+       
+        picBack(0).Visible = True
+        flxarbeit(0).SetFocus
+        flxarbeit(0).SelectionMode = flexSelectionByRow
+        flxarbeit(0).ColSel = flxarbeit(0).Cols - 1
+        
+        picInfo(0).Visible = False
+        flxInfo(0).Visible = True
+        flxInfo(0).Rows = 1
+        
+    Case RUFZEITENANZEIGE
+        mnuDatei.Enabled = True
+        mnuBearbeiten.Enabled = False
+        mnuExtras.Enabled = True
+        
+        Call GeplanteRufzeiten
+        tmrAction.Enabled = True
+        picBack(1).Visible = True
+        flxarbeit(1).SetFocus
+        flxarbeit(1).SelectionMode = flexSelectionByRow
+        flxarbeit(1).ColSel = flxarbeit(1).Cols - 1
+        
+End Select
+
+For i% = 0 To 23
+    cmdToolbar(i%).Enabled = False
+Next i%
+cmdToolbar(19).Enabled = True
+        
+ProgrammModus% = NeuerModus%
+
+Call DefErrPop
+End Sub
+
+Private Sub cmdToolbar_Click(Index As Integer)
+
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("cmdToolbar_Click")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Select Case Index
+    Case 19
+        Call mnuBeenden_Click
+End Select
+Call DefErrPop
+End Sub
+
+Private Sub flxArbeit_LostFocus(Index As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxArbeit_LostFocus")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+If (Index = 0) Then
+    flxarbeit(0).HighLight = flexHighlightNever
+End If
+Call DefErrPop
+End Sub
+
+Private Sub flxArbeit_GotFocus(Index As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxArbeit_GotFocus")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%
+
+If (Index = 0) Then
+    flxarbeit(0).HighLight = flexHighlightAlways
+End If
+Call DefErrPop
+End Sub
+
+Private Sub flxInfo_GotFocus(Index As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxInfo_GotFocus")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim iRows%, versatz%, ZeilenDiff%, MaxZeilenDiff%
+
+If (Index = 0) Then
+'    flxInfo(0).ColSel = 3
+    flxInfo(0).HighLight = flexHighlightAlways
+    flxInfo(0).TopRow = 1
+    flxInfo(0).row = 1
+    flxInfo(0).col = 0
+    flxInfo(0).ColSel = flxInfo(0).Cols - 1
+    If (flxInfo(0).Rows > MaxRowsInfo%(0)) Then
+        MaxZeilenDiff% = MaxRowsArbeit%(0) - 2
+        
+        ZeilenDiff% = flxInfo(0).Rows - MaxRowsInfo%(0)
+        If (ZeilenDiff% > MaxZeilenDiff%) Then ZeilenDiff% = MaxZeilenDiff%
+        versatz% = ZeilenDiff% * flxInfo(0).RowHeight(0)
+        
+        flxarbeit(0).Height = flxarbeit(0).Height - versatz%
+        If (flxarbeit(0).row >= flxarbeit(0).TopRow + MaxRowsArbeit%(0) - ZeilenDiff%) Then
+            flxarbeit(0).TopRow = flxarbeit(0).row
+        End If
+        
+        picArbeitBack(0).Height = picArbeitBack(0).Height - versatz%
+        
+        picInfoBack(0).Top = picInfoBack(0).Top - versatz%
+        picInfoBack(0).Height = picInfoBack(0).Height + versatz%
+    '    flxInfo(2).Top = flxInfo(2).Top - versatz%
+        flxInfo(0).Height = flxInfo(0).Height + versatz%
+    End If
+End If
+Call DefErrPop
+End Sub
+
+Private Sub flxInfo_LostFocus(Index As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxInfo_LostFocus")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim versatz%, ZeilenDiff%, MaxZeilenDiff%
+
+If (ProgrammChar$ = "T") Then Call DefErrPop: Exit Sub
+
+If (Index = 0) Then
+'    flxInfo(0).HighLight = flexHighlightWithFocus
+    If (flxInfo(0).Rows > MaxRowsInfo%(0)) Then
+        MaxZeilenDiff% = MaxRowsArbeit%(0) - 2
+        
+        ZeilenDiff% = flxInfo(0).Rows - MaxRowsInfo%(0)
+        If (ZeilenDiff% > MaxZeilenDiff%) Then ZeilenDiff% = MaxZeilenDiff%
+        versatz% = ZeilenDiff% * flxInfo(0).RowHeight(0)
+        
+        flxInfo(0).Height = flxInfo(0).Height - versatz%
+        picInfoBack(0).Height = picInfoBack(0).Height - versatz%
+        picInfoBack(0).Top = picInfoBack(0).Top + versatz%
+        picArbeitBack(0).Height = picArbeitBack(0).Height + versatz%
+        flxarbeit(0).Height = flxarbeit(0).Height + versatz%
+    End If
+    flxInfo(0).HighLight = flexHighlightNever
+    picInfo(0).Visible = True
+End If
+Call DefErrPop
+End Sub
+
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    Select Case X \ Screen.TwipsPerPixelX
+         Case WM_LBUTTONDOWN
+            Me.WindowState = vbNormal
+    End Select
+End Sub
+
+Private Sub picInfoBack_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("picInfoBack_MouseMove")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+If (picToolTip.Visible = True) Then
+    picToolTip.Visible = False
+End If
+Call DefErrPop
+End Sub
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_KeyDown")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, ind%, h$
+
+If (picToolTip.Visible = True) Then
+    picToolTip.Visible = False
+End If
+
+If (Shift And vbCtrlMask And (KeyCode <> 17)) Then
+    ind% = -1
+    Select Case KeyCode
+        Case vbKeyF2
+            ind% = 1
+        Case vbKeyF3
+            ind% = 2
+        Case vbKeyF4
+            ind% = 3
+        Case vbKeyF5
+            ind% = 4
+        Case vbKeyF6
+            ind% = 5
+        Case vbKeyF7
+            ind% = 6
+        Case vbKeyF8
+            ind% = 7
+        Case vbKeyF9
+            ind% = 8
+'        Case vbKeyF11
+'            ind% = 9
+    End Select
+    If ((Shift And vbShiftMask) And (ind% > 0)) Then
+        ind% = ind% + 8
+'        If (ProgrammChar$ = "T") Then ind% = ind% + 11
+        ind% = ind% + 11
+    End If
+'    If ((ind% = 2) And (ProgrammChar$ = "T")) Then ind% = 25
+    If (ind% = 2) Then ind% = 25
+    If (ind% >= 0) Then
+        h$ = cmdToolbar(ind%).ToolTipText
+        picToolTip.Width = picToolTip.TextWidth(h$ + "x")
+        picToolTip.Height = picToolTip.TextHeight(h$) + 45
+        picToolTip.Left = cmdToolbar(ind%).Left
+        picToolTip.Top = 660
+        picToolTip.Visible = True
+        picToolTip.Cls
+        picToolTip.CurrentX = 2 * Screen.TwipsPerPixelX
+        picToolTip.CurrentY = 0
+        picToolTip.Print h$
+        KeyCode = 0
+    End If
+End If
+Call DefErrPop
+End Sub
+
+Private Sub Form_LinkExecute(CmdStr As String, Cancel As Integer)
+
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_LinkExecute")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+If (HochfahrenAktiv% = True) Then
+    DDEstr$ = CmdStr
+    Cancel = 0
+Else
+    Call DecodDDE(CmdStr, Cancel)
+End If
+
+Call DefErrPop
+End Sub
+
+Public Sub DecodDDE(CmdStr As String, Cancel As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("DecodDDE")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, Index%
+Dim NeuProgrammChar$, s$, SQLStr$
+
+Cancel = 0
+    
+
+Call DefErrPop
+End Sub
+
+'Private Sub Form_Resize()
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("Form_Resize")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim i%, cmdToolSize%, lblStatusSize%, versatz%
+'Dim c As Control
+'
+'On Error Resume Next
+'
+'If ((WindowState = vbMaximized) Or ((WindowState = vbNormal) And (OrgWindowState% = vbMaximized))) Then
+'    versatz% = (Width - OrgFormWidth%) / 2
+'    OrgWindowState% = WindowState
+'    OrgFormWidth% = Width
+'
+'    For Each c In Controls
+'        If TypeOf c Is PictureBox Then
+'            If (c Is picToolbar) Then
+'                c.Width = ScaleWidth
+'            Else
+'                c.Left = c.Left + versatz%
+'            End If
+'        End If
+'    Next c
+'
+'    picStartBack.Width = ScaleWidth
+'
+'    cmdToolbar(19).Left = picToolbar.ScaleWidth - cmdToolbar(19).Width
+'    lblTasten(19).Left = picToolbar.ScaleWidth - lblTasten(19).Width
+'
+'End If
+'Call DefErrPop
+'End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_Unload")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+TaxeDB.Close
+Call KillSysTrayIcon(Me, 1)
+
+Call DefErrPop
+End Sub
+
+Private Sub mnuBeenden_Click()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("mnuBeenden_Click")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Call ProgrammEnde
+Call DefErrPop
+End Sub
+
+Private Sub mnuInfo_Click()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("mnuInfo_Click")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+frmAbout.Show
+Call DefErrPop
+End Sub
+
+Private Sub tmrAction_Timer()
+Dim Max%, erg%, ret%
+Static TimerPos%
+
+TimerPos% = TimerPos% + 1
+   
+AutomaticInd% = PruefeRufzeiten%
+If (AutomaticInd% >= 0) Then
+    If (AutomaticInd% >= 100) Then
+        AutomaticInd% = AutomaticInd% - 100
+        If (Me.WindowState = vbMinimized) Then Me.WindowState = vbNormal
+        Me.SetFocus
+        frmWarnung.Show 1
+    Else
+        Lieferant% = Rufzeiten(AutomaticInd%).Lieferant
+'        ActInfoBereich% = 0
+'        VonBM% = 0:    BisBM% = 0:    WaGr$ = "":    LaCo$ = "":   auto$ = "":    Exklusiv% = 0
+''?        Call AuslesenBestellung(False, False)
+        If (AnzBestellArtikel% > 0) Then
+            ret% = ModemAktivieren%
+            If (ret%) Then
+                AutomaticSend% = True
+                Call WechselModus(SENDEANZEIGE)
+                Call ZeigeBestellWerte
+                Call SendAutomatic
+                Call WechselModus(RUFZEITENANZEIGE)
+            Else
+                Call MsgBox("Modem momentan belegt !")
+            End If
+        End If
+    End If
+    Exit Sub
+End If
+
+If (TimerPos% = 4) Then
+    TimerPos% = 0
+    If (BestVorsPeriodisch%) Then
+        Call BestellVorschlag
+    End If
+End If
+
+End Sub
+
+Private Sub Form_Load()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_Load")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%
+Dim l&
+Dim h$
+
+On Error Resume Next
+
+HochfahrenAktiv% = True
+   
+Height = wpara.WorkAreaHeight
+If (wpara.BildFaktor = 0.8!) Then
+    Width = 10980 * wpara.BildFaktor '10200
+Else
+    Width = Width * wpara.BildFaktor
+End If
+    
+'With picSave
+'    .Left = 0
+'    .Top = 0
+'    .Width = ScaleWidth
+'    .Height = ScaleHeight
+'    .ZOrder 0
+'End With
+
+
+h$ = "0"
+l& = GetPrivateProfileString(INI_SECTION, "Standard", "0", h$, 2, INI_DATEI)
+Standard% = Val(Left$(h$, l&))
+'ProgrammTyp% = Standard%
+
+
+h$ = "N"
+l& = WritePrivateProfileString(INI_SECTION, "Toolbar", h$, INI_DATEI)
+
+Set opToolbar = New clsToolbar
+Call opToolbar.InitToolbar(Me, INI_DATEI, INI_SECTION)
+
+
+For i% = 0 To 16
+    cmdToolbar(i%).ToolTipText = ""
+Next i%
+
+
+Call wpara.HoleGlobalIniWerte(UserSection$, INI_DATEI)
+Call wpara.InitFont(Me)
+Call HoleIniWerte
+
+BildFaktor2! = (ScaleHeight - picToolbar.Height) / (8340 - picToolbar.Height)
+    
+Set InfoMain = New clsInfoBereich
+Call InfoMain.InitInfoBereich(flxInfo(0), INI_DATEI, INFO_SECTION)
+Call InfoMain.ZeigeInfoBereich("", False)
+flxInfo(0).row = 0
+flxInfo(0).col = 0
+
+Set opBereich = New clsOpBereiche
+Call opBereich.InitBereich(Me, opToolbar)
+opBereich.ArbeitTitel = False
+opBereich.ArbeitLeerzeileOben = False
+opBereich.ArbeitWasDarunter = True
+opBereich.InfoTitel = False
+opBereich.InfoAnzZeilen = InfoMain.AnzInfoZeilen
+opBereich.AnzahlButtons = 0
+
+ProgrammTyp% = 0
+Caption = ProgrammNamen$(ProgrammTyp%) + " - "
+
+With flxarbeit(0)
+    .Cols = 22
+    .Rows = 2
+    .FixedRows = 1
+    .FormatString = "<PZN|^ |<Name|>Menge|^Meh|>BM|>NR|^Lieferant|>POS|<Zusatz|<ActBedingung|||?|!|v"
+End With
+    
+'mnuRahmenAnzeigen.Checked = wpara.FarbeRahmen
+'mnuZuKontrollierende.Checked = NurZuKontrollierende%
+
+picBack(0).Visible = True
+
+
+'Call InitDateiButtons
+
+'Call InitAnimation
+
+HochfahrenAktiv% = False
+
+Call DefErrPop
+
+End Sub
+
+'Public Sub InitGrafik()
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("InitGrafik")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim i%, X%, erg%, h$, a!, l&, j!, cmdToolSize%, lblStatusSize%, ll%
+'Dim c As Control
+'Dim d As Control
+'Dim e As Control
+'Dim IstPunkte!, SollPunkte!, P!
+'Dim f%
+'
+'On Error Resume Next
+'
+'prot% = True
+'If (prot% = True) Then
+'    PROTOKOLL% = FreeFile
+'    Open "winwawi.fnt" For Output As PROTOKOLL%
+'End If
+'
+'Me.WindowState = vbNormal
+'
+'' Verhältnis der Bildschirmauflösungen
+'BildFaktor! = Screen.Width / 12000
+'
+'Height = WorkHeight
+'If (BildFaktor! = 0.8!) Then
+'    Width = 10980 * BildFaktor! '10200
+'Else
+'    Width = Width * BildFaktor!
+'End If
+'OrgFormWidth% = Width
+'
+'picToolbar.Height = 630 '420
+'BildFaktor2! = (ScaleHeight - picToolbar.Height) / (8340 - picToolbar.Height)
+'
+'If (prot% = True) Then
+'    Print #PROTOKOLL%, "Faktoren:    "; BildFaktor!; BildFaktor2!
+'End If
+'
+'Call HoleIniWerte
+'
+'Call InitStartBild
+'
+''    .Font.Name = "MS Sans Serif"
+''    .Font.Name = "Times New Roman"
+'Font.Name = "Times New Roman"
+'If (BildFaktor! >= 1!) Then Font.Name = "Arial"
+'
+'Call InitFontSize
+'
+'i% = 1
+'P! = 50 / Controls.Count
+'For Each c In Controls
+'    Call LadeAnzeige(i% * P!)
+'    If (c.Container Is picStartBack) Then
+'        'Print c.Name
+'    Else
+'        Call InitFont(c)
+'        Call InitPosition(c)
+'    End If
+'    i% = i% + 1
+'Next c
+'
+'Font.Name = fName$
+'Font.Size = fSize%
+'
+''Call LadeAnzeige(50)
+'Call InitBereiche
+'Call LadeAnzeige(60)
+'Call RechneGridHoehe
+'Call LadeAnzeige(70)
+'Call InitToolbar
+'Call LadeAnzeige(90)
+'
+'Font.Name = fName$
+'Font.Size = fSize%
+'
+'If (prot% = True) Then
+''    Close #PROTOKOLL%  '????
+'End If
+'
+'Me.WindowState = vbMinimized
+'
+'Call DefErrPop
+'End Sub
+
+'Sub InitStartBild()
+'
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("InitStartBild")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'picStartBack.Top = 0
+'picStartBack.Left = 0
+'picStartBack.Height = ScaleHeight
+'picStartBack.Width = ScaleWidth
+'
+'imgStart.Top = picStartBack.Top
+'imgStart.Left = picStartBack.Left
+'imgStart.Height = picStartBack.ScaleHeight
+'imgStart.Width = picStartBack.ScaleWidth
+'imgStart.Picture = imgToolbar.ListImages(18).Picture
+'
+'lblStartWinInfo.Left = 15
+'lblStartWinInfo.Width = picStartBack.ScaleWidth - 30
+'lblStartWinInfo.Top = lblStartWinInfo.Top * BildFaktor2!
+'lblStartText.Left = 15
+'lblStartText.Width = picStartBack.ScaleWidth - 30
+'lblStartText.Top = lblStartText.Top * BildFaktor2!
+'
+'picStartProzent.Height = picStartProzent.Height * BildFaktor2!
+'picStartProzent.Top = ScaleHeight - picStartProzent.Height - 150
+'picStartProzent.Left = 150
+'picStartProzent.Width = picStartBack.ScaleWidth - 300
+'
+'lblStartProzent.Top = ScaleHeight - picStartProzent.Height - lblStartProzent.Height - 150
+'lblStartProzent.Left = 15
+'lblStartProzent.Width = picStartBack.ScaleWidth - 30
+'
+'
+'picToolbar.Visible = False
+'picStartBack.Visible = True
+'
+'Show
+'Refresh
+'
+'Call DefErrPop
+'End Sub
+
+'Sub LadeAnzeige(proz%)
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("LadeAnzeige")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim X%
+'
+'X% = picStartProzent.ScaleWidth / 100 * proz%
+'picStartProzent.Line (0, 0)-(X%, picStartProzent.ScaleHeight), vbBlack, BF
+'
+'Call DefErrPop
+'End Sub
+
+'Sub InitFontSize()
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("InitFontSize")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim i%, j%, k%
+'Dim SollPunkte!, IstPunkte!
+'
+'For i% = 0 To 1
+'
+'    If (i% = 0) Then
+'        Font.Name = "Small Fonts"
+'    Else
+'        If (BildFaktor! < 1!) Then
+'            Font.Name = "MS Sans Serif"
+'        Else
+'            Font.Name = "Arial"
+'        End If
+''        Font.Name = "Times New Roman"
+'    End If
+'
+'    For k% = 24 To 5 Step -1
+'
+'        Font.Size = k%
+'        SollPunkte! = TextHeight("A") * BildFaktor! '2
+'
+'        If (prot% = True) Then
+'            Print #PROTOKOLL%, "    "; i%; k%; SollPunkte!
+'        End If
+'
+'        For j% = 24 To 5 Step -1      '18
+'            FontPoints!(i%, k%) = 0
+'
+'            Font.Size = j%
+'            IstPunkte! = TextHeight("A")
+'
+'            If (prot% = True) Then
+'                Print #PROTOKOLL%, "    "; IstPunkte!
+'            End If
+'
+'            If (IstPunkte! <= SollPunkte!) Then
+'                If (IstPunkte! < SollPunkte!) Then
+'                    FontPoints!(i%, k%) = j% + 1
+'                Else
+'                    FontPoints!(i%, k%) = j%
+'                End If
+'                If (prot% = True) Then
+'                    Print #PROTOKOLL%, "    "; i%; k%; FontPoints!(i%, k%)
+'                End If
+'                Exit For
+'            End If
+'        Next j%
+'        If (FontPoints!(i%, k%) = 0) Then
+'            FontPoints!(i%, k%) = 5
+'            If (prot% = True) Then
+'                Print #PROTOKOLL%, "    "; i%; k%; FontPoints!(i%, k%)
+'            End If
+'        End If
+'    Next k%
+'Next i%
+'
+'Call DefErrPop
+'End Sub
+
+'Sub InitFont(c As Control)
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("InitFont")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim SollPunkte!, IstPunkte!, j!
+'
+'On Error Resume Next
+'
+'If (prot% = True) Then
+'    Print #PROTOKOLL%, c.Name
+'    Print #PROTOKOLL%, "    "; c.Font.Size; c.Font.Name
+'End If
+'
+'If (TypeOf c Is MSFlexGrid) Or (c.Name = picInfo(0).Name) Or (c Is picBestellWerte) Then
+'    c.Font.Name = fName$
+'    c.Font.Size = fSize%
+'ElseIf (c Is lblTasten(0)) Then
+'Else
+'        If (BildFaktor! < 1!) Then
+'            c.Font.Name = "MS Sans Serif"
+'        Else
+'            c.Font.Name = "Arial"
+'        End If
+''        c.Font.Name = "Times New Roman"
+'        c.Font.Size = FontPoints(1, c.Font.Size)
+'End If
+'
+'If (prot% = True) Then Print #PROTOKOLL%, "    "; c.Font.Size; c.Font.Name; SollPunkte!; IstPunkte!
+'
+'Call DefErrPop
+'End Sub
+
+'Sub InitPosition(c As Control)
+'
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("InitPosition")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'On Error Resume Next
+'
+'If TypeOf c Is PictureBox Then
+'    c.TabStop = False
+'    If (c Is picStartBack) Then
+'    ElseIf (c Is picInfo(0)) Then
+'        c.TabStop = True
+'    ElseIf (c Is picAnimationBack) Or (c Is picAnimationBack2) Then
+'        c.Height = c.Height * BildFaktor2!
+'        c.Width = c.Width * BildFaktor!
+'        c.Top = (ScaleHeight - c.Height) / 2
+'        c.Left = (ScaleWidth - c.Width) / 2
+'    ElseIf c Is picToolbar Then
+'        c.Top = 0
+'        c.Left = 0
+''        c.Height = 630
+'        c.Width = ScaleWidth
+'    Else
+'        c.Top = picToolbar.Height
+'        c.Left = 0
+'        c.Height = ScaleHeight - c.Top
+'        c.Width = ScaleWidth
+'    End If
+'Else
+'    c.Height = c.Height * BildFaktor2!
+'    c.Width = c.Width * BildFaktor!
+'    c.Top = c.Top * BildFaktor2!
+'    c.Left = c.Left * BildFaktor!
+'End If
+'
+'Call DefErrPop
+'End Sub
+
+'Sub InitBereiche()
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("InitBereiche")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim i%
+'
+'On Error GoTo andi
+'
+'For i% = 0 To 1
+'    picArbeitBack(i%).Top = 0
+'    picArbeitBack(i%).Left = 0
+'    If (i% = 0) Then
+'        picArbeitBack(i%).Height = picBack(i%).ScaleHeight * 0.6!
+'    Else
+'        picArbeitBack(i%).Height = picBack(i%).ScaleHeight - (600 * BildFaktor2!)
+'    End If
+'    picArbeitBack(i%).Width = picBack(i%).ScaleWidth
+'
+'    lblArbeit(i%).Top = 195 * BildFaktor2!
+'    lblArbeit(i%).Left = 150 * BildFaktor2!
+'    lblArbeit(i%).Width = picArbeitBack(i%).Width - (300 * BildFaktor!)
+'
+'    flxarbeit(i%).Top = 690 * BildFaktor2!
+'    flxarbeit(i%).Height = picArbeitBack(i%).Height - (690 + 60) * BildFaktor2!
+'    flxarbeit(i%).Left = 150 * BildFaktor2!
+'    flxarbeit(i%).Width = picArbeitBack(i%).Width - (300 * BildFaktor!)
+'
+'
+'    picInfoBack(i%).Top = picArbeitBack(i%).Height
+'    picInfoBack(i%).Height = picBack(i%).ScaleHeight - picArbeitBack(i%).Height
+'    picInfoBack(i%).Left = 0
+'    picInfoBack(i%).Width = picBack(i%).ScaleWidth
+'
+'    lblInfo(i%).Top = 195 * BildFaktor2!
+'    lblInfo(i%).Left = 150 * BildFaktor2!
+'    lblInfo(i%).Width = picArbeitBack(i%).Width - (300 * BildFaktor!)
+'    lblInfo(i%).Caption = "Keine zusätzlichen Informationen vorhanden"
+'
+'    flxInfo(i%).Top = 690 * BildFaktor2!
+'    If (flxInfo(i%).Top > picInfoBack(i%).Height) Then
+'        flxInfo(i%).Height = 90
+'    ElseIf (i% <> 0) Then
+'        flxInfo(i%).Height = picInfoBack(i%).Height - (690 + 60) * BildFaktor2!
+'    End If
+'    flxInfo(i%).Left = 150 * BildFaktor2!
+'    flxInfo(i%).Width = picInfoBack(i%).Width - (300 * BildFaktor!)
+'Next i%
+'
+''cmdOk(5).Left = (picArbeitBack(5).Width - (cmdEsc(5).Width * 2 + 300)) / 2
+''cmdOk(5).Top = picBack(5).Top + picBack(5).Height + 90
+''cmdEsc(5).Left = cmdOk(5).Left + cmdOk(5).Width + 300
+''cmdEsc(5).Top = cmdOk(5).Top
+'
+'
+'Call DefErrPop: Exit Sub
+'
+'andi:
+'Print Err;
+'Resume Next
+'Return
+'
+'Call DefErrPop
+'End Sub
+    
+'Sub RechneGridHoehe()
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("RechneGridHoehe")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim i%
+'
+'For i% = 0 To 1
+'    flxarbeit(i%).Rows = 1
+'    MaxRowsArbeit%(i%) = (flxarbeit(i%).Height - 90) \ flxarbeit(i%).RowHeight(0)
+'    flxarbeit(i%).Height = flxarbeit(i%).RowHeight(0) * MaxRowsArbeit%(i%) + 90
+'
+'    flxInfo(i%).Rows = 1
+'    MaxRowsInfo%(i%) = (flxInfo(i%).Height - 90) \ flxInfo(i%).RowHeight(0)
+'    flxInfo(i%).Height = flxarbeit(i%).RowHeight(0) * MaxRowsInfo%(i%) + 90
+'Next i%
+'
+'Call DefErrPop
+'End Sub
+
+'Sub ErmittleBereiche(Index%)
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("ErmittleBereiche")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim iInfoZeilen%
+'
+'iInfoZeilen% = 4 'AnzInfoZeilen%(0)
+'
+'lblInfo(Index%).Visible = False
+'
+'flxInfo(Index%).Visible = False
+'flxInfo(Index%).Top = lblInfo(Index%).Top
+'flxInfo(Index%).Rows = 1
+'
+'flxInfo(Index%).Height = flxInfo(Index%).RowHeight(0) * iInfoZeilen% + 90
+'
+'picInfo(Index%).Height = picInfo(Index%).TextHeight("Äg") * iInfoZeilen% + 90
+'picInfoBack(Index%).Height = flxInfo(Index%).Height + (195 + 60) * BildFaktor2!
+''picInfoBack(Index%).Height = picInfo(Index%).Height + (195 + 60) * BildFaktor2!
+'
+'picArbeitBack(Index%).Height = picBack(Index%).ScaleHeight - picInfoBack(Index%).Height
+'If (flxarbeit(Index%).Rows < 1) Then flxarbeit(Index%).Rows = 1
+'If (Index% = 0) Then
+'    picBestellWerte.Height = picInfo(Index%).Height
+'    flxarbeit(Index%).Height = picArbeitBack(Index%).Height - (690 + 60) * BildFaktor2!
+'    flxarbeit(Index%).Height = flxarbeit(Index%).Height - (picBestellWerte.Height + 90)
+''    flxarbeit(Index%).Height = flxarbeit(Index%).Height - (picBestellWerte.TextHeight("Äg") + 90)
+'    MaxRowsArbeit%(Index%) = (flxarbeit(Index%).Height - 90) \ flxarbeit(Index%).RowHeight(0)
+'End If
+'flxarbeit(Index%).Height = flxarbeit(Index%).RowHeight(0) * MaxRowsArbeit%(Index%) + 90
+'
+'picInfoBack(Index%).Top = picArbeitBack(Index%).Height
+'
+'If (Index% = 0) Then
+'    picBestellWerte.Top = flxarbeit(Index%).Top + flxarbeit(Index%).Height '+30
+'    picBestellWerte.Left = flxarbeit(Index%).Left
+''    picBestellWerte.Height = (picBestellWerte.TextHeight("Äg") + 90)
+'    picBestellWerte.Width = flxarbeit(Index%).Width
+'    picBestellWerte.Visible = True
+'End If
+'
+'picInfo(Index%).Top = flxInfo(Index%).Top
+'picInfo(Index%).Left = flxInfo(Index%).Left
+'picInfo(Index%).Width = flxInfo(Index%).Width
+'
+'picInfo(Index%).Visible = True
+'
+'If (Index% = 0) Then
+'    flxInfo(Index%).Height = picInfoBack(Index%).Height - flxInfo(Index%).Top
+'    MaxRowsInfo%(Index%) = (flxInfo(Index%).Height - 90) \ flxInfo(Index%).RowHeight(0)
+'    flxInfo(Index%).Height = flxarbeit(Index%).RowHeight(0) * MaxRowsInfo%(Index%) + 90
+'End If
+'
+'Call DefErrPop
+'End Sub
+    
+'Sub InitToolbar()
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("InitToolbar")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim i%, X%, cmdToolSize%, loch%
+'
+'For i% = 1 To 25
+'    Load cmdToolbar(i%)
+'    Load lblTasten(i%)
+'Next i%
+'
+'cmdToolSize% = 330
+'
+'loch% = (picToolbar.ScaleWidth - (20 * (cmdToolSize% + 15))) / 4
+'
+'X% = 0
+'For i% = 0 To 19
+'    If ((i% = 1) Or (i% = 9) Or (i% = 14)) Then X% = X% + loch% '105
+'    If (i% = 19) Then X% = picToolbar.ScaleWidth - cmdToolSize%
+'
+'    If (i% = 0) Then
+''        cmdToolbar(i%).Picture = imgToolbar.ListImages(1).Picture
+'        lblTasten(i%).Caption = "Esc"
+'    ElseIf (i% = 19) Then
+'        cmdToolbar(i%).Picture = imgToolbar.ListImages(19).Picture
+'        lblTasten(i%).Caption = "strgQ"
+'    ElseIf (i% <= 8) Then
+'        If (i% = 2) Then
+''            cmdToolbar(i%).Picture = imgToolbar.ListImages(15).ExtractIcon
+'        ElseIf (i% = 3) Then
+''            cmdToolbar(i%).Picture = imgToolbar.ListImages(9).Picture
+'        ElseIf (i% = 6) Then
+''            cmdToolbar(i%).Caption = "bm"
+'        ElseIf (i% = 7) Then
+''            cmdToolbar(i%).Picture = imgToolbar.ListImages(13).Picture
+'        ElseIf (i% = 8) Then
+''            cmdToolbar(i%).Caption = "nr"
+'        Else
+''            cmdToolbar(i%).Picture = imgToolbar.ListImages(i% + 1).Picture
+'        End If
+'        lblTasten(i%).Caption = "F" + Format(i% + 1, "0")
+'    ElseIf (i% <= 13) Then
+'        If (i% < 13) Then
+''            cmdToolbar(i%).Picture = imgToolbar.ListImages(i% + 1).ExtractIcon
+'        End If
+'        lblTasten(i%).Caption = "sF" + Format(i% - 7, "0")
+'    Else
+' '       cmdToolbar(i%).Caption = "&" + ProgrammRec(i% - 9).Hotkey
+'        cmdToolbar(i%).Enabled = False
+'        lblTasten(i%).Caption = "a" + Format(i% - 13, "0")
+'    End If
+'
+'    cmdToolbar(i%).Top = 0
+'    cmdToolbar(i%).Left = X%
+'    cmdToolbar(i%).Width = cmdToolSize%
+'    cmdToolbar(i%).Height = cmdToolSize%
+'    cmdToolbar(i%).Visible = True
+'
+'    lblTasten(i%).Top = 375
+'    lblTasten(i%).Left = X%
+'    lblTasten(i%).Width = cmdToolSize%
+'    lblTasten(i%).Height = 240
+'    lblTasten(i%).Visible = True
+'
+'    X% = X% + cmdToolSize% + 15
+'Next i%
+'
+'For i% = 0 To 25
+'    cmdToolbar(i%).ToolTipText = lblTasten(i%).Caption
+'Next i%
+'cmdToolbar(19).ToolTipText = "Programm beenden"
+'
+'Call DefErrPop
+'End Sub
+
+'Sub BereichsFarben()
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Call DefErrFnc("BereichsFarben")
+'On Error GoTo DefErr
+'GoTo DefErrEnd
+'DefErr:
+'Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+'Case vbRetry
+'  Resume
+'Case vbIgnore
+'  Resume Next
+'End Select
+'Call DefErrAbort
+'DefErrEnd:
+''DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+'Dim i%
+'
+'On Error Resume Next
+'
+'For i% = 0 To 1
+'    picArbeitBack(i%).BorderStyle = FarbeRahmen%
+'    picArbeitBack(i%).BackColor = FarbeArbeit&
+'    lblArbeit(i%).BackColor = FarbeArbeit&
+'    flxarbeit(i%).BackColorBkg = FarbeArbeit&
+'
+'    picInfoBack(i%).BorderStyle = FarbeRahmen%
+'    picInfoBack(i%).BackColor = FarbeInfo&
+'    lblInfo(i%).BackColor = FarbeInfo&
+'    flxInfo(i%).BackColorBkg = FarbeInfo&
+'Next i%
+'
+''lblModemTyp.BackColor = FarbeArbeit&
+''lblModemTypAnzeige.BackColor = FarbeArbeit&
+'
+'Call DefErrPop
+'End Sub
+
+Sub GeplanteRufzeiten()
+Dim i%, k%, ind%, l%
+Dim h$, h2$
+Dim j%, IstWoTag%, rWoTag%, IstZeit%, rZeit%
+Dim IstDatum&
+
+flxarbeit(1).Rows = 1
+
+IstWoTag% = WeekDay(Now, vbMonday)
+IstZeit% = Val(Format(Now, "HHMM"))
+IstZeit% = (IstZeit% \ 100) * 60 + (IstZeit% Mod 100)
+
+IstDatum& = Val(Format(Day(Date), "00") + Format(Month(Date), "00") + Format(Year(Date), "0000"))
+
+For k% = 1 To 7
+    For i% = 0 To (AnzRufzeiten% - 1)
+        If (Rufzeiten(i%).Lieferant > 0) Then
+            For j% = 0 To 6
+                rWoTag% = Rufzeiten(i%).WoTag(j%)
+                rZeit% = Rufzeiten(i%).UhrZeit
+                rZeit% = (rZeit% \ 100) * 60 + (rZeit% Mod 100)
+                If (rWoTag% > 0) Then
+                    If (rWoTag% = IstWoTag%) And (rZeit% >= IstZeit%) Then
+                        Call ZeigeGeplanteRufzeit(i%, k%, IstWoTag%)
+                    End If
+                Else
+                    Exit For
+                End If
+            Next j%
+        End If
+    Next i%
+
+    If (IstWoTag% = 7) Then
+        IstWoTag% = 1
+    Else
+        IstWoTag% = IstWoTag% + 1
+    End If
+    IstZeit% = 6
+Next k%
+
+With flxarbeit(1)
+    If (.row = 0) Then
+        .Rows = 2
+        .TextMatrix(1, 0) = "9999999"
+        .TextMatrix(1, 1) = " "
+        .TextMatrix(1, 2) = "Derzeit keine Rufzeiten gespeichert !"
+    End If
+    .row = 1
+    .col = 3
+    .RowSel = .Rows - 1
+    .ColSel = 3
+    .Sort = 5
+    .col = 0
+    .ColSel = .Cols - 1
+End With
+
+End Sub
+
+Sub ZeigeGeplanteRufzeit(RufInd%, SortInd%, TagInd%)
+Dim i%, k%, ind%, l%
+Dim h$, h2$
+
+Get #LDATEI%, Rufzeiten(RufInd%).Lieferant + 1, lif
+h$ = lif.kurz
+Call OemToChar(h$, h$)
+h$ = h$ + " (" + Mid$(Str$(Rufzeiten(RufInd%).Lieferant), 2) + ")"
+
+h$ = h$ + vbTab + Format$(Rufzeiten(RufInd%).UhrZeit / 100, "00")
+h$ = h$ + ":" + Format$(Rufzeiten(RufInd%).UhrZeit Mod 100, "00")
+
+h$ = h$ + vbTab
+h2$ = Str$(SortInd%) + Format$(Rufzeiten(RufInd%).UhrZeit, "0000")
+h$ = h$ + WochenTag$(TagInd% - 1)
+h$ = h$ + vbTab + h2$
+h$ = h$ + vbTab + Rufzeiten(RufInd%).AuftragsErg
+h$ = h$ + vbTab + Rufzeiten(RufInd%).AuftragsArt
+If (Rufzeiten(i%).Aktiv = "J") Then
+    h$ = h$ + vbTab + "ja"
+Else
+    h$ = h$ + vbTab + "nein"
+End If
+flxarbeit(1).AddItem h$
+
+End Sub
+
+Public Sub EchtkurzInfo()
+
+End Sub
+
+Private Sub Form_Resize()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_Resize")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, cmdToolSize%, lblStatusSize%, versatz%
+Dim c As Control
+
+On Error Resume Next
+
+If (HochfahrenAktiv%) Then Exit Sub
+
+If (Me.WindowState = vbMinimized) Then Exit Sub
+
+Call opBereich.ResizeWindow
+'picSave.Visible = False
+
+Call DefErrPop
+End Sub
+
+Private Sub opToolbar_Resized()
+
+Call opBereich.ResizeWindow
+
+End Sub
+
+Sub RefreshBereichsFlexSpalten()
+Dim i%, j%, spBreite%
+Dim sp&
+            
+With flxarbeit(0)
+    Font.Bold = True
+    .ColWidth(0) = 0
+    .ColWidth(1) = TextWidth("X")
+    .ColWidth(2) = 0
+    .ColWidth(3) = TextWidth("XXXXXX")
+    .ColWidth(4) = TextWidth("XXX")
+    .ColWidth(5) = TextWidth("9999")
+    .ColWidth(6) = TextWidth("999")
+    .ColWidth(7) = TextWidth("(XXXXXX)")
+    .ColWidth(8) = TextWidth("9999")
+    .ColWidth(9) = TextWidth("XXXXXXXX") '("XXXXXXXXXXXXX")
+    .ColWidth(10) = 0
+    .ColWidth(11) = 0
+    .ColWidth(12) = 0
+    .ColWidth(13) = TextWidth("WI")
+    .ColWidth(14) = TextWidth("W")
+    .ColWidth(15) = TextWidth("WII") + wpara.FrmScrollHeight + 2 * wpara.FrmBorderHeight
+    .ColWidth(16) = 0   'TextWidth("XXX")
+    .ColWidth(17) = 0
+    .ColWidth(18) = 0
+    .ColWidth(19) = 0
+    .ColWidth(20) = 0
+    .ColWidth(21) = 0
+    Font.Bold = False
+    
+    spBreite% = 0
+    For i% = 1 To .Cols - 1
+        If (.ColWidth(i%) > 0) And (i% < 13) Then
+            .ColWidth(i%) = .ColWidth(i%) + TextWidth("X")
+        End If
+        spBreite% = spBreite% + .ColWidth(i%)
+    Next i%
+    If (spBreite% > .Width) Then
+        spBreite% = .Width
+    End If
+    .ColWidth(2) = .Width - spBreite%
+End With
+With flxInfo(0)
+    sp& = .Width / 8
+    .ColWidth(0) = 2 * sp&
+    For i% = 1 To 6
+        .ColWidth(i%) = sp&
+    Next i%
+End With
+        
+End Sub
+
+Sub RefreshBereichsControlsAdd()
+Dim i%
+
+On Error Resume Next
+
+With frmAction
+    .picBestellWerte.Font.Name = .flxarbeit(0).Font.Name
+    .picBestellWerte.Font.Size = .flxarbeit(0).Font.Size
+    .picBestellWerte.Top = .flxarbeit(0).Top + .flxarbeit(0).Height
+    .picBestellWerte.Left = .flxarbeit(0).Left
+    .picBestellWerte.Height = opBereich.ZeilenHoeheY + 90
+    .picBestellWerte.Width = .flxarbeit(0).Width
+    .picBestellWerte.Visible = True
+    Call ZeigeBestellWerte
+End With
+  
+End Sub
+
+Sub RefreshBereichsFarbenAdd()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("InitBereichsFarbenAdd")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%
+
+On Error Resume Next
+
+Call DefErrPop
+End Sub
+
+Sub HoleIniWerte()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("HoleIniWerte")
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+Call DefErrAbort
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, ind%, iVal%
+Dim l&, f&
+Dim h$, h2$, key$
+    
+With frmAction
+    
+    iVal% = (Screen.Width - Width) / 2
+    If (iVal% < 0) Then
+        iVal% = 0
+    End If
+    h$ = Format(iVal%, "00000")
+    l& = GetPrivateProfileString(UserSection$, "StartX", h$, h$, 6, INI_DATEI)
+    h$ = Left$(h$, l&)
+    iVal% = Val(h$)
+    If (iVal% = -9999) Then
+        WindowState = vbMaximized
+    Else
+        If (iVal% < 0) Then
+            iVal% = 0
+        End If
+        .Left = iVal%
+        
+        iVal% = 75
+        h$ = Format(iVal%, "00000")
+        l& = GetPrivateProfileString(UserSection$, "StartY", h$, h$, 6, INI_DATEI)
+        h$ = Left$(h$, l&)
+        iVal% = Val(h$)
+        If (iVal% < 0) Then
+            iVal% = 0
+        End If
+        .Top = iVal%
+        
+        iVal% = .Width
+        h$ = Format(iVal%, "00000")
+        l& = GetPrivateProfileString(UserSection$, "BreiteX", h$, h$, 6, INI_DATEI)
+        h$ = Left$(h$, l&)
+        iVal% = Val(h$)
+        If (iVal% < 0) Then
+            iVal% = 0
+        End If
+        If (.Left + iVal% > wpara.WorkAreaWidth) Then
+            WindowState = vbMaximized
+        Else
+            .Width = iVal%
+        
+            iVal% = .Height
+            h$ = Format(iVal%, "00000")
+            l& = GetPrivateProfileString(UserSection$, "HoeheY", h$, h$, 6, INI_DATEI)
+            h$ = Left$(h$, l&)
+            iVal% = Val(h$)
+            If (iVal% < 0) Then
+                iVal% = 0
+            End If
+            If (.Top + iVal% > wpara.WorkAreaHeight) Then
+                WindowState = vbMaximized
+            Else
+                .Height = iVal%
+            End If
+        End If
+    End If
+    
+''    h$ = Space$(20)
+''    h2$ = Left$("Arial" + Space$(20), 20)
+''    l& = GetPrivateProfileString(UserSection$, "Fontname", h2$, h$, 21, WINWAWI_INI)
+''    h$ = Left$(h$, l&)
+''    fName$ = RTrim$(h$)
+''
+''    h$ = "8"
+''    l& = GetPrivateProfileString(UserSection$, "Fontsize", "8", h$, 3, WINWAWI_INI)
+''    h$ = Left$(h$, l&)
+''    fSize% = Val(h$)
+'
+'    h2$ = Left$("Arial,8" + Space$(20), 20)
+'    h$ = Space$(20)
+'    l& = GetPrivateProfileString(UserSection$, "FontInformation", h2$, h$, 21, WINWAWI_INI)
+'    h$ = Left$(h$, l&)
+'    ind% = InStr(h$, ",")
+'    OpFonts(0).Name = RTrim$(Left$(h$, ind% - 1))
+'    OpFonts(0).Size = Val(Mid$(h$, ind% + 1))
+'
+'    h2$ = Left$("Arial,8" + Space$(20), 20)
+'    h$ = Space$(20)
+'    l& = GetPrivateProfileString(UserSection$, "FontBeschriftung", h2$, h$, 21, WINWAWI_INI)
+'    h$ = Left$(h$, l&)
+'    ind% = InStr(h$, ",")
+'    OpFonts(1).Name = RTrim$(Left$(h$, ind% - 1))
+'    OpFonts(1).Size = Val(Mid$(h$, ind% + 1))
+'
+'    Call InitFont(Me)
+'
+'
+'
+'    h2$ = "C0C0C0"
+'    h$ = Space$(8)
+'    l& = GetPrivateProfileString(UserSection$, "FarbeArbeit", h2$, h$, 9, WINWAWI_INI)
+'    h$ = Left$(h$, l&)
+'    FarbeArbeit& = BerechneFarbWert&(h$)
+'
+'    h2$ = "80FFFF"
+'    h$ = Space$(8)
+'    l& = GetPrivateProfileString(UserSection$, "FarbeInfo", h2$, h$, 9, WINWAWI_INI)
+'    h$ = Left$(h$, l&)
+'    FarbeInfo& = BerechneFarbWert&(h$)
+'
+'    h$ = "0"
+'    l& = GetPrivateProfileString(UserSection$, "FarbeRahmen", "0", h$, 2, WINWAWI_INI)
+'    h$ = Left$(h$, l&)
+'    FarbeRahmen% = Val(h$)
+'
+'    Call InitAlleBereichsFarben
+    
+    
+    h$ = "01"
+    l& = GetPrivateProfileString(INI_SECTION, "MinutenWarnung", "3", h$, 3, INI_DATEI)
+    h$ = Left$(h$, l&)
+    AnzMinutenWarnung% = Val(h$)
+    
+    h$ = "01"
+    l& = GetPrivateProfileString(INI_SECTION, "MinutenWarten", "3", h$, 3, INI_DATEI)
+    h$ = Left$(h$, l&)
+    AnzMinutenWarten% = Val(h$)
+    
+    h$ = "N"
+    l& = GetPrivateProfileString(INI_SECTION, "BestVorsKomplett", "N", h$, 2, INI_DATEI)
+    h$ = Left$(h$, l&)
+    If (h$ = "J") Then
+        BestVorsKomplett% = True
+    Else
+        BestVorsKomplett% = False
+    End If
+    
+    h$ = "03"
+    l& = GetPrivateProfileString(INI_SECTION, "BestVorsKomplettMinuten", "03", h$, 3, INI_DATEI)
+    h$ = Left$(h$, l&)
+    BestVorsKomplettMinuten% = Val(h$)
+    
+    
+    h$ = "N"
+    l& = GetPrivateProfileString(INI_SECTION, "BestVorsPeriodisch", "N", h$, 2, INI_DATEI)
+    h$ = Left$(h$, l&)
+    If (h$ = "J") Then
+        BestVorsPeriodisch% = True
+    Else
+        BestVorsPeriodisch% = False
+    End If
+    
+    h$ = "10"
+    l& = GetPrivateProfileString(INI_SECTION, "BestVorsPeriodischMinuten", "10", h$, 3, INI_DATEI)
+    h$ = Left$(h$, l&)
+    BestVorsPeriodischMinuten% = Val(h$)
+
+End With
+Call DefErrPop
+End Sub
+

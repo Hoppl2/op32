@@ -1,0 +1,8 @@
+frmAction = 36, 104, 540, 512, , 154, 154, 706, 602, 
+modWinRezDr = 36, 104, 540, 512, 
+modInclude = 36, 104, 540, 512, 
+modWinTools = 36, 104, 540, 512, 
+clsWinRezDr = 36, 104, 540, 512, Z
+modWinDruck = 36, 104, 540, 512, 
+modRezSpeicher = 36, 104, 540, 512, 
+frmTm290Wait = 36, 104, 540, 512, , 198, 198, 750, 646, C

@@ -1,0 +1,162 @@
+Attribute VB_Name = "Filtermodul"
+Function SuchRoutine(srcStr)
+    Dim DocName As String
+    Dim LinkCriteria As String
+    Dim Kriterien As String, DB1 As DATABASE, Taxe As Recordset
+    Dim fnd As String
+    Dim i As Integer
+    Dim pos As Long
+    Dim frm As Form
+    Dim ctl As String
+    Dim SavePos As Variant
+    
+    i = 0
+    fnd = ""
+    
+    If srcStr = Null Then
+        AnzeigeClear
+        Exit Function
+    End If
+    
+    Set frm = Forms![Taxe]
+    
+    Set DB1 = DBEngine.Workspaces(0).Databases(0)
+    Set Taxe = DB1.OpenRecordset("Taxe", dbOpenTable)
+    With Taxe
+        .Index = "SLeft"
+        If Len(srcStr) > 0 Then
+            For i = 1 To Len(srcStr)
+                If Mid$(srcStr, i, 1) >= "0" And Mid$(srcStr, i, 1) <= "9" Then
+                    .Index = "Kbezeichnung"
+                End If
+            Next
+            .Seek ">=", srcStr
+            frm![PZN1] = !PZN
+            frm![Bezeichnung1] = !Bezeichnung
+            frm![Menge1] = !Menge
+            frm![Einheit1] = !Einheit
+            pos = !Kennummer
+            .Index = "Kennummer"
+            .Seek "=", pos
+            SavePos = .Bookmark
+            .Index = "Sortierung"
+            '.Index = "Bezeichnung"
+            .Bookmark = SavePos
+            For i = 1 To 19
+                .MoveNext
+                ctl = "PZN" & Trim(Str(i + 1))
+                frm.Controls(ctl) = !PZN
+                ctl = "Bezeichnung" & Trim(Str(i + 1))
+                frm.Controls(ctl) = !Bezeichnung
+                ctl = "Menge" & Trim(Str(i + 1))
+                frm.Controls(ctl) = !Menge
+                ctl = "Einheit" & Trim(Str(i + 1))
+                frm.Controls(ctl) = !Einheit
+            Next i
+            .Close
+        Else
+            AnzeigeClear
+        End If
+    End With
+End Function
+
+
+
+Public Sub BezeichnungKomprimieren()
+    Dim DB1 As DATABASE, Taxe As Recordset
+    Dim Alt, Neu As String
+    Dim Test As String
+    Dim l As Integer
+    Dim pos As Integer
+    Dim counter As Long
+    
+    Alt = ""
+    
+    Set DB1 = DBEngine.Workspaces(0).Databases(0)
+    Set Taxe = DB1.OpenRecordset("Taxe", dbOpenTable)
+    Taxe.MoveFirst
+    counter = 0
+    
+    Do Until Taxe.EOF
+        With Taxe
+            counter = counter + 1
+            .Edit
+            Alt = !Bezeichnung
+            l = Len(!Bezeichnung)
+            Neu = ""
+
+            For pos = 1 To l
+                Test = Mid$(Alt, pos, 1)
+                If Test >= "A" And Test <= "Z" Or Test >= "0" And Test <= "9" Then
+                    Neu = Neu + Test
+                End If
+            Next pos
+            !KBezeichnung = Neu
+            .UPDATE
+            .MoveNext
+        End With
+    Loop
+    Taxe.Close
+End Sub
+
+Public Sub WerteExtrahieren()
+    Dim DB1 As DATABASE, Taxe As Recordset
+    Dim Alt As String
+    Dim Test As String
+    Dim l As Integer
+    Dim pos, merk As Integer
+    Dim Wert As Long
+    Dim Links As String
+    
+    Alt = ""
+    
+    Set DB1 = DBEngine.Workspaces(0).Databases(0)
+    Set Taxe = DB1.OpenRecordset("Taxe", dbOpenTable)
+        
+    With Taxe
+    .Index = "Kennummer"
+    .MoveFirst
+    
+        Do Until .EOF
+            .Edit
+            Alt = !Bezeichnung
+            l = Len(Alt)
+            merk = l + 1
+            Wert = 0
+            For pos = 1 To l
+                Test = Mid$(Alt, pos, 1)
+                If Test >= "0" And Test <= "9" Then
+                'hier fehlt noch die Beschränkung bis zum nächsten Leerzeichen
+                    Wert = Val(Mid$(Alt, pos, l - pos + 1))
+                    merk = pos
+                    pos = l
+                End If
+            Next pos
+            Links = Left$(Alt, merk - 1)
+            !SLeft = Links
+            !SWert = Wert
+            .UPDATE
+            .MoveNext
+        Loop
+    .Close
+    End With
+End Sub
+
+Public Sub AnzeigeClear()
+    Dim i As Integer
+    Dim frm As Form
+    Dim ctl As String
+    
+    Set frm = Forms![Taxe]
+    
+    For i = 0 To 19
+        ctl = "PZN" & Trim(Str(i + 1))
+        frm.Controls(ctl) = ""
+        ctl = "Bezeichnung" & Trim(Str(i + 1))
+        frm.Controls(ctl) = ""
+        ctl = "Menge" & Trim(Str(i + 1))
+        frm.Controls(ctl) = ""
+        ctl = "Einheit" & Trim(Str(i + 1))
+        frm.Controls(ctl) = ""
+    Next i
+End Sub

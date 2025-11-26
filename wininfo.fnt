@@ -1,0 +1,1120 @@
+Faktoren:     1  0,92607 
+     0  24  600 
+     600 
+     0  24  24 
+     0  23  480 
+     600 
+     480 
+     0  23  23 
+     0  22  480 
+     600 
+     480 
+     0  22  23 
+     0  21  480 
+     600 
+     480 
+     0  21  23 
+     0  20  495 
+     600 
+     480 
+     0  20  24 
+     0  19  450 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     0  19  19 
+     0  18  450 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     0  18  19 
+     0  17  360 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     0  17  17 
+     0  16  360 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     0  16  17 
+     0  15  330 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     0  15  15 
+     0  14  330 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     0  14  15 
+     0  13  300 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     0  13  13 
+     0  12  300 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     0  12  13 
+     0  11  240 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     300 
+     240 
+     0  11  11 
+     0  10  180 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     300 
+     240 
+     180 
+     0  10  10 
+     0  9  180 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     300 
+     240 
+     180 
+     0  9  10 
+     0  8  180 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     300 
+     240 
+     180 
+     0  8  10 
+     0  7  165 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     300 
+     240 
+     180 
+     180 
+     180 
+     165 
+     0  7  7 
+     0  6  150 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     300 
+     240 
+     180 
+     180 
+     180 
+     165 
+     150 
+     0  6  6 
+     0  5  120 
+     600 
+     480 
+     480 
+     480 
+     495 
+     450 
+     450 
+     360 
+     360 
+     330 
+     330 
+     300 
+     300 
+     240 
+     180 
+     180 
+     180 
+     165 
+     150 
+     120 
+     0  5  5 
+     1  24  540 
+     540 
+     1  24  24 
+     1  23  525 
+     540 
+     525 
+     1  23  23 
+     1  22  495 
+     540 
+     525 
+     495 
+     1  22  22 
+     1  21  480 
+     540 
+     525 
+     495 
+     480 
+     1  21  21 
+     1  20  480 
+     540 
+     525 
+     495 
+     480 
+     1  20  21 
+     1  19  420 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     1  19  19 
+     1  18  405 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     1  18  18 
+     1  17  390 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     1  17  17 
+     1  16  360 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     1  16  16 
+     1  15  345 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     1  15  15 
+     1  14  330 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     1  14  14 
+     1  13  285 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     1  13  13 
+     1  12  270 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     1  12  12 
+     1  11  255 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     255 
+     1  11  11 
+     1  10  240 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     255 
+     240 
+     1  10  10 
+     1  9  225 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     255 
+     240 
+     225 
+     1  9  9 
+     1  8  210 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     255 
+     240 
+     225 
+     210 
+     1  8  8 
+     1  7  180 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     255 
+     240 
+     225 
+     210 
+     180 
+     1  7  7 
+     1  6  150 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     255 
+     240 
+     225 
+     210 
+     180 
+     150 
+     1  6  6 
+     1  5  105 
+     540 
+     525 
+     495 
+     480 
+     480 
+     420 
+     405 
+     390 
+     360 
+     345 
+     330 
+     285 
+     270 
+     255 
+     240 
+     225 
+     210 
+     180 
+     150 
+     105 
+     1  5  5 
+picAnimationBack2
+     9,75 Arial
+     9,75 Arial 0  0 
+aniSuchen2
+lblAnimation2
+     12 Arial
+     12 Arial 0  0 
+lblAnimation2
+     12 Arial
+     12 Arial 0  0 
+picAnimationBack
+     9,75 Arial
+     9,75 Arial 0  0 
+aniSuchen
+lblAnimation
+     12 Arial
+     12 Arial 0  0 
+picBack
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdOk
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+tabOptionen
+     9,75 Arial
+     9,75 Arial 0  0 
+txtOptionenEinspielenCdLw
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+chkOptionenEinspielenDaconCd
+     12 MS Sans Serif
+     12 Arial 0  0 
+chkOptionenEinspielenLauerCd
+     12 MS Sans Serif
+     12 Arial 0  0 
+chkOptionenEinspielenDOS
+     12 MS Sans Serif
+     12 Arial 0  0 
+lstOptionenStart
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+txtOptionenListe1
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+txtOptionenListe2
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+lstOptionenTaxe
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+chkOptionenTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+fmeOptionenBereicheFarbeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+fmeOptionenBereicheFarbeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdOptionenBereicheFarbe
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdOptionenBereicheFarbe
+     9,75 Arial
+     9,75 Arial 0  0 
+chkOptionenBereicheRahmen
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblOptionenEinspielenCdLw
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblOptionenStart
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblOptionenListe2
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblOptionenListe1
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblOptionenTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblOptionenBereicheFarbeArbeit
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblOptionenBereicheFarbeInfo
+     12 MS Sans Serif
+     12 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+fmeTaxeOptions
+     9,75 Arial
+     9,75 Arial 0  0 
+optTaxe
+     9,75 Arial
+     9,75 Arial 0  0 
+optTaxe
+     9,75 Arial
+     9,75 Arial 0  0 
+optTaxe
+     9,75 Arial
+     9,75 Arial 0  0 
+optTaxe
+     9,75 Arial
+     9,75 Arial 0  0 
+optTaxe
+     9,75 Arial
+     9,75 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblTaxe
+     14,25 Arial
+     14,25 Arial 0  0 
+lblTaxe
+     14,25 Arial
+     14,25 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblTaxe
+     13,5 MS Sans Serif
+     14,25 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblTaxe
+     13,5 MS Sans Serif
+     14,25 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblTaxe
+     13,5 MS Sans Serif
+     14,25 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+lblTaxe
+     13,5 MS Sans Serif
+     14,25 Arial 0  0 
+lblTaxe
+     13,5 MS Sans Serif
+     14,25 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+cmdOk
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+cmdTaxeIdente
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+cmdTaxeAutIdem
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+cmdTaxeImporte
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+cmdTaxeAlternativPackung
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+lblTaxe
+     12 MS Sans Serif
+     12 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+picAuswahlInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+flxAuswahl2
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+scrAuswahl
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+cmdOk
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+txtAuswahl
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+cmdTaxeAnzeigeModus
+     9,75 Arial
+     9,75 Arial 0  0 
+picToolTip
+     8,25 Arial
+     8,25 Arial 0  0 
+txtDDEServer
+     9,75 Arial
+     9,75 Arial 0  0 
+picBack
+     9,75 Arial
+     9,75 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+lstVergleich
+     9,75 Arial
+     9,75 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+cmdOk
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+picHotkeys
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+cmdHotkey
+     6 Arial
+     6 Small Fonts 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+cmdMonographie
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdArtikelCode
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdOk
+     9,75 Arial
+     9,75 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+aniDaconVt
+lblDaconVtLetter
+     12 Arial
+     12 Arial 0  0 
+lblDaconVtAnzahl
+     12 Arial
+     12 Arial 0  0 
+lblDaconVtLetterAnzeige
+     14,25 Arial
+     14,25 Arial 0  0 
+lblDaconVtAnzahlAnzeige
+     14,25 Arial
+     14,25 Arial 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+lblDaconVtHeader
+     14,25 Arial
+     14,25 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+fmeCdUpdateDauer
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+lblCdUpdateDauerBisher
+     12 Arial
+     12 Arial 0  0 
+lblCdUpdateDauerBisherAnzeige
+     14,25 Arial
+     14,25 Arial 0  0 
+lblCdUpdateDauerRest
+     12 Arial
+     12 Arial 0  0 
+lblCdUpdateDauerRestAnzeige
+     14,25 Arial
+     14,25 Arial 0  0 
+fmeCdUpdateStatus
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+lblCdUpdateStatusAktuellAnzeige
+     14,25 Arial
+     14,25 Arial 0  0 
+lblCdUpdateStatusAktuell
+     12 Arial
+     12 Arial 0  0 
+lblCdUpdateStatusAnzahlAnzeige
+     14,25 Arial
+     14,25 Arial 0  0 
+lblCdUpdateStatusAnzahl
+     12 Arial
+     12 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+prgCdUpdate
+lblCdUpdateProzent
+     14,25 Arial
+     14,25 Arial 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+Label5
+     14,25 Arial
+     14,25 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+cmdOk
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+flxFilter
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+txtEingabe
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+cmdSuchen
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdFilter
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdOperator
+     9,75 Arial
+     9,75 Arial 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+cmdNeu
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdListe
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEntfernen
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+lblAnzahl
+     12 Arial
+     12 Arial 0  0 
+lblListeSize
+     18 MS Sans Serif
+     18 Arial 0  0 
+picStartBack
+     9,75 Arial
+     9,75 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+picHtm1
+     9,75 Arial
+     9,75 Arial 0  0 
+picHtm2
+     9,75 Arial
+     9,75 Arial 0  0 
+scrHtml
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+cmdOk
+     9,75 Arial
+     9,75 Arial 0  0 
+picToolbar
+     9,75 MS Sans Serif
+     9,75 Arial 0  0 
+cmdToolbar
+     8,25 Arial
+     8,25 Arial 0  0 
+lblTasten
+     6,75 Small Fonts
+     6,75 Small Fonts 0  0 
+lstSortierung
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdHotkeyHidden
+     8,25 Arial
+     8,25 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblIndexDateienName
+     12 Arial
+     12 Arial 0  0 
+lblIndexDateienName
+     12 Arial
+     12 Arial 0  0 
+lblIndexDateienName
+     12 Arial
+     12 Arial 0  0 
+lblIndexDateienName
+     12 Arial
+     12 Arial 0  0 
+lblIndexDateienName
+     12 Arial
+     12 Arial 0  0 
+lblIndexDateienName
+     12 Arial
+     12 Arial 0  0 
+lblIndexDateienName
+     12 Arial
+     12 Arial 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+Label6
+     14,25 Arial
+     14,25 Arial 0  0 
+picBack
+     8,25 MS Sans Serif
+     8,25 Arial 0  0 
+txtCliCdUpdate
+     9,75 Arial
+     9,75 Arial 0  0 
+cmdEsc
+     9,75 Arial
+     9,75 Arial 0  0 
+fmeArbeit
+     9,75 Arial
+     9,75 Arial 0  0 
+lstOpGh
+     9,75 Arial
+     9,75 Arial 0  0 
+flxarbeit
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblArbeit
+     12 Arial
+     12 Arial 0  0 
+fmeInfo
+     9,75 Arial
+     9,75 Arial 0  0 
+Picture1
+     9,75 Arial
+     9,75 Arial 0  0 
+flxInfo
+     9,75 Arial
+     8,25 Comic Sans MS 0  0 
+lblInfo
+     12 Arial
+     12 Arial 0  0 
+cmdOk
+     9,75 Arial
+     9,75 Arial 0  0 

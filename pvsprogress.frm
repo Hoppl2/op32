@@ -1,0 +1,1453 @@
+VERSION 5.00
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "msflxgrd.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Begin VB.Form frmFortschritt 
+   Caption         =   "Datens‰tze einlesen"
+   ClientHeight    =   7260
+   ClientLeft      =   1470
+   ClientTop       =   1170
+   ClientWidth     =   7575
+   ControlBox      =   0   'False
+   Icon            =   "pvsprogress.frx":0000
+   LinkTopic       =   "Form1"
+   ScaleHeight     =   7260
+   ScaleWidth      =   7575
+   Begin VB.CommandButton cmdDruck 
+      Caption         =   "&Drucken (F6)"
+      Height          =   500
+      Left            =   4320
+      TabIndex        =   17
+      Top             =   5400
+      Visible         =   0   'False
+      Width           =   1200
+   End
+   Begin VB.CommandButton cmdOk 
+      Caption         =   "&trotzdem ¸berleiten"
+      Default         =   -1  'True
+      Height          =   500
+      Left            =   120
+      TabIndex        =   16
+      Top             =   5280
+      Visible         =   0   'False
+      Width           =   1200
+   End
+   Begin MSFlexGridLib.MSFlexGrid flxTmp 
+      Height          =   1215
+      Index           =   0
+      Left            =   6240
+      TabIndex        =   14
+      TabStop         =   0   'False
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   2143
+      _Version        =   393216
+   End
+   Begin VB.Timer tmrBestVors 
+      Interval        =   500
+      Left            =   3600
+      Top             =   4920
+   End
+   Begin VB.PictureBox picBestVorsProgress 
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H00FFFFFF&
+      DrawMode        =   10  'Stift maskieren
+      FillColor       =   &H8000000D&
+      FillStyle       =   0  'Ausgef¸llt
+      ForeColor       =   &H8000000D&
+      Height          =   615
+      Left            =   4920
+      ScaleHeight     =   555
+      ScaleWidth      =   1275
+      TabIndex        =   13
+      Top             =   4320
+      Width           =   1335
+   End
+   Begin VB.CommandButton cmdEsc 
+      Cancel          =   -1  'True
+      Caption         =   "Abbruch"
+      Height          =   500
+      Left            =   1560
+      TabIndex        =   10
+      Top             =   5280
+      Width           =   1200
+   End
+   Begin VB.Frame fmeBestVorsDauer 
+      Caption         =   "Einspieldauer"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1335
+      Left            =   0
+      TabIndex        =   5
+      Top             =   2280
+      Width           =   8400
+      Begin VB.Label lblBestVorsDauer 
+         Alignment       =   2  'Zentriert
+         Caption         =   "Bisher"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   720
+         TabIndex        =   9
+         Top             =   600
+         Width           =   1095
+      End
+      Begin VB.Label lblFortschrittDauerWert 
+         Alignment       =   2  'Zentriert
+         BorderStyle     =   1  'Fest Einfach
+         Caption         =   "99999999"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   510
+         Index           =   0
+         Left            =   1920
+         TabIndex        =   8
+         Top             =   480
+         Width           =   1935
+      End
+      Begin VB.Label lblBestVorsDauer 
+         Alignment       =   2  'Zentriert
+         Caption         =   "Rest"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   1
+         Left            =   4920
+         TabIndex        =   7
+         Top             =   600
+         Width           =   1095
+      End
+      Begin VB.Label lblFortschrittDauerWert 
+         Alignment       =   2  'Zentriert
+         BorderStyle     =   1  'Fest Einfach
+         Caption         =   "99999999"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   510
+         Index           =   1
+         Left            =   6120
+         TabIndex        =   6
+         Top             =   480
+         Width           =   1935
+      End
+   End
+   Begin VB.Frame fmeBestVorsStatus 
+      Caption         =   "Einspielstatus"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   2055
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   5400
+      Begin VB.Label lblFortschrittStatusWert 
+         Alignment       =   2  'Zentriert
+         BorderStyle     =   1  'Fest Einfach
+         Caption         =   "99999999"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   480
+         Index           =   1
+         Left            =   3120
+         TabIndex        =   4
+         Top             =   1200
+         Width           =   1455
+      End
+      Begin VB.Label lblBestVorsStatus 
+         Alignment       =   2  'Zentriert
+         Caption         =   "Datens‰tze ¸bernommen"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   1
+         Left            =   240
+         TabIndex        =   3
+         Top             =   1320
+         Width           =   2535
+      End
+      Begin VB.Label lblFortschrittStatusWert 
+         Alignment       =   2  'Zentriert
+         BorderStyle     =   1  'Fest Einfach
+         Caption         =   "99999999"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   510
+         Index           =   0
+         Left            =   3120
+         TabIndex        =   2
+         Top             =   480
+         Width           =   1455
+      End
+      Begin VB.Label lblBestVorsStatus 
+         Alignment       =   2  'Zentriert
+         Caption         =   "Anzahl Datens‰tze"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   360
+         TabIndex        =   1
+         Top             =   600
+         Width           =   2415
+      End
+   End
+   Begin ComctlLib.ProgressBar prgBestVors 
+      Height          =   255
+      Left            =   -120
+      TabIndex        =   11
+      Top             =   4080
+      Visible         =   0   'False
+      Width           =   6135
+      _ExtentX        =   10821
+      _ExtentY        =   450
+      _Version        =   327682
+      Appearance      =   1
+   End
+   Begin MSFlexGridLib.MSFlexGrid flxTmp 
+      Height          =   1215
+      Index           =   1
+      Left            =   6360
+      TabIndex        =   15
+      TabStop         =   0   'False
+      Top             =   3960
+      Visible         =   0   'False
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   2143
+      _Version        =   393216
+   End
+   Begin VB.Label lblBestVorsProzent 
+      Alignment       =   2  'Zentriert
+      Caption         =   "999%"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   1920
+      TabIndex        =   12
+      Top             =   4560
+      Visible         =   0   'False
+      Width           =   975
+   End
+End
+Attribute VB_Name = "frmFortschritt"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Const DefErrModul = "FORTSCHRITT.FRM"
+
+Public FortschrittAbbruch%
+
+Dim wg%, lc$, AVP#, Spanne#, Tara$, Rezept$
+Sub SucheArtikel()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("SucheArtikel")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%
+Dim ok As Boolean
+Dim satz As Long
+Dim Wagr$, Lac$, atc$, h$
+Dim AvpVon#, AvpBis#
+Dim gfundn%
+Dim Prozent!, StartZeit!, dauer!, GesamtDauer!, RestDauer!
+
+Wagr$ = Trim(frmSPrmArtikel.txtEin(0).text)
+Wagr$ = WGTrennen(Wagr$)
+Lac$ = Trim(frmSPrmArtikel.txtEin(1).text)
+atc$ = UCase(Trim(frmSPrmArtikel.txtEin(2).text))
+AvpVon# = xVal(frmSPrmArtikel.txtEin(3).text)
+AvpBis# = xVal(frmSPrmArtikel.txtEin(4).text)
+ast.GetFirstRecord
+gfundn% = 0
+prgBestVors.max = ast.erstmax
+StartZeit! = Timer
+For satz = 1 To ast.erstmax
+  ok = True
+  ast.GetRecord (satz + 1)
+  If Val(ast.pzn) = 0 Then ok = False
+  If AvpVon# > 0# And ast.AVP < AvpVon# Then ok = False
+  If AvpBis# > 0# And ast.AVP > AvpBis# Then ok = False
+  If Lac$ > "" And InStr(Lac$, ast.Lac) = 0 Then ok = False
+  If Wagr$ > "" Then
+    h$ = ast.wg
+    If Val(h$) < 10 Then h$ = Format(Val(h$) * 10, "00")
+    If InStr(Wagr$, h$) = 0 Then ok = False
+  End If
+  'wagr
+  'atc
+  If ok And atc$ > "" Then
+    TaxeRec.Index = "PZN"
+    TaxeRec.Seek "=", ast.pzn
+    If TaxeRec.NoMatch Then
+      ok = False
+    Else
+      If Left(TaxeRec!ATCCode, Len(atc$)) <> atc$ Then ok = False
+    End If
+  End If
+  If ok Then
+    sp.Index = "Unique"
+    sp.Seek "=", ast.pzn
+    If sp.NoMatch Then
+      sp.AddNew
+      sp!pzn = Left(ast.pzn, 7)
+      sp.Update
+      h$ = ast.pzn$ + vbTab + ast.kurz + vbTab + ast.meng + vbTab + ast.meh + vbTab
+      frmWinPvsOptionen.flxOptionen1(1).AddItem h$
+      gfundn% = gfundn% + 1
+    End If
+  End If
+  
+  If (satz Mod 100 = 1) Then
+      lblFortschrittStatusWert(0).Caption = satz
+      lblFortschrittStatusWert(1).Caption = gfundn%
+      dauer! = Timer - StartZeit!
+      lblFortschrittDauerWert(0).Caption = Format$(dauer! \ 60, "##0") + ":" + Format$(dauer! Mod 60, "00")
+      Prozent! = (satz / ast.erstmax) * 100!
+      If (Prozent! > 0) Then
+          GesamtDauer! = (dauer! / Prozent!) * 100!
+      Else
+          GesamtDauer! = dauer!
+      End If
+      RestDauer! = GesamtDauer! - dauer!
+      lblFortschrittDauerWert(1).Caption = Format$(RestDauer! \ 60, "##0") + ":" + Format$(RestDauer! Mod 60, "00")
+      prgBestVors.Value = satz
+      lblBestVorsProzent.Caption = Format$(Prozent!, "##0") + " %"
+          
+      h$ = Format$(Prozent!, "##0") + " %"
+      With picBestVorsProgress
+          .Cls
+          .CurrentX = (.ScaleWidth - .TextWidth(h$)) \ 2
+          .CurrentY = (.ScaleHeight - .TextHeight(h$)) \ 2
+          picBestVorsProgress.Print h$
+          picBestVorsProgress.Line (0, 0)-((Prozent! * .ScaleWidth) \ 100, .ScaleHeight), vbHighlight, BF
+      End With
+      
+      DoEvents
+      If (FortschrittAbbruch% = True) Then
+          Exit For
+      End If
+
+  End If
+Next satz
+Call DefErrPop
+End Sub
+
+Private Sub cmdEsc_Click()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("cmdEsc_Click")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FortschrittAbbruch% = -1
+Call DefErrPop
+End Sub
+
+Sub HoleVK()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("HoleVK")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+Dim j&, vsatz&, SatzAnz&, RezAnz&, LastZeit$, vmax&, gfundn&
+Dim spBreite%, erg%, VKAbZeit%, VKAbdatum%, EndeT%, i%, zeit$
+Dim bad%, badData As Long, badWert As Double
+Dim h$, Abdatum$, xc$, l&, RezNum$, buf$, pneu As Byte
+Dim Prozent!, StartZeit!, dauer!, GesamtDauer!, RestDauer!
+Dim asatz As Long, ssatz As Long
+Dim ok As Boolean, foundTax As Boolean, foundASS As Boolean, NeuerKunde As Boolean, NurStornos As Boolean, anyBad As Boolean
+Dim outFlag As Boolean, omitFlag As Boolean, prmFLAG As Boolean, Preiseingabe As Boolean, anyPrivat As Boolean
+Dim KennZ$, Kundenende%, RezeptEnde%, Basis#, RecCount As Single
+Dim RabBasis#, rab#, Preis#, wrkPSTAT As Long
+Dim anyRp As Boolean, rpMinus%, LaufNr%, vLaufnr%
+Dim recno As Long, begVerk As Long, begPstat As Long
+Dim ptmp As pssType, pleer As pssType
+Dim Rabatt#, Ust#, badPZN$, SndPrm#
+Dim letztDatum As Date, letztZeit As Integer
+Dim maxPss As Single, gefunden As Boolean, begpss As Long
+Dim Tag As Date, fout%
+Dim Privatartikelminus As Boolean
+
+'fout = FreeFile
+'Open "PSTW.$$$" For Output As #fout
+sp.Index = "Unique"
+
+flxTmp(0).Clear
+flxTmp(0).Cols = 6
+
+With flxTmp(1)
+  .Clear
+  .Cols = 6
+  .FixedRows = 1
+  .FixedCols = 0
+  .FormatString = "<|<|>|<|>"
+  .Rows = 3
+  .FixedRows = 2
+  .TextMatrix(0, 3) = "Preis/Spanne f¸r Pr‰mienbasis nicht ermittelbar"
+  .TextMatrix(1, 0) = "Tag"
+  .TextMatrix(1, 1) = "Zeit"
+  .TextMatrix(1, 2) = "PZN"
+  .TextMatrix(1, 3) = "Artikel"
+  .TextMatrix(1, 4) = "Preis"
+  .ColWidth(0) = Me.TextWidth("99.99.99")
+  .ColWidth(1) = Me.TextWidth("99:99")
+  .ColWidth(2) = Me.TextWidth("9999999")
+  .ColWidth(3) = 0
+  .ColWidth(4) = Me.TextWidth("99999999.99")
+  .ColWidth(5) = wpara.FrmScrollHeight '+ 2 * wpara.FrmBorderHeight
+  .Rows = 2
+  Me.Font.Bold = False
+  GoSub ArtikelSpalte
+End With
+
+buf = String(64, 0)
+Get #fpss, 1, buf
+maxPss = CVS(Left(buf, 4))
+
+xc$ = MKDatum((vonAuswD))
+Call TagSuchen(gefunden, begpss, xc$, CLng(maxPss))
+If begpss < maxPss Then
+  begpss = begpss - 1
+  Get #fpss, begpss * 64& + 1, p
+  If CVDatum(p.datum) < vonAuswD Then
+    begpss = begpss + 1
+    Get #fpss, begpss * 64& + 1, p
+  End If
+  If CVDatum(p.datum) >= vonAuswD Then
+    erg% = iMsgBox("F¸r den gew‰hlten Zeitraum gibt es bereits ¸bergeleitete Daten. Mˆchte Sie diese ¸berschreiben?", vbYesNo Or vbQuestion)
+    If erg% = vbNo Then
+      Call DefErrPop
+      Exit Sub
+    Else
+      maxPss = begpss
+    End If
+  End If
+End If
+
+NeuerKunde = True
+v.GetFirstRecord
+
+vsatz& = v.DatumSuche(xc$)
+If vsatz& < 0 Then vsatz& = Abs(vsatz&) + 1
+If vsatz& <= 1 Then vsatz& = 2
+'vsatz& = vsatz& + 1
+
+If DateValue(bisAuswD) = DateValue(Now) Then
+  vmax& = v.erstmax
+Else
+  xc$ = MKDatum((DateAdd("d", 1, bisAuswD)))
+  vmax& = v.DatumSuche(xc$)
+  If vmax& < 0 Then
+    vmax& = Abs(vmax&) + 1
+    If vmax& > v.erstmax Then vmax& = v.erstmax
+  ElseIf vmax& = 0 Then
+    vmax& = v.erstmax
+  End If
+End If
+vmax& = vmax& + 1
+
+SatzAnz& = vmax& - vsatz& + 1
+If SatzAnz& <= 0 Then
+  erg% = iMsgBox("F¸r den ausgew‰hlten Zeitraum sind keine Verkaufsdaten gespeichert!", vbOKOnly Or vbInformation)
+  Call DefErrPop
+  Exit Sub
+End If
+prgBestVors.max = SatzAnz&
+StartZeit! = Timer
+
+RecCount = 0
+j& = 1
+Do While vsatz& <= vmax&
+    If NeuerKunde Then GoSub RueckSetzen
+    
+    v.GetRecord (vsatz&)
+    vLaufnr% = v.LaufNr
+    vsatz& = vsatz& + 1
+    j& = j& + 1
+    
+    If v.RezNr > 0 And Val(v.RezEan) = 0 Then
+      RezNum$ = "9999998" + Format(v.RezNr, "00000") + "0"
+      Call EanPruef(RezNum$)
+      v.RezEan = RezNum$
+      v.PutRecord (vsatz&)
+    End If
+    
+    ok = True
+    letztDatum = dDatum(v.datum)
+    letztZeit = v.zeit
+    Tag = dDatum(v.datum)
+    If Tag < vonAuswD Then ok = False
+    If Tag > bisAuswD Then Exit Do
+        
+    If Asc(v.TxtTyp) = 1 And Not LSAuch Then ok = False
+    If InStr(" +F", v.wegmark) = 0 Then ok = False
+    If v.wegmark = "F" And Not LSAuch Then ok = False
+    If ok Then
+      
+'      If Val(v.RezEan) = 0 And v.Gebuehren <> 0 Then Stop
+      EndeT = Asc(v.EndeT)
+'----------------------------------------------
+      'KundenEnde ermitteln
+      If (EndeT And 4) <> 0 Then    'Kunde zu Ende
+        Kundenende% = rpMinus%
+        If Not anyRp And Privatartikelminus Then
+          Kundenende% = -1
+        End If
+        NeuerKunde = True
+      End If
+      
+      If v.Storno = 0 And Asc(v.TxtTyp) = 0 Then NurStornos = False
+      'If v.pzn <> "9999999" And Val(v.RezEan) = 0 And v.Storno = 0 And (v.Gebuehren = 0 Or PrivRez) Then
+      
+      'If v.pzn <> "9999999" And Val(v.RezEan) = 0 And v.Storno = 0 Then  '1.0.13
+      ' in ÷ gelten Artikel, dioe aus dem Rezept gestellt wurden (v.rez = -1) als Barverkauf, wenn ihr AVP
+      ' <= Rezeptgeb¸hr. Dann sind diese Artikel als rabattf‰hig markiert.
+      If v.pzn <> "9999999" And v.Storno = 0 And (v.RezNr = 0 Or (v.RezNr < 0 And Asc(v.pFlag) = 2)) Then
+      
+        GoSub PutSatz  'Puffer leeren wenn outFLAG%
+        
+        NurStornos = False
+        
+        If Val(v.Preis) < 0 And v.Storno = 0 Then Privatartikelminus = True
+        
+        KennZ$ = "P"  'Artikel-Satz
+        anyPrivat = True
+
+        GoSub SucheArtikel
+        GoSub CheckDataIntegrity  'return(bad%)
+        If bad% = 0 Then
+          GoSub CharakteristikErmitteln
+          outFlag = True
+          omitFlag = False
+          Call Artikelbewerten(outFlag, omitFlag)
+          If (v.gebuehren <> 0 And Not PrivRez) Then outFlag = False
+          If outFlag = False Then   'f¸r Summe Barverkauf, Zusatzverkauf u. Sondernprm. trotzdem ¸berleiten
+            outFlag = True
+            KennZ$ = "S"
+          End If
+        End If
+    
+        If outFlag Then
+          Call AusgabeErstellen(KennZ$, Kundenende%, RezeptEnde%, Basis#)
+    
+          If v.pFlag <> Chr$(0) And KennZ$ <> "S" Then
+            RabBasis# = RabBasis# + CVD(p.Preis$)
+          End If
+          
+          If KennZ$ = "P" Then prmFLAG = True
+          GoSub BewertungSonderPrm
+        End If
+        If Kundenende% <> 0 And Not outFlag Then GoSub AusgabeKundenEnde
+   
+      Else
+        GoSub PreiseingabeSuchen
+        'If Val(v.RezEan) > 0 Then
+        
+        If v.RezNr <> 0 Then      '1.0.13
+        'If Val(v.RezEan) > 0 Or (Val(v.RezEan) = 0 And v.Gebuehren > 0 And Not PrivRez) Then    'RezeptEnde suchen
+          NurStornos = False
+          anyRp = True
+          rpMinus% = 1
+          RezeptEnde = 0
+          If vsatz& <= vmax& Then
+            While vsatz& <= vmax& And RezeptEnde = 0
+              EndeT = Asc(v.EndeT)
+              Preis# = Val(v.Preis)
+              If Preis# < 0# Then
+                rpMinus% = -1
+              ElseIf Preis# = 0# Then
+                If InStr("a b/", Left(v.text, 3)) > 0 Then rpMinus% = -1
+              End If
+              If Val(v.RezEan) = 0 And v.gebuehren = 0 Then EndeT% = (EndeT% Or 1)
+              If (EndeT% And 7) <> 0 Then    'Irgendwas zu Ende
+                If (EndeT% And 3) <> 0 Then    'Rp zu Ende
+                  RezeptEnde% = rpMinus%
+                End If
+                If (EndeT% And 4) <> 0 Then    'AND KundenEnde% = 1 THEN  'Kunde zu Ende
+                  Kundenende% = rpMinus%
+                  RezeptEnde% = rpMinus%
+                  NeuerKunde = True
+                End If
+                GoSub PutSatz  'Puffer leeren wenn outFLAG%
+      
+                KennZ$ = "T"  'TransaktionsEnde
+                Call AusgabeErstellen(KennZ$, Kundenende%, RezeptEnde%, Basis#)
+                outFlag = True
+      
+                If Val(v.RezEan) > 0 Then
+                  If RezeptEnde% < 0 Then
+                  'IF RezeptEnde% < 0 AND Rez% > 0 THEN
+                    'das ist ein storniertes Rezept
+                    With flxTmp(0)
+                      For l = 0 To .Rows - 1
+                        If .TextMatrix(l, 0) = v.RezEan Then
+                          .RemoveItem (l)
+                          Exit For
+                        End If
+                      Next l
+                      .Rows = .Rows + 1
+                      l = .Rows - 1
+                      .TextMatrix(l, 0) = v.RezEan
+                      .TextMatrix(l, 1) = CStr(v.RezNr)
+                      Call PruefPNR(pneu, v.PersCode)
+                      .TextMatrix(l, 2) = CStr(pneu)
+                      .TextMatrix(l, 3) = CStr(maxPss + 1)
+                    End With
+      
+                  ElseIf RezeptEnde% > 0 Then
+      
+                    'das ist ein normales Rezept
+                    With flxTmp(0)
+                      For l = 0 To .Rows - 1
+                        If .TextMatrix(l, 0) = v.RezEan Then
+                          'es gibt dazu ein storniertes Rezept
+                        
+                          wrkPSTAT = Val(.TextMatrix(l, 3))
+                          LSet ptmp = p          'aktuellen Buffer sichern
+                          Get #fpss, (wrkPSTAT - 1) * 64 + 1, p
+                          Call PruefPNR(pneu, v.PersCode)
+                          p.Pnr = pneu
+                          Put #fpss, (wrkPSTAT - 1) * 64 + 1, p
+                          'Kundenende suchen und korrigieren
+                          If p.KuEnde = 0 Then
+                            LaufNr% = p.LaufNr
+                            wrkPSTAT = wrkPSTAT + 1
+                            'vorwÑrts
+                            While wrkPSTAT <= maxPss And p.LaufNr = LaufNr%
+                              Get #fpss, (wrkPSTAT - 1) * 64 + 1, p
+                              If p.KuEnde <> 0 Then
+                                Call PruefPNR(pneu, v.PersCode)
+                                p.Pnr = pneu
+                                Put #fpss, (wrkPSTAT - 1) * 64 + 1, p
+                                wrkPSTAT = maxPss + 1
+                                LaufNr% = 0   'Ende
+                              End If
+                              wrkPSTAT = wrkPSTAT + 1
+                            Wend
+                            If LaufNr% > 0 Then   'nicht gef., rÅckwÑrts suchen
+                              wrkPSTAT = Val(.TextMatrix(l, 3)) - 1
+                              While wrkPSTAT > 63 And p.LaufNr = LaufNr%
+                                Get #fpss, (wrkPSTAT - 1) * 64 + 1, p
+                                If p.KuEnde <> 0 Then
+                                  Call PruefPNR(pneu, v.PersCode)
+                                  p.Pnr = pneu
+                                  Put #fpss, (wrkPSTAT - 1) * 64 + 1, p
+                                  wrkPSTAT = 0
+                                End If
+                                wrkPSTAT = wrkPSTAT - 1
+                              Wend
+                            End If
+                          End If
+                          
+                          LSet p = ptmp               'aktuellen Buffer wiederherstellen
+                          .RemoveItem (l)
+                          Exit For
+                        End If
+                      Next l
+                    End With
+                  End If
+                End If
+              End If
+              v.GetRecord (vsatz)
+              vsatz = vsatz + 1
+            Wend
+            RezeptEnde% = 0
+            vsatz = vsatz - 1
+          End If
+        ElseIf v.pzn$ = "9999999" And Mid$(v.text$, 20, 1) = "x" And v.Storno <> 1 Then
+          If outFlag Then
+            p.Multi = Val(Mid$(v.text$, 16, 3))
+          End If
+          If Kundenende% <> 0 Then GoSub AusgabeKundenEnde
+        ElseIf Preiseingabe Then
+          NurStornos = False
+          If Abs(Val(v.Preis$)) = AVP# Then  'Eigenverbrauch ?
+            outFlag = False
+            GoSub AusgabeKundenEnde
+          ElseIf Kundenende% <> 0 Then
+            If p.LaufNr = v.LaufNr And p.RezEnde <> 0 Then
+              If outFlag Then
+                p.KuEnde = Kundenende%
+              Else
+                GoSub AusgabeKundenEnde
+              End If
+            Else
+              RezeptEnde% = 0
+              GoSub AusgabeKundenEnde
+            End If
+          End If
+        ElseIf v.pzn = "9999999" And Left$(v.text$, 6) = "RABATT" Then
+          NurStornos = False
+          If RabAbzug Then
+'            p.KuEnde = Kundenende%
+            GoSub PutSatz    'Buffer leeren
+            GoSub RabattBehandeln
+          End If
+          If Kundenende% <> 0 Then GoSub AusgabeKundenEnde
+' gs Stornokunden auslassen, Stornoaritkel kommen auch hier rein!
+'        ElseIf v.pzn = "9999999" And Kundenende% <> 0 Then
+'          If p.LaufNr = v.LaufNr And p.RezEnde <> 0 Then
+'            p.KuEnde = Kundenende%
+'          Else
+'            RezeptEnde% = 0
+'            GoSub AusgabeKundenEnde
+'          End If
+        ElseIf Kundenende% <> 0 Then
+          If p.LaufNr = v.LaufNr And p.RezEnde <> 0 Then
+            p.KuEnde = Kundenende%
+          ElseIf Not NurStornos Then
+            RezeptEnde% = 0
+            GoSub AusgabeKundenEnde
+          End If
+        Else  'pzn = 9999999 und kein Rezept, kein KuEnde, kein Preis, kein Rabatt
+          'EndeT1% = ASC(v.EndeT$)
+        End If
+      End If
+    End If
+    
+    If (j& Mod 100 = 1) Then
+        lblFortschrittStatusWert(0).Caption = j&
+        lblFortschrittStatusWert(1).Caption = gfundn&
+        dauer! = Timer - StartZeit!
+        lblFortschrittDauerWert(0).Caption = Format$(dauer! \ 60, "##0") + ":" + Format$(dauer! Mod 60, "00")
+        Prozent! = (j& / SatzAnz&) * 100!
+        If (Prozent! > 0) Then
+            GesamtDauer! = (dauer! / Prozent!) * 100!
+        Else
+            GesamtDauer! = dauer!
+        End If
+        RestDauer! = GesamtDauer! - dauer!
+        lblFortschrittDauerWert(1).Caption = Format$(RestDauer! \ 60, "##0") + ":" + Format$(RestDauer! Mod 60, "00")
+        prgBestVors.Value = j&
+        lblBestVorsProzent.Caption = Format$(Prozent!, "##0") + " %"
+            
+        h$ = Format$(Prozent!, "##0") + " %"
+        With picBestVorsProgress
+            .Cls
+            .CurrentX = (.ScaleWidth - .TextWidth(h$)) \ 2
+            .CurrentY = (.ScaleHeight - .TextHeight(h$)) \ 2
+            picBestVorsProgress.Print h$
+            picBestVorsProgress.Line (0, 0)-((Prozent! * .ScaleWidth) \ 100, .ScaleHeight), vbHighlight, BF
+        End With
+        
+        DoEvents
+        If (FortschrittAbbruch% = True) Then
+          RecCount = 0
+          outFlag = False
+          Exit Do
+        End If
+    End If
+Loop
+GoSub PutSatz  'Puffer leeren wenn outFLAG%
+If FortschrittAbbruch% = 0 Then
+'  If (omitFlag Or Vorschau) And RecCount > 0 Then
+  If anyBad And Not Vorschau Then
+    Me.Left = frmAction.Left + wpara.LinksX
+    Me.Width = frmAction.Width - 2 * wpara.LinksX
+    Me.Top = frmAction.Top + wpara.TitelY
+    Me.Height = frmAction.ScaleHeight - 2 * wpara.TitelY
+    cmdEsc.Top = Me.ScaleHeight - cmdEsc.Height - 2 * wpara.TitelY
+    cmdOk.Top = cmdEsc.Top
+    cmdDruck.Top = cmdEsc.Top
+    
+    With flxTmp(1)
+      .Left = wpara.LinksX
+      .Top = wpara.TitelY
+      .Width = Me.ScaleWidth - 2 * wpara.LinksX
+      .Height = cmdEsc.Top - .Top - wpara.TitelY
+      GoSub ArtikelSpalte
+      .Rows = .Rows + 2
+      .TextMatrix(.Rows - 1, 3) = "Artikelwert"
+      .TextMatrix(.Rows - 1, 4) = Format(badWert, "###,###,##0.00")
+      .Visible = True
+      .ZOrder 0
+    End With
+    cmdOk.Left = (Me.ScaleWidth - cmdEsc.Width) / 2
+    cmdEsc.Left = cmdOk.Left + cmdOk.Width + 2 * wpara.LinksX
+    'cmdDruck.Visible = True   'Druck geht noch nicht -> invisble
+    cmdOk.Visible = True
+    
+    Do While FortschrittAbbruch% = 0
+      DoEvents
+    Loop
+  Else
+    FortschrittAbbruch% = 1
+  End If
+  
+  If RecCount > 0 And FortschrittAbbruch% = 1 Then
+    buf = String(64, 0)
+    Get #fpss, 1, buf
+    buf = MKS(maxPss) + Mid$(buf, 5)
+    Put #fpss, 1, buf
+    If letztDatum > bisAuswD Then
+      letztDatum = bisAuswD
+      letztZeit = 2359
+    End If
+    
+    Get #fpss, 65, p2
+    p2.lAusDat = MKDatum(letztDatum)
+    p2.lAusTim = letztZeit
+    p2.UebOK = -1
+    p2.UebErst = 0
+    ErstesMal% = 0
+    p2.lUebDat = MKDatum(letztDatum)
+    p2.lUebTim = letztZeit
+    p2.lAnz = MKS(RecCount)
+    p2.gAnz = MKS(RecCount + CVS(p2.gAnz))
+    Put #fpss, 65, p2
+    FortschrittAbbruch% = 0
+  End If
+End If
+'Close #fout
+Call DefErrPop
+Exit Sub
+'-----------------------------------------------------------------------------------------------------------------------
+SucheArtikel:
+foundTax = False
+erg = ast.IndexSearch(0, v.pzn, asatz)
+If erg = 0 Then
+  ast.GetRecord asatz + 1
+  foundTax = True
+Else
+  TaxeRec.Index = "PZN"
+  TaxeRec.Seek "=", v.pzn
+  If Not TaxeRec.NoMatch Then
+    Call Taxe2ast(v.pzn)
+    foundTax = True
+  End If
+End If
+
+foundASS = False
+erg = ass.IndexSearch(0, v.pzn, ssatz)
+If erg = 0 Then
+  ass.GetRecord (ssatz + 1)
+  foundASS = True
+End If
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+PreiseingabeSuchen:
+Preiseingabe = True
+If v.pzn <> "9999999" Then Preiseingabe = False
+If Asc(v.TxtTyp) <> 0 Then Preiseingabe = False
+If Val(v.Preis) = 0 Then Preiseingabe = False
+If Mid(v.text, 20, 1) = "x" Then Preiseingabe = False
+If Mid(v.text, 1, 11) = "AUFZAHLUNG " Or Mid(v.text, 1, 11) = "MEHRKOSTEN " Then Preiseingabe = False
+If Mid(v.text, 1, 10) = "OFFENE GEB" Then Preiseingabe = False
+If Mid(v.text, 1, 7) = "ACONTO " Then Preiseingabe = False
+If Mid(v.text, 1, 6) = "RABATT" Then Preiseingabe = False
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+RabattBehandeln:
+rab# = 0
+If InStr(v.text, "%") > 0 Then
+  rab# = Abs(Val(Mid(v.text, InStr(v.text, "%") - 2, 2)))
+Else
+  'Rabatt ermitteln
+  If RabBasis# > 0 Then
+    rab# = Abs(Val(v.Preis) / (RabBasis# * 0.01))
+  End If
+End If
+
+If rab# > 0 Then
+  wrkPSTAT = maxPss
+  While wrkPSTAT > begPstat
+    Get #fpss, (wrkPSTAT - 1) * 64 + 1, p
+    If p.pFlag <> 0 Then
+      Rabatt# = (CVD(p.Preis) / 100) * rab#
+      Ust# = Asc(p.mwst)
+      If Pr‰mBasis$ = "E" Then Rabatt# = (Rabatt# / ((100 + Ust#) / 100))
+      p.Basis = MKD$(CVD(p.Basis) - Rabatt#)
+      p.sPrm = MKS(CVS(p.sPrm) - Rabatt#)
+      p.RabProz = CInt(rab#)
+      p.RabBetr = MKD$(Rabatt#)
+      Put #fpss, (wrkPSTAT - 1) * 64 + 1, p
+    End If
+    wrkPSTAT = wrkPSTAT - 1
+  Wend
+End If
+
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+CharakteristikErmitteln:
+AVP# = Val(v.Preis)
+If AVP# = 0 Then AVP# = ast.AVP
+If foundTax Then lc$ = ast.Lac Else lc$ = " "
+wg% = Val(v.wg)      'Warengruppe
+If wg% < 10 Then wg% = wg% * 10
+If wg% < 0 Or wg% > 99 Then wg% = 0
+If Val(v.mw) < 1 Or Val(v.mw) > 4 Then v.mw = "2"
+'Spanne ermitteln
+Rezept$ = ""
+Spanne# = 0
+Tara$ = ""
+If foundTax Then
+  If InStr("S+", Left$(ast.rez, 1)) > 0 Then Rezept$ = "J"
+  If InStr("+", Right$(ast.rez, 1)) > 0 Then Rezept$ = "J"
+  Spanne# = (Abs(AVP#) / ((100# + para.mwst(Val(v.mw))) / 100#)) - ast.aep
+  If Spanne# < 0 Then Spanne# = 0
+  Spanne# = Sgn(AVP#) * Spanne#
+End If
+If foundASS Then
+  If ass.max(0) > 0 Then Tara$ = Tara$ + "A"
+  If ass.max(1) > 0 Then Tara$ = Tara$ + "B"
+  If ass.max(2) > 0 Then Tara$ = Tara$ + "C"
+  If ass.max(3) > 0 Then Tara$ = Tara$ + "D"
+  If (Len(Tara$) > 0 Or ass.tplatz > 0) Then Tara$ = "V" + Tara$
+End If
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+CheckDataIntegrity:
+bad% = 0
+If foundTax Then
+  If Val(v.Preis) = 0 And ast.AVP = 0 Then bad = 1  'Kein Preis
+  If (chkSPANNE Or Pr‰mBasis = "S") And (ast.aep = 0 Or bad% = 1) Then bad% = 2
+Else
+  If Val(v.Preis) = 0 Then bad% = 3  'Kein Preis
+  If Pr‰mBasis = "S" Then bad% = 4 'Spanne    \
+End If
+If bad% > 0 And badPZN$ <> v.pzn Then
+  badData = badData + 1
+  badWert# = badWert# + Val(v.Preis)
+  badPZN$ = v.pzn
+  zeit$ = Right$(Str(10000 + letztZeit), 4)
+  zeit$ = Left$(zeit$, 2) + ":" + Right$(zeit$, 2)
+  h$ = Format(Tag, "dd.mm.yy") + vbTab + zeit$ + vbTab + v.pzn + vbTab + v.text$ + vbTab + v.Preis
+  flxTmp(1).AddItem h$
+  anyBad = True
+End If
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+AusgabeKundenEnde:
+GoSub PutSatz    'Buffer leeren
+KennZ$ = "T"  'TransaktionsEnde
+p.KuEnde = Kundenende%
+
+Call AusgabeErstellen(KennZ$, Kundenende%, RezeptEnde%, Basis#)
+If prmFLAG Then
+  p.pzn = "9999998"   'doch PrÑmKunde
+Else
+  p.pzn = "9999999"   'kein PrÑmKunde
+End If
+outFlag = True
+anyRp = False
+anyPrivat = False
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+PutSatz:
+If outFlag Then
+  If p.KuEnde <> 0 Then
+    gfundn = gfundn + 1
+    'Print #fout, p.LaufNr
+  End If
+  If (p.Pnr = 0) Then p.Pnr = 1
+  maxPss = maxPss + 1
+  Put #fpss, (maxPss - 1) * 64# + 1, p
+  RecCount = RecCount + 1
+  LSet p = pleer
+  rab# = 0
+  Rabatt# = 0
+  Basis# = 0
+  AVP# = 0
+  Spanne# = 0
+  SndPrm# = 0
+End If
+outFlag = False
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+RueckSetzen:
+rpMinus% = 1
+Privatartikelminus = False
+RezeptEnde% = 0
+Kundenende% = 0
+RabBasis# = 0
+NeuerKunde = False
+prmFLAG = False
+NurStornos = True
+begVerk = vsatz
+begPstat = maxPss + 1
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+BewertungSonderPrm:
+sp.Seek "=", v.pzn
+If Not sp.NoMatch Then
+  p.sPrm = MKS(CVD(p.Basis))
+End If
+Return
+'-----------------------------------------------------------------------------------------------------------------------
+ArtikelSpalte:
+With flxTmp(1)
+  spBreite% = 0
+  For i% = 0 To .Cols - 1
+      If (.ColWidth(i%) > 0) Then
+          .ColWidth(i%) = .ColWidth(i%) + Me.TextWidth("X")
+      End If
+      spBreite% = spBreite% + .ColWidth(i%)
+  Next i%
+  If (spBreite% > .Width) Then
+      spBreite% = .Width
+  End If
+  .ColWidth(3) = .Width - spBreite%
+End With
+Return
+End Sub
+
+
+Sub AusgabeErstellen(KennZ$, Kundenende%, RezeptEnde%, Basis#)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("AusgabeErstellen ")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+Dim pneu As Byte
+
+p.KZ = KennZ$
+p.datum = MKDatum(dDatum(v.datum))
+p.zeit = v.zeit
+p.LaufNr = v.LaufNr
+p.RezNr = v.RezNr
+p.User = v.User
+p.BS = v.BS
+p.pzn = v.pzn
+Call PruefPNR(pneu, v.PersCode)
+p.Pnr = pneu
+
+p.KuEnde = Kundenende%
+
+If KennZ$ = "P" Or KennZ$ = "S" Then   'Artikel fÅr die PrÑmierung
+  p.wg = wg%
+  p.Preis = MKD(Val(v.Preis))
+  p.mwst = Chr$(para.mwst(Val(v.mw)))
+  p.Lac = lc$
+  p.RabProz = 0        'wird ggf. Åberschrieben
+  p.RabBetr = MKD$(0) 'wird ggf. Åberschrieben
+  p.pFlag = Asc(v.pFlag)
+  If para.Land = "A" Then p.pFlag = 2
+  p.Multi = 1    'wird ggf. Åberschrieben
+  If Pr‰mBasis = "E" Then       'exkl.
+    'Basis# = (avp# / ((100 + para.mwst(Val(v.mw))) / 100))
+    Basis# = (Val(v.Preis) / ((100 + para.mwst(Val(v.mw))) / 100))
+  ElseIf Pr‰mBasis = "I" Then   'inkl.
+    'Basis# = avp#
+    Basis# = Val(v.Preis)
+  Else
+    Basis# = Spanne#
+  End If
+  p.Basis = MKD$(Basis#)
+  p.sPrm = MKS$(0)   'wird ggf. Åberschrieben
+  p.RezEnde = 0
+ElseIf KennZ$ = "T" Then    'Rp-/Kd-Ende
+  p.RezEnde = RezeptEnde%
+End If
+Call DefErrPop
+End Sub
+
+
+Sub PruefPNR(pneu As Byte, palt As Byte)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("PruefPNR")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+
+pneu = palt
+If palt < 1 Or palt > 50 Then pneu = 0
+Call DefErrPop
+End Sub
+
+Sub Artikelbewerten(outFlag As Boolean, omitFlag As Boolean)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Artikelbewerten")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+
+Dim i%, j%, k%
+Dim memFlag%
+
+outFlag = True
+memFlag% = 0
+i% = 1
+
+While i% <= 10 And outFlag
+
+  If Len(wg1$(i%)) > 0 Then  'WG definiert
+    If InStr(wg1$(i%), Right(Str(100 + wg%), 2)) = 0 Then outFlag = False
+  End If
+
+  If outFlag Then
+    tLager$(i%) = RTrim(tLager$(i%))
+    If Len(tLager$(i%)) > 0 Then 'LgPlatz definiert
+      j% = Len(tLager$(i%))
+      k% = Len(Tara$)
+      'bricht ab, wenn 1 Zeichen im Artikel mit einem Zeichen
+      'der Vorgabe Åbereinstimmt. j% ist dann -1
+      While j% > 0
+        While k% > 0
+          If Mid$(Tara$, k%, 1) = Mid$(tLager$(i%), j%, 1) Then
+            j% = 0: k% = 0
+          End If
+          k% = k% - 1
+        Wend
+        j% = j% - 1
+      Wend
+      If j% = 0 Then outFlag = False
+    End If
+  End If
+
+  If outFlag Then
+    If Len(LgCode$(i%)) > 0 Then 'LgCode definiert
+      If InStr(LgCode$(i%), lc$) = 0 Then outFlag = False
+    End If
+  End If
+
+  If outFlag Then
+    If Abs(AVP#) < vonAVP#(i%) Then outFlag = False
+    If bisAVP#(i%) > 0# And Abs(AVP#) > bisAVP#(i%) Then outFlag = False
+  End If
+
+  If outFlag Then
+    If Abs(Spanne#) < vonSP#(i%) Then outFlag = False
+    If bisSP#(i%) > 0# And Abs(Spanne#) > bisSP#(i%) Then outFlag = False
+    
+  End If
+
+  If outFlag Then
+    If Rp$(i%) = "N" And Rezept$ = "J" Then outFlag = False
+  End If
+
+  If operator$(i%) = "N" Then outFlag = Not outFlag
+
+  i% = i% + 1
+
+  If i% <= 10 Then
+    If operator$(i%) = "O" Then
+      memFlag% = memFlag% + outFlag
+      outFlag = True
+    End If
+  End If
+Wend
+If memFlag% <> 0 Then outFlag = True
+If Not outFlag Then omitFlag = True
+Call DefErrPop
+End Sub
+
+
+Private Sub cmdOk_Click()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("cmdOk_Click")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FortschrittAbbruch% = 1
+Call DefErrPop
+End Sub
+
+Private Sub Form_Load()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_Load")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, j%, l%, k%, lInd%, wi%, MaxWi%, spBreite%, ind%
+Dim Breite1%, Breite2%, Hoehe1%, Hoehe2%
+Dim h$, h2$, FormStr$
+
+FortschrittAbbruch% = 0
+If PrgAction = ARTIKEL_EINLESEN Then
+  lblBestVorsStatus(1).Caption = "Artikel ¸bernommen"
+ElseIf PrgAction = VERKAUF_EINLESEN Then
+  lblBestVorsStatus(1).Caption = "Kunden ¸bernommen"
+End If
+
+Call wpara.InitFont(Me)
+
+For i% = 0 To 1
+    lblFortschrittStatusWert(i%).Caption = ""
+    lblFortschrittDauerWert(i%).Caption = ""
+Next i%
+lblBestVorsProzent.Caption = ""
+
+fmeBestVorsStatus.Left = wpara.LinksX
+fmeBestVorsStatus.Top = wpara.TitelY
+
+lblBestVorsStatus(0).Top = 2 * wpara.TitelY
+For i% = 1 To 1
+    lblBestVorsStatus(i%).Top = lblBestVorsStatus(i% - 1).Top + lblBestVorsStatus(i% - 1).Height + 90
+Next i%
+For i% = 0 To 1
+    lblFortschrittStatusWert(i%).Top = lblBestVorsStatus(i%).Top
+Next i%
+
+lblBestVorsStatus(0).Left = wpara.LinksX
+For i% = 1 To 1
+    lblBestVorsStatus(i%).Left = lblBestVorsStatus(i% - 1).Left
+Next i%
+
+MaxWi% = 0
+For i% = 0 To 1
+    wi% = lblBestVorsStatus(i%).Width
+    If (wi% > MaxWi%) Then
+        MaxWi% = wi%
+    End If
+Next i%
+
+lblFortschrittStatusWert(0).Left = lblBestVorsStatus(0).Left + MaxWi% + 300
+For i% = 1 To 1
+    lblFortschrittStatusWert(i%).Left = lblFortschrittStatusWert(i% - 1).Left
+Next i%
+
+fmeBestVorsStatus.Width = lblFortschrittStatusWert(0).Left + lblFortschrittStatusWert(0).Width + 2 * wpara.LinksX
+fmeBestVorsStatus.Height = lblBestVorsStatus(1).Top + lblBestVorsStatus(1).Height + wpara.TitelY
+
+fmeBestVorsDauer.Left = wpara.LinksX
+fmeBestVorsDauer.Top = fmeBestVorsStatus.Top + fmeBestVorsStatus.Height + 300
+
+lblBestVorsDauer(0).Top = 2 * wpara.TitelY
+For i% = 1 To 1
+    lblBestVorsDauer(i%).Top = lblBestVorsDauer(i% - 1).Top + lblBestVorsDauer(i% - 1).Height + 90
+Next i%
+For i% = 0 To 1
+    lblFortschrittDauerWert(i%).Top = lblBestVorsDauer(i%).Top
+Next i%
+
+lblBestVorsDauer(0).Left = wpara.LinksX
+For i% = 1 To 1
+    lblBestVorsDauer(i%).Left = lblBestVorsDauer(i% - 1).Left
+Next i%
+
+lblFortschrittDauerWert(0).Left = lblFortschrittStatusWert(0).Left
+For i% = 1 To 1
+    lblFortschrittDauerWert(i%).Left = lblFortschrittDauerWert(i% - 1).Left
+Next i%
+
+fmeBestVorsDauer.Width = lblFortschrittDauerWert(0).Left + lblFortschrittDauerWert(0).Width + 2 * wpara.LinksX
+fmeBestVorsDauer.Height = lblBestVorsDauer(1).Top + lblBestVorsDauer(1).Height + wpara.TitelY
+
+
+prgBestVors.Left = wpara.LinksX
+prgBestVors.Top = fmeBestVorsDauer.Top + fmeBestVorsDauer.Height + 300
+prgBestVors.Width = fmeBestVorsDauer.Width
+
+lblBestVorsProzent.Left = prgBestVors.Left + (prgBestVors.Width - lblBestVorsProzent.Width) / 2
+lblBestVorsProzent.Top = prgBestVors.Top + prgBestVors.Height + 150
+
+picBestVorsProgress.Left = wpara.LinksX
+picBestVorsProgress.Top = fmeBestVorsDauer.Top + fmeBestVorsDauer.Height + 300
+picBestVorsProgress.Width = fmeBestVorsDauer.Width
+picBestVorsProgress.Height = picBestVorsProgress.TextHeight("99 %") + 120
+
+
+'cmdEsc.Top = lblBestVorsProzent.Top + lblBestVorsProzent.Height + 150
+cmdEsc.Top = picBestVorsProgress.Top + picBestVorsProgress.Height + 210
+cmdOk.Top = cmdEsc.Top
+cmdDruck.Top = cmdEsc.Top
+
+Me.Width = fmeBestVorsDauer.Width + 2 * wpara.LinksX + 120
+
+cmdEsc.Width = wpara.ButtonX
+cmdEsc.Height = wpara.ButtonY
+cmdOk.Width = wpara.ButtonX
+If Me.TextWidth("   trotzdem ‹berleiten   ") > wpara.ButtonX Then cmdOk.Width = Me.TextWidth("   trotzdem ‹berleiten   ")
+cmdOk.Height = wpara.ButtonY
+cmdDruck.Width = wpara.ButtonX
+cmdDruck.Height = wpara.ButtonY
+
+cmdEsc.Left = (Me.ScaleWidth - cmdEsc.Width) / 2
+
+cmdDruck.Left = wpara.LinksX
+cmdOk.Left = cmdEsc.Left
+
+Me.Height = cmdEsc.Top + cmdEsc.Height + wpara.TitelY + 90 + wpara.FrmCaptionHeight
+
+Me.Left = frmAction.Left + (frmAction.Width - Me.Width) / 2
+Me.Top = frmAction.Top + (frmAction.Height - Me.Height) / 2
+Call DefErrPop
+End Sub
+
+Private Sub tmrBestVors_Timer()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("tmrBestVors_Timer")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+tmrBestVors.Enabled = False
+If PrgAction = ARTIKEL_EINLESEN Then
+  Call SucheArtikel
+ElseIf PrgAction = VERKAUF_EINLESEN Then
+  Call HoleVK
+End If
+Unload Me
+
+Call DefErrPop
+
+End Sub
+
+

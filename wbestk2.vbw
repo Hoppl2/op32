@@ -1,0 +1,14 @@
+frmAction = 161, 96, 665, 530, , 22, 22, 574, 470, C
+modWbestk2 = 0, 0, 504, 434, 
+frmAbout = 129, 77, 633, 511, C, 66, 66, 618, 514, C
+modSenden = 161, 96, 665, 530, 
+modInclude = 129, 77, 633, 511, 
+modIniDatei = 161, 129, 665, 537, Z
+modBestvors = 285, 74, 789, 508, 
+modSysTray = 129, 77, 633, 511, 
+frmBestVors = 129, 103, 633, 511, , 88, 88, 640, 536, C
+frmAbbruch = 327, 60, 831, 468, , 176, 176, 728, 624, 
+frmErfassung = 35, 103, 539, 511, C, 110, 110, 662, 558, C
+modManuell = 129, 103, 633, 511, C
+clsWbestk2 = 129, 103, 633, 511, C
+modSchwellwerte = 35, 103, 539, 511, 

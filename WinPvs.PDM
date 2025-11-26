@@ -1,0 +1,154 @@
+[Root]
+Most Recent Package=WinPVS
+
+
+[Package|WinPVS|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\vb5src\winwawi\PVSSETUP
+
+[Package|WinPVS|Configure DAO ISAMs]
+Applicable=Yes
+Xbase=No
+Excel=No
+Text=No
+Paradox=No
+Lotus=No
+Jet 2.x=No
+
+[Package|WinPVS|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|WinPVS|Files Found]
+
+[Package|WinPVS|Files Released]
+
+[Package|WinPVS|Missing Dependency Information]
+C:\grapo\user\op32.dll=
+
+[Package|WinPVS|Out-of-Date Dependency Information]
+
+[Package|WinPVS|Files Added]
+
+[Package|WinPVS|Files Removed]
+
+[Package|WinPVS|Files In Project]
+C:\vb5src\winwawi\WinPvs.exe=Yes
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\VB6DE.DLL=Yes
+C:\WINDOWS\SYSTEM\MBFIEE32.DLL=Yes
+C:\user\FABSCLS.EXE=Yes
+C:\Programme\Gemeinsame Dateien\Microsoft Shared\DAO\DAO350.DLL=Yes
+C:\WINDOWS\SYSTEM\MSJet35.dll=Yes
+C:\WINDOWS\SYSTEM\MSJtEr35.dll=Yes
+C:\WINDOWS\SYSTEM\MSJInt35.dll=Yes
+C:\WINDOWS\SYSTEM\VBAJet32.dll=Yes
+C:\WINDOWS\SYSTEM\expsrv.dll=Yes
+C:\WINDOWS\SYSTEM\MSRD2x35.dll=Yes
+C:\WINDOWS\SYSTEM\MsRepl35.dll=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT40.DLL=Yes
+C:\WINDOWS\SYSTEM\VB5DB.dll=Yes
+C:\WINDOWS\SYSTEM\MSFLXGRD.OCX=Yes
+C:\WINDOWS\SYSTEM\FlxGdDE.dll=Yes
+C:\WINDOWS\SYSTEM\COMCTL32.OCX=Yes
+C:\WINDOWS\SYSTEM\CMCTLDE.DLL=Yes
+C:\WINDOWS\SYSTEM\COMDLG32.OCX=Yes
+C:\WINDOWS\SYSTEM\CmDlgDE.dll=Yes
+C:\WINDOWS\SYSTEM\COMCT232.OCX=Yes
+C:\WINDOWS\SYSTEM\CmCt2DE.dll=Yes
+C:\WINDOWS\SYSTEM\MSCOMM32.ocx=Yes
+C:\WINDOWS\SYSTEM\MSCOMDE.DLL=Yes
+C:\WINDOWS\SYSTEM\MSCHART.OCX=Yes
+C:\WINDOWS\SYSTEM\MSCHTDE.DLL=Yes
+C:\WINDOWS\SYSTEM\TABCTL32.OCX=Yes
+C:\WINDOWS\SYSTEM\TabCtDE.dll=Yes
+C:\grapo\user\op32.dll=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=Yes
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|WinPVS|Configure Registry Files]
+Applicable=No
+
+[Package|WinPVS|Configure Remote Servers]
+Applicable=No
+
+[Package|WinPVS|Install Locations]
+C:\vb5src\winwawi\WinPvs.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\VB6DE.DLL=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MBFIEE32.DLL=$(WinSysPath)
+C:\user\FABSCLS.EXE=$(WinSysPath)
+C:\Programme\Gemeinsame Dateien\Microsoft Shared\DAO\DAO350.DLL=$(MSDAOPath)
+C:\WINDOWS\SYSTEM\MSJet35.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\MSJtEr35.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\MSJInt35.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\VBAJet32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\expsrv.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\MSRD2x35.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\MsRepl35.dll=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT40.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\VB5DB.dll=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSFLXGRD.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\FlxGdDE.dll=$(WinSysPath)
+C:\WINDOWS\SYSTEM\COMCTL32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CMCTLDE.DLL=$(WinSysPath)
+C:\WINDOWS\SYSTEM\COMDLG32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CmDlgDE.dll=$(WinSysPath)
+C:\WINDOWS\SYSTEM\COMCT232.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CmCt2DE.dll=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSCOMM32.ocx=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSCOMDE.DLL=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSCHART.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSCHTDE.DLL=$(WinSysPath)
+C:\WINDOWS\SYSTEM\TABCTL32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\TabCtDE.dll=$(WinSysPath)
+C:\grapo\user\op32.dll=$(WinSysPath)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Programme\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|WinPVS|Configure Shared Files]
+Applicable=Yes
+C:\vb5src\winwawi\WinPvs.exe=No
+
+[Package|WinPVS|Distribution]
+Type=single
+Size=
+Title=WinPvs
+
+[Package|WinPVS|IconGroups]
+Group0=WinPvs
+PrivateGroup0=-1
+Parent0=$(Programs)
+Group1=Optipharm
+PrivateGroup1=0
+Parent1=$(Programs)
+
+[Package|WinPVS|WinPvs]
+Icon1=WinPvs.exe
+Title1=WinPvs
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|WinPVS|Package]
+PackageFolder=C:\vb5src\winwawi\PVSSETUP
+ProjectFolder=C:\vb5src\winwawi
+ServerSideCab=
+File1=C:\vb5src\winwawi\PVSSETUP\setup.exe
+File2=C:\vb5src\winwawi\PVSSETUP\Setup.Lst
+File3=C:\vb5src\winwawi\PVSSETUP\WinPvs.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz

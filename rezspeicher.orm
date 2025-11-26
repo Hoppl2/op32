@@ -1,0 +1,371 @@
+VERSION 5.00
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Begin VB.Form frmRezSpeicher 
+   Caption         =   "Rezept-Speicher"
+   ClientHeight    =   4215
+   ClientLeft      =   60
+   ClientTop       =   345
+   ClientWidth     =   8595
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   4215
+   ScaleWidth      =   8595
+   Begin VB.CommandButton cmdEsc 
+      Cancel          =   -1  'True
+      Caption         =   "ESC"
+      Height          =   450
+      Left            =   2640
+      TabIndex        =   1
+      Top             =   3600
+      Width           =   1200
+   End
+   Begin MSFlexGridLib.MSFlexGrid flxRezSpeicher 
+      Height          =   2700
+      Left            =   360
+      TabIndex        =   0
+      Top             =   840
+      Width           =   2520
+      _ExtentX        =   4445
+      _ExtentY        =   4763
+      _Version        =   65541
+      Rows            =   0
+      Cols            =   1
+      FixedRows       =   0
+      FixedCols       =   0
+      BackColor       =   -2147483633
+      BackColorBkg    =   -2147483633
+      FocusRect       =   0
+      HighLight       =   2
+      GridLines       =   0
+      GridLinesFixed  =   1
+      ScrollBars      =   2
+      SelectionMode   =   1
+   End
+End
+Attribute VB_Name = "frmRezSpeicher"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Const DefErrModul = "REZSPEICHER.FRM"
+
+Private Sub cmdEsc_Click()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("cmdEsc_Click")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Unload Me
+Call DefErrPop
+End Sub
+
+Private Sub flxRezSpeicher_GotFocus()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxRezSpeicher_GotFocus")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+With flxRezSpeicher
+    .col = 0
+    .ColSel = .Cols - 1
+    .HighLight = flexHighlightAlways
+End With
+
+Call DefErrPop
+End Sub
+
+Private Sub flxRezSpeicher_KeyPress(KeyAscii As Integer)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxRezSpeicher_KeyPress")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim KKASSEN%, iLen%, iPos%
+Dim iAnzeige As Byte
+Dim h$
+
+If (KeyAscii = vbKeySpace) Then
+    With flxRezSpeicher
+        iPos% = Val(.TextMatrix(.row, 0))
+        h$ = .TextMatrix(.row, 1)
+        iAnzeige = Abs(h$ = "")
+        
+        KKASSEN% = FileOpen("kkassen.dat", "RW", "B")
+        iLen% = Len(Kkasse)
+        
+        If (KKASSEN% > 0) Then
+            Get #KKASSEN%, iPos% * iLen% + 1, Kkasse
+            Kkasse.Anzeige = iAnzeige
+            Put #KKASSEN%, iPos% * iLen% + 1, Kkasse
+            Close KKASSEN%
+        End If
+        
+        If (iAnzeige) Then
+            h$ = Chr$(214)
+        Else
+            h$ = ""
+        End If
+        .TextMatrix(.row, 1) = h$
+    End With
+End If
+
+Call DefErrPop
+End Sub
+
+Private Sub flxRezSpeicher_LostFocus()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxRezSpeicher_LostFocus")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+With flxRezSpeicher
+    .HighLight = flexHighlightNever
+End With
+
+Call DefErrPop
+End Sub
+
+Private Sub Form_Load()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_Load")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, j%, l%, k%, lInd%, wi%, MaxWi%, spBreite%, ind%, lief%
+Dim Breite1%, Breite2%, Hoehe1%, Hoehe2%, FeldInd%
+Dim h$, h2$, FormStr$
+
+Call wpara.InitFont(Me)
+
+With flxRezSpeicher
+    .Rows = 2
+    .FixedRows = 1
+    .FormatString = "||<Nummer|<Name|>Gesamt|>GesFAM|>ImpFähig|>ImpIst|"
+    .Rows = 1
+    .ColWidth(0) = 0
+    .ColWidth(1) = TextWidth(String(2, "A"))
+    .ColWidth(2) = TextWidth(String(12, "9"))
+    .ColWidth(3) = TextWidth(String(26, "A"))
+    For i% = 4 To 7
+        .ColWidth(i%) = TextWidth(String(9, "9"))
+    Next i%
+    .ColWidth(8) = wpara.FrmScrollHeight
+    
+    Breite1% = 0
+    For i% = 0 To (.Cols - 1)
+        Breite1% = Breite1% + .ColWidth(i%)
+    Next i%
+    .Width = Breite1% + 90
+    .Height = .RowHeight(0) * 21 + 90
+    
+    .Top = wpara.TitelY
+    .Left = wpara.LinksX
+    
+    Call flxRezSpeicherBefuellen
+    
+    .FillStyle = flexFillRepeat
+    .row = 1
+    .col = 1
+    .RowSel = .Rows - 1
+    .ColSel = .col
+    .CellFontName = "Symbol"
+    .FillStyle = flexFillSingle
+
+    .row = 1
+    .col = 3
+    .RowSel = .Rows - 1
+    .ColSel = .col
+    .Sort = 5
+    .col = 0
+    .ColSel = .Cols - 1
+End With
+
+Font.Bold = False   ' True
+
+cmdEsc.Top = flxRezSpeicher.Top + flxRezSpeicher.Height + 150
+
+Me.Width = flxRezSpeicher.Left + flxRezSpeicher.Width + 2 * wpara.LinksX
+
+cmdEsc.Width = wpara.ButtonX
+cmdEsc.Height = wpara.ButtonY
+
+cmdEsc.Left = (Me.Width - cmdEsc.Width) / 2
+
+Font.Name = wpara.FontName(1)
+Font.Size = wpara.FontSize(1)
+
+Me.Height = cmdEsc.Top + cmdEsc.Height + wpara.TitelY + 90 + wpara.FrmCaptionHeight
+
+Me.Left = frmAction.Left + (frmAction.Width - Me.Width) / 2
+Me.Top = frmAction.Top + (frmAction.Height - Me.Height) / 2
+
+Call DefErrPop
+End Sub
+
+Private Sub flxRezSpeicherBefuellen()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxRezSpeicherBefuellen")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%, KKASSEN%, iLen%
+Dim dWert#
+Dim h$, h2$, AuswertungMonat$
+
+KKASSEN% = FileOpen("kkassen.dat", "R", "B")
+iLen% = Len(Kkasse)
+
+If (KKASSEN% > 0) Then
+    Get #KKASSEN%, , Kkasse
+
+    AuswertungMonat$ = Format(Now, "YYMM")
+    For i% = 1 To 1000
+        Get #KKASSEN%, , Kkasse
+        If (EOF(KKASSEN%)) Then Exit For
+        
+        h$ = Format(i%, "0")
+        
+        h2$ = ""
+        If (Kkasse.Anzeige) Then h2$ = Chr$(214)
+        h$ = h$ + vbTab + h2$
+        
+        h2$ = Kkasse.Name
+        Call OemToChar(h2$, h2$)
+        
+        h$ = h$ + vbTab + Kkasse.nummer + vbTab + h2$
+        h2$ = GetRezeptSpeicher$(Kkasse.nummer, AuswertungMonat$)
+        h$ = h$ + h2$
+        flxRezSpeicher.AddItem h$
+    Next i%
+    
+    Close #KKASSEN%
+End If
+
+h$ = vbTab + vbTab + vbTab + "(nicht zugeordnet)"
+h2$ = GetRezeptSpeicher$("Unbekannt", AuswertungMonat$)
+h$ = h$ + h2$
+flxRezSpeicher.AddItem h$
+
+h$ = vbTab + vbTab + vbTab + "(Privat-Rezepte)"
+h2$ = GetRezeptSpeicher$("Privat   ", AuswertungMonat$)
+h$ = h$ + h2$
+flxRezSpeicher.AddItem h$
+
+Call DefErrPop
+End Sub
+
+Private Function GetRezeptSpeicher$(kNummer$, kMonat$)
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("GetRezeptSpeicher$")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim dWert#
+Dim ret$, h2$
+        
+With AuswertungRec
+    .Index = "Unique"
+    .Seek "=", kNummer$, kMonat$
+    If (.NoMatch = False) Then
+        h2$ = ""
+        dWert# = AuswertungRec!rez_gesamt
+        If (dWert# <> 0) Then h2$ = Format(dWert#, "0.00")
+        ret$ = ret$ + vbTab + h2$
+        
+        h2$ = ""
+        dWert# = AuswertungRec!rez_gesamtfam
+        If (dWert# <> 0) Then h2$ = Format(dWert#, "0.00")
+        ret$ = ret$ + vbTab + h2$
+        
+        h2$ = ""
+        dWert# = AuswertungRec!rez_ImpFähig
+        If (dWert# <> 0) Then h2$ = Format(dWert#, "0.00")
+        ret$ = ret$ + vbTab + h2$
+        
+        h2$ = ""
+        dWert# = AuswertungRec!rez_ImpIst
+        If (dWert# <> 0) Then h2$ = Format(dWert#, "0.00")
+        ret$ = ret$ + vbTab + h2$
+    End If
+End With
+        
+GetRezeptSpeicher$ = ret$
+
+Call DefErrPop
+End Function
+

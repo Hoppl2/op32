@@ -1,0 +1,14 @@
+frmAction = 0, 0, 1104, 647, , 25, 25, 1129, 672, C
+modWinRezX = 36, 108, 1304, 958, 
+modInclude = 35, 106, 539, 957, 
+modWinTools = 35, 106, 539, 957, 
+clsWinRezDr = 36, 108, 1182, 958, 
+modWinDruck = 36, 108, 540, 958, 
+modRezSpeicher = 36, 108, 540, 958, 
+frmTm290Wait = 0, 0, 0, 0, C, 250, 250, 1471, 913, C
+modSysTray = 35, 106, 539, 957, 
+modTaxieren = 225, 225, 1588, 694, 
+frmTaxieren = 0, 0, 1363, 469, , 275, 275, 1496, 938, C
+frmMagDarstellung = 75, 75, 1296, 738, , 150, 150, 1371, 813, C
+frmTaxMuster = 300, 300, 1521, 963, , 175, 175, 1396, 838, C
+frmEdit = 100, 100, 1371, 619, , 200, 200, 1421, 863, C

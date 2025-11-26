@@ -1,0 +1,863 @@
+VERSION 5.00
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Begin VB.Form frmKKassen 
+   Caption         =   "Kassen-Stammdaten"
+   ClientHeight    =   6510
+   ClientLeft      =   2340
+   ClientTop       =   1695
+   ClientWidth     =   9450
+   LinkTopic       =   "Form1"
+   ScaleHeight     =   6510
+   ScaleWidth      =   9450
+   Begin VB.TextBox txtKStrasse 
+      Height          =   375
+      Left            =   960
+      MaxLength       =   30
+      TabIndex        =   11
+      Top             =   1680
+      Width           =   7935
+   End
+   Begin VB.TextBox txtKPlz 
+      Height          =   375
+      Left            =   960
+      MaxLength       =   30
+      TabIndex        =   13
+      Top             =   2160
+      Width           =   7935
+   End
+   Begin VB.TextBox txtKTel 
+      Height          =   375
+      Left            =   960
+      MaxLength       =   20
+      TabIndex        =   15
+      Top             =   2640
+      Width           =   3375
+   End
+   Begin VB.TextBox txtKFax 
+      Height          =   375
+      Left            =   4920
+      MaxLength       =   20
+      TabIndex        =   17
+      Top             =   2640
+      Width           =   3975
+   End
+   Begin VB.PictureBox picFont 
+      Height          =   375
+      Left            =   5040
+      ScaleHeight     =   315
+      ScaleWidth      =   915
+      TabIndex        =   22
+      Top             =   4920
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.CheckBox chkKEti 
+      Caption         =   "&Etikette"
+      Height          =   375
+      Left            =   960
+      TabIndex        =   18
+      Top             =   3120
+      Width           =   2415
+   End
+   Begin VB.ComboBox cmbKZZTyp 
+      Height          =   315
+      Left            =   6240
+      TabIndex        =   9
+      Text            =   "Combo2"
+      Top             =   1200
+      Width           =   2775
+   End
+   Begin VB.ComboBox cmbKTyp 
+      Height          =   315
+      Left            =   960
+      Style           =   2  'Dropdown-Liste
+      TabIndex        =   7
+      Top             =   1200
+      Width           =   3615
+   End
+   Begin VB.TextBox txtKKurz 
+      Height          =   375
+      Left            =   4800
+      MaxLength       =   10
+      TabIndex        =   3
+      Top             =   240
+      Width           =   2295
+   End
+   Begin VB.TextBox txtKName 
+      Height          =   375
+      Left            =   960
+      MaxLength       =   30
+      TabIndex        =   5
+      Top             =   720
+      Width           =   7935
+   End
+   Begin VB.TextBox txtKKNr 
+      Height          =   375
+      Left            =   960
+      MaxLength       =   9
+      TabIndex        =   1
+      Top             =   240
+      Width           =   1695
+   End
+   Begin VB.CommandButton cmdOk 
+      Caption         =   "OK"
+      Default         =   -1  'True
+      Height          =   390
+      Left            =   360
+      TabIndex        =   19
+      Top             =   6000
+      Width           =   1200
+   End
+   Begin VB.CommandButton cmdEsc 
+      Cancel          =   -1  'True
+      Caption         =   "ESC"
+      Height          =   390
+      Left            =   1800
+      TabIndex        =   20
+      Top             =   6000
+      Width           =   1200
+   End
+   Begin MSFlexGridLib.MSFlexGrid flxAbrech 
+      Height          =   1260
+      Left            =   240
+      TabIndex        =   21
+      TabStop         =   0   'False
+      Top             =   3600
+      Width           =   2520
+      _ExtentX        =   4445
+      _ExtentY        =   2223
+      _Version        =   65541
+      Rows            =   0
+      Cols            =   1
+      FixedRows       =   0
+      FixedCols       =   0
+      BackColor       =   -2147483633
+      BackColorBkg    =   -2147483633
+      FocusRect       =   0
+      HighLight       =   2
+      GridLines       =   0
+      GridLinesFixed  =   1
+      ScrollBars      =   2
+      SelectionMode   =   1
+   End
+   Begin VB.Label lblKStrasse 
+      AutoSize        =   -1  'True
+      Caption         =   "&Strasse"
+      Height          =   195
+      Left            =   240
+      TabIndex        =   10
+      Top             =   1800
+      Width           =   525
+   End
+   Begin VB.Label lblKPlz 
+      AutoSize        =   -1  'True
+      Caption         =   "&PLZ/Ort"
+      Height          =   195
+      Left            =   120
+      TabIndex        =   12
+      Top             =   2280
+      Width           =   585
+   End
+   Begin VB.Label lblKTel 
+      AutoSize        =   -1  'True
+      Caption         =   "&Telefon"
+      Height          =   195
+      Left            =   120
+      TabIndex        =   14
+      Top             =   2640
+      Width           =   540
+   End
+   Begin VB.Label lblKFax 
+      AutoSize        =   -1  'True
+      Caption         =   "&Fax"
+      Height          =   195
+      Left            =   4560
+      TabIndex        =   16
+      Top             =   2760
+      Width           =   255
+   End
+   Begin VB.Label lblKTyp 
+      AutoSize        =   -1  'True
+      Caption         =   "&Typ"
+      Height          =   195
+      Left            =   240
+      TabIndex        =   6
+      Top             =   1320
+      Width           =   270
+   End
+   Begin VB.Label lblKZZTyp 
+      AutoSize        =   -1  'True
+      Caption         =   "&Zuzahlung"
+      Height          =   195
+      Left            =   5160
+      TabIndex        =   8
+      Top             =   1320
+      Width           =   750
+   End
+   Begin VB.Label lblKKurz 
+      AutoSize        =   -1  'True
+      Caption         =   "&Kurzbezeichnung"
+      Height          =   195
+      Left            =   3480
+      TabIndex        =   2
+      Top             =   360
+      Width           =   1230
+   End
+   Begin VB.Label lblKName 
+      AutoSize        =   -1  'True
+      Caption         =   "N&ame"
+      Height          =   195
+      Left            =   240
+      TabIndex        =   4
+      Top             =   840
+      Width           =   420
+   End
+   Begin VB.Label lblKNr 
+      AutoSize        =   -1  'True
+      Caption         =   "&Nummer"
+      Height          =   195
+      Left            =   240
+      TabIndex        =   0
+      Top             =   360
+      Width           =   585
+   End
+End
+Attribute VB_Name = "frmKKassen"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+
+Private Const DefErrModul = "KKASSEN.FRM"
+
+
+Private LastKKNr&
+
+Sub FelderFüllen()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("FelderFüllen")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim i%
+
+txtKKNr.text = KasseRec!Nummer
+txtKName.text = sCheckNull(KasseRec!Name)
+txtKKurz.text = sCheckNull(KasseRec!kurz)
+txtKStrasse.text = sCheckNull(KasseRec!strasse)
+txtKPlz.text = sCheckNull(KasseRec!plzort)
+txtKTel.text = sCheckNull(KasseRec!tel)
+txtKFax.text = sCheckNull(KasseRec!fax)
+i% = KasseRec!typ
+If i% <= 8 Then
+    cmbKTyp.ListIndex = i%
+Else
+    If i% - 2 < cmbKTyp.ListCount Then
+      cmbKTyp.ListIndex = i% - 2
+    Else
+      cmbKTyp.ListIndex = 0
+    End If
+End If
+If Val(KasseRec!zuzatyp) < cmbKZZTyp.ListCount Then
+  cmbKZZTyp.ListIndex = Val(KasseRec!zuzatyp)
+Else
+  cmbKZZTyp.ListIndex = 0
+End If
+If KasseRec!Etikette Then
+    chkKEti.Value = 1
+Else
+    chkKEti.Value = 0
+End If
+
+Call DefErrPop
+End Sub
+
+Sub flxAbrechBefuellen()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("flxAbrechBefuellen")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim l&, RezAnz&, RezAnzGes&
+Dim h$, VglJahr$
+Dim UmsGes#, Quote#, ImpSoll#, GesFAM#, ImpFähig#, ImpIst#, diff#
+Dim Werte#(4)
+Dim i%
+Dim ds As Recordset
+
+
+With flxAbrech
+
+    .Redraw = False
+    If Val(KKSatz) > 0 Then
+      Set ds = RezSpeicherDB.OpenRecordset("SELECT * FROM Auswertung WHERE Kkasse = " + Chr$(34) + KKSatz$ + Chr$(34) + " ORDER BY Monat", dbOpenSnapshot, dbReadOnly)
+      If Not ds.EOF Then ds.MoveFirst
+      Do While Not ds.EOF
+        If VglJahr$ = "" Then VglJahr$ = Left(ds!Monat, 2)
+        If Left(ds!Monat, 2) <> VglJahr$ Then
+            h$ = "20" + VglJahr$ + vbTab + vbTab + "20" + VglJahr$ + " ges." + vbTab
+            For i% = 1 To 4
+                If Werte#(i%) <> 0 Then
+                    h$ = h$ + Format(Werte#(i%), "0.00")
+                End If
+                Werte#(i%) = 0
+                h$ = h$ + vbTab
+            Next i%
+            .AddItem h$
+            VglJahr$ = Left(ds!Monat, 2)
+        End If
+        
+        h$ = ds!Monat + vbTab
+        
+        UmsGes# = dCheckNull(ds!abr_gesamt)
+        If UmsGes# = 0# Then
+            UmsGes# = dCheckNull(ds!Rez_Gesamt)
+        Else
+            h$ = h$ + "*"
+        End If
+        h$ = h$ + vbTab + Format(CDate("01." + Mid(ds!Monat, 3, 2) + ".20" + Left(ds!Monat, 2)), "MM/YYYY") + vbTab
+        
+        If UmsGes# <> 0# Then
+            h$ = h$ + Format(UmsGes#, "0.00")
+            Werte#(1) = Werte#(1) + UmsGes#
+        End If
+        h$ = h$ + vbTab
+        
+        RezAnz& = dCheckNull(ds!RezAnzahl)
+        RezAnzGes& = RezAnzGes& + RezAnz&
+        If RezAnz& > 0 Then
+            h$ = h$ + Format(RezAnz&, "0")
+        End If
+        h$ = h$ + vbTab
+        
+        GesFAM# = dCheckNull(ds!abr_gesamtFAM)
+        If GesFAM# = 0 Then GesFAM# = dCheckNull(ds!Rez_GesamtFAM)
+        If GesFAM# <> 0# Then
+            h$ = h$ + Format(GesFAM#, "0.00")
+            Werte#(2) = Werte#(2) + GesFAM#
+        End If
+        h$ = h$ + vbTab
+        
+        ImpFähig# = dCheckNull(ds!abr_ImpFähig)
+        If ImpFähig# = 0 Then ImpFähig# = dCheckNull(ds!Rez_ImpFähig)
+        If ImpFähig# <> 0# Then
+            h$ = h$ + Format(ImpFähig#, "0.00")
+            Werte#(3) = Werte#(3) + ImpFähig#
+        End If
+        h$ = h$ + vbTab
+  
+        ImpIst# = dCheckNull(ds!abr_ImpIst)
+        If ImpIst# = 0 Then ImpIst# = dCheckNull(ds!Rez_ImpIst)
+        If ImpIst# <> 0# Then
+            h$ = h$ + Format(ImpIst#, "0.00")
+            Werte#(4) = Werte#(4) + ImpIst#
+        End If
+        h$ = h$ + vbTab
+  
+        Quote# = ImportQuote#(GesFAM#, ImpFähig#, Left(sCheckNull(ds!Monat), 2))
+        If Quote# <> 0# Then h$ = h$ + Format(Quote#, "0.0")
+        h$ = h$ + vbTab
+  
+        ImpSoll# = GesFAM# * (Quote# / 100#)
+        If ImpSoll# <> 0# Then h$ = h$ + Format(ImpSoll#, "0.00")
+        h$ = h$ + vbTab
+        
+        diff# = ImpIst# - ImpSoll#
+        If diff# <> 0# Then h$ = h$ + Format(diff#, "0.00")
+        h$ = h$ + vbTab
+        
+        diff# = diff# / 10#
+        If Abs(diff#) > 5# Then
+            h$ = h$ + Format(diff#, "0.00")
+        End If
+        h$ = h$ + vbTab
+        If dCheckNull(ds!Saldo) > 0# Then
+            h$ = h$ + Format(dCheckNull(ds!Saldo), "0.00")
+        End If
+        
+  '      SaldoGes# = SaldoGes# + Saldo#
+  
+        .AddItem h$
+        ds.MoveNext
+      Loop
+      ds.Close
+      Set ds = Nothing
+  
+      If VglJahr$ > "" Then
+          h$ = "20" + VglJahr$ + vbTab + vbTab + "20" + VglJahr$ + " ges." + vbTab
+          For i% = 1 To 4
+              If i% = 2 Then
+                  If RezAnzGes& > 0 Then h$ = h$ + Format(RezAnzGes&, "0")
+                  h$ = h$ + vbTab
+              End If
+              If Werte#(i%) <> 0 Then
+                  h$ = h$ + Format(Werte#(i%), "0.00")
+                  'h$ = h$ + Format(99999999.99, "0.00")
+              End If
+              h$ = h$ + vbTab
+          Next i%
+          .AddItem h$
+      End If
+      If .Rows < 2 Then .Rows = 2
+      .row = 1
+      .col = 0
+      .RowSel = .Rows - 1
+      .ColSel = 1
+      .Sort = 6
+      .col = 0
+      .ColSel = .Cols - 1
+      
+      For l& = 1 To .Rows - 1
+          If Val(.TextMatrix(l&, 9)) < 0 Then
+              .row = l&
+              .col = 9
+              .CellForeColor = vbRed
+          End If
+          If InStr(.TextMatrix(l&, 2), "ges") > 0 Then
+              .row = l&
+              For i% = 1 To .Cols - 1
+                .col = i%
+                .CellBackColor = vbWhite
+              Next i%
+          End If
+      Next l&
+      .row = 1
+      .col = 0
+      .ColSel = .Cols - 1
+    End If
+    
+    .Redraw = True
+
+End With
+Call DefErrPop
+End Sub
+
+Private Sub cmdEsc_Click()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("cmdEsc_Click")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Unload Me
+Call DefErrPop
+End Sub
+
+Private Sub cmdOk_Click()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("cmdOK_Click")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim k$
+Dim recno&, l&
+
+If Val(txtKKNr.text) = 0 Then
+  txtKKNr.SetFocus
+  Exit Sub
+End If
+If Trim(txtKKurz.text) = "" Then
+  txtKKurz.SetFocus
+  Exit Sub
+End If
+If Trim(txtKName.text) = "" Then
+  txtKName.SetFocus
+  Exit Sub
+End If
+If cmbKTyp.ListIndex = 0 Then
+    cmbKTyp.SetFocus
+    Exit Sub
+End If
+k$ = Right(String(9, "0") + CStr(Val(txtKKNr.text)), 9)
+
+With KasseRec
+    .index = "Unique"
+    .Seek "=", k$
+    
+    If Val(KKSatz) <> Val(k$) Then
+        If Not .NoMatch Then
+            If KasseRec!Nummer <> KKSatz$ Then
+              Call iMsgBox("Krankenkassennummer bereits vorhanden!", vbExclamation, "Krankenkassen erfassen")
+              txtKKNr.SetFocus
+              .Seek "=", KKSatz$
+              Exit Sub
+            End If
+        End If
+    End If
+    
+    If .NoMatch Then
+        .AddNew
+        KasseRec!Anzeige = False
+        Kkasse.Anzeige = 0
+    Else
+        .Edit
+    End If
+    KasseRec!Nummer = k$
+    Kkasse.Nummer = txtKKNr.text
+    
+    KasseRec!kurz = UCase(Trim(txtKKurz.text))
+    Kkasse.kurz = UCase(Trim(txtKKurz.text))
+    
+    KasseRec!Name = Trim(txtKName.text)
+    Kkasse.Name = txtKName.text
+    
+    Select Case cmbKTyp.ListIndex
+    Case 1 To 7
+        KasseRec!typ = cmbKTyp.ListIndex
+        Kkasse.typ = cmbKTyp.ListIndex
+    Case Else
+        KasseRec!typ = cmbKTyp.ListIndex + 2
+        Kkasse.typ = cmbKTyp.ListIndex + 2
+    End Select
+    
+    KasseRec!zuzatyp = cmbKZZTyp.ListIndex
+    Kkasse.ZZTyp = cmbKZZTyp.ListIndex
+    
+    KasseRec!Etikette = (chkKEti.Value = 1)
+    If chkKEti.Value = 1 Then
+        Kkasse.Eti = "J"
+    Else
+        Kkasse.Eti = "N"
+    End If
+    
+    KasseRec!strasse = Trim(txtKStrasse.text)
+    KasseRec!plzort = Trim(txtKPlz.text)
+    KasseRec!tel = Trim(txtKTel.text)
+    KasseRec!fax = Trim(txtKFax.text)
+    
+    .Update
+    If Val(KKSatz$) > 0 Then
+      FabsErrf% = Kkasse.IndexSearch(0, KKSatz$, FabsRecno&)
+      If FabsErrf% = 0 Then
+        Kkasse.PutRecord (FabsRecno& + 1)
+      Else
+        Kkasse.PutRecord (0)
+      End If
+    Else
+      Kkasse.PutRecord (0)
+      LastKKNr = Kkasse.Nummer
+      l& = WritePrivateProfileString("Rezeptkontrolle", "LastKKNr", CStr(LastKKNr), INI_DATEI)
+    End If
+End With
+Unload Me
+Call DefErrPop
+End Sub
+
+
+Private Sub Form_Load()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("Form_Load")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Dim Breite1%, i%, FormVersatzY%
+Dim ScreenSizeWidth&, ScreenSizeHeight&, l&
+Dim h$
+
+Call wpara.InitFont(Me)
+
+FormVersatzY% = wpara.FrmCaptionHeight + wpara.FrmBorderHeight
+Me.Width = frmRezSpeicher.Width
+Me.Height = frmRezSpeicher.Height - FormVersatzY%
+Me.Left = frmRezSpeicher.Left
+Me.Top = frmRezSpeicher.Top + FormVersatzY%
+
+
+lblKNr.Top = wpara.TitelY
+lblKNr.Left = wpara.LinksX
+txtKKNr.Top = lblKNr.Top + (lblKNr.Height - txtKKNr.Height) \ 2
+txtKKNr.Left = lblKNr.Left + lblKNr.Width + wpara.LinksX
+'txtKKNr.Width = TextWidth(String$("9", 11))
+
+txtKName.Left = txtKKNr.Left
+txtKName.Top = txtKKNr.Top + txtKKNr.Height + wpara.TitelY \ 2
+lblKName.Left = wpara.LinksX
+lblKName.Top = txtKName.Top + (txtKName.Height - lblKName.Height) \ 2
+
+lblKKurz.Top = lblKNr.Top
+txtKKurz.Top = txtKKNr.Top
+txtKKurz.Left = txtKName.Left + txtKName.Width - txtKKurz.Width
+lblKKurz.Left = txtKKurz.Left - lblKKurz.Width - wpara.LinksX
+
+lblKTyp.Left = wpara.LinksX
+lblKTyp.Top = lblKName.Top + (lblKName.Top - lblKNr.Top)
+cmbKTyp.Left = txtKKNr.Left
+cmbKTyp.Top = txtKName.Top + txtKName.Height + wpara.TitelY \ 2
+
+cmbKZZTyp.Top = cmbKTyp.Top
+cmbKZZTyp.Left = txtKName.Left + txtKName.Width - cmbKZZTyp.Width
+lblKZZTyp.Top = lblKTyp.Top
+lblKZZTyp.Left = cmbKZZTyp.Left - lblKZZTyp.Width - wpara.LinksX
+
+lblKStrasse.Left = wpara.LinksX
+txtKStrasse.Top = cmbKTyp.Top + cmbKTyp.Height + wpara.TitelY \ 2
+txtKStrasse.Left = txtKName.Left
+txtKStrasse.Width = txtKName.Width
+lblKStrasse.Top = lblKTyp.Top + (lblKName.Top - lblKNr.Top)
+
+
+lblKPlz.Left = wpara.LinksX
+txtKPlz.Top = txtKStrasse.Top + txtKStrasse.Height + wpara.TitelY \ 2
+txtKPlz.Left = txtKName.Left
+txtKPlz.Width = txtKName.Width
+lblKPlz.Top = txtKPlz.Top
+
+lblKTel.Left = wpara.LinksX
+txtKTel.Top = txtKPlz.Top + txtKPlz.Height + wpara.TitelY \ 2
+txtKTel.Left = txtKName.Left
+txtKTel.Width = txtKName.Width
+lblKTel.Top = txtKTel.Top
+
+lblKFax.Left = wpara.LinksX
+txtKFax.Top = txtKTel.Top + txtKTel.Height + wpara.TitelY \ 2
+txtKFax.Left = txtKName.Left
+txtKFax.Width = txtKName.Width
+lblKFax.Top = txtKFax.Top
+
+chkKEti.Left = txtKKNr.Left
+chkKEti.Top = txtKFax.Top + txtKFax.Height + wpara.TitelY \ 2
+
+cmbKTyp.AddItem ""
+cmbKTyp.AddItem "RVO/Primärkasse"
+cmbKTyp.AddItem "VdAK"
+cmbKTyp.AddItem "Bundeswehr"
+cmbKTyp.AddItem "Berufsgenossenschaften"
+cmbKTyp.AddItem "Post-Beamten-KK A"
+cmbKTyp.AddItem "Träger der Sozialhilfe"
+cmbKTyp.AddItem "Bundesgrenzschutz"
+cmbKTyp.AddItem "Polizei, Polizeiheilfürsorge"
+cmbKTyp.AddItem "Baden-Württemberg: BKK"
+cmbKTyp.AddItem "Niedersachsen: VW BKK"
+cmbKTyp.AddItem "Zivildienst"
+cmbKTyp.AddItem "Sachsen: AOK"
+cmbKTyp.AddItem "Baden-Württemberg: IKK"
+cmbKTyp.ListIndex = 0
+
+cmbKZZTyp.AddItem "keine Kosten für Patient"
+cmbKZZTyp.AddItem "gesetzliche Zuzahlung"
+cmbKZZTyp.AddItem "abweichende Zuzahlung"
+cmbKZZTyp.AddItem "keine Zuzahlung"
+cmbKZZTyp.ListIndex = 1
+If Val(KKSatz) > 0 Then
+    KasseRec.index = "Unique"
+    KasseRec.Seek "=", KKSatz
+    FabsErrf% = Kkasse.IndexSearch(0, KKSatz, FabsRecno&)
+    If FabsErrf% = 0 Then Kkasse.GetRecord (FabsRecno& + 1)
+    Call FelderFüllen
+End If
+'ScreenSizeWidth& = (Screen.Width / Screen.TwipsPerPixelX) * Screen.TwipsPerPixelY - Screen.TwipsPerPixelX
+Call ScreenWerte(ScreenSizeHeight&, ScreenSizeWidth&)
+ScreenSizeWidth& = Me.ScaleWidth
+
+With flxAbrech
+    .Top = chkKEti.Top + chkKEti.Height + wpara.TitelY
+    .Left = wpara.LinksX
+    
+    If DarfRezSpeicher Then
+        .Cols = 4
+        .Rows = 2
+        .FixedRows = 1
+        .FormatString = "||<Monat|>ges.Mon|>Anzahl|>FAM|>ImpFähig|>ImpIst|>Q.%|>Q.EUR|>Diff.|>+/-|>Saldo|>"
+        .Rows = 1
+        .Font.Size = .Font.Size + 1
+        Do
+            .Font.Size = .Font.Size - 1
+            picFont.FontSize = .Font.Size
+            .ColWidth(0) = 0
+            .ColWidth(1) = picFont.TextWidth("AA")
+            .ColWidth(2) = picFont.TextWidth(String(9, "9"))
+            .ColWidth(3) = picFont.TextWidth(String(12, "9"))
+            .ColWidth(4) = picFont.TextWidth(String(7, "9"))
+            .ColWidth(5) = picFont.TextWidth(String(11, "9"))
+            .ColWidth(6) = picFont.TextWidth(String(11, "9"))
+            .ColWidth(7) = picFont.TextWidth(String(11, "9"))
+            .ColWidth(8) = picFont.TextWidth(String(5, "9"))
+            .ColWidth(9) = picFont.TextWidth(String(10, "9"))
+            .ColWidth(10) = picFont.TextWidth(String(9, "9"))
+            .ColWidth(11) = picFont.TextWidth(String(8, "9"))
+            .ColWidth(12) = picFont.TextWidth(String(6, "9"))
+            .ColWidth(13) = wpara.FrmScrollHeight
+            Breite1% = 0
+            For i% = 0 To (.Cols - 1)
+                Breite1% = Breite1% + .ColWidth(i%)
+            Next i%
+            .Width = Breite1% + 90
+            .Height = .RowHeight(0) * 13 + 90
+        Loop While (.Width - 100) > ScreenSizeWidth&
+        
+        .Height = ((Me.ScaleHeight - .Top - wpara.ButtonY - 300) \ .RowHeight(0)) * .RowHeight(0) + 90
+        
+'        i% = 13
+'        Do While (.Top + .Height + wpara.ButtonY + 300) > ScreenSizeHeight& And i% > 4
+'            i% = i% - 1
+'            .Height = .RowHeight(0) * i% + 90
+'        Loop
+        Call flxAbrechBefuellen
+    Else
+        .Visible = False
+        .Height = 0
+    End If
+End With
+
+'Me.Width = flxAbrech.Left + flxAbrech.Width + 2 * wpara.LinksX
+'If txtKName.Left + txtKName.Width > flxAbrech.Left + flxAbrech.Width Then
+'    Me.Width = txtKName.Left + txtKName.Width + 2 * wpara.LinksX
+'End If
+'Me.Left = frmAction.Left + (frmAction.Width - Me.Width) / 2
+'Me.Top = frmAction.Top + (frmAction.Height - Me.Height) / 2
+
+cmdEsc.Top = flxAbrech.Top + flxAbrech.Height + 150
+cmdEsc.Height = wpara.ButtonY
+cmdEsc.Width = wpara.ButtonX
+
+cmdOk.Top = cmdEsc.Top
+cmdOk.Height = wpara.ButtonY
+cmdOk.Width = wpara.ButtonX
+
+cmdOk.Left = (Me.Width - (cmdOk.Width * 2 + 300)) / 2
+cmdEsc.Left = cmdOk.Left + cmdEsc.Width + 300
+
+Font.Name = wpara.FontName(1)
+Font.Size = wpara.FontSize(1)
+
+'Me.Height = cmdEsc.Top + cmdEsc.Height + wpara.TitelY + 90 + wpara.FrmCaptionHeight
+
+'Me.Left = frmRezSpeicher.Left + (frmRezSpeicher.Width - Me.Width) / 2
+'If Me.Left < 0 Then Me.Left = -flxAbrech.Left
+'Me.Top = frmRezSpeicher.Top + (frmRezSpeicher.Height - Me.Height) / 2
+
+h$ = Space$(10)
+l& = GetPrivateProfileString("Rezeptkontrolle", "LastKKNr", h$, h$, 6, INI_DATEI)
+If l& > 0 Then
+    LastKKNr = Val(h$)
+End If
+If Val(KKSatz) <= 0 And LastKKNr > 0 Then
+    With KasseRec
+        .index = "Unique"
+        Do
+          LastKKNr = LastKKNr + 1
+          .Seek "=", Format(LastKKNr, "000000000")
+        Loop Until .NoMatch
+    End With
+    txtKKNr.text = CStr(LastKKNr)
+End If
+Call DefErrPop
+End Sub
+
+
+Private Sub txtKKNr_GotFocus()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("txtKKNr_GotFocus")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call SelectAll(txtKKNr)
+Call DefErrPop
+End Sub
+
+
+Private Sub txtKKurz_GotFocus()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("txtKKurz_GotFocus")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call SelectAll(txtKKurz)
+Call DefErrPop
+
+End Sub
+
+
+Private Sub txtKName_GotFocus()
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call DefErrFnc("txtKName_GotFocus")
+Call DefErrMod(DefErrModul)
+On Error GoTo DefErr
+GoTo DefErrEnd
+DefErr:
+Select Case DefErrAnswer(Err.Source, Err.Number, Err.Description, DefErrModul)
+Case vbRetry
+  Resume
+Case vbIgnore
+  Resume Next
+End Select
+End
+DefErrEnd:
+'DefErr!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Call SelectAll(txtKName)
+Call DefErrPop
+
+End Sub
+
+
