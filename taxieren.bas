@@ -2004,6 +2004,12 @@ With frmTaxieren.flxTaxieren
             Exit For
         End If
     Next
+    For i% = 1 To (.Rows - 1)
+        If (InStr(UCase(.TextMatrix(i, 3)), UCase("Honorierung des Sichtbezuges")) > 0) Then
+            .RemoveItem (i)
+            Exit For
+        End If
+    Next
     
     If (Trim(.TextMatrix(.Rows - 1, 0)) <> "") Then
         .AddItem " "
@@ -2067,6 +2073,34 @@ With frmTaxieren.flxTaxieren
         .flag = MAG_PREISEINGABE
     End With
     Call frmTaxieren.ZeigeTaxierZeile(.row)
+    
+    Dim SumSubstitutionsAbgabenSichtbezug As Integer
+    h = MyInputBox("Honorierung des Sichtbezuges (Anzahl): ", "Sichtbezug der Opioidsubstitution", "")
+    SumSubstitutionsAbgabenSichtbezug = Val(h)
+
+    If (SumSubstitutionsAbgabenSichtbezug > 0) Then
+        .AddItem " "
+        .row = .Rows - 1
+        row% = .row
+
+        With TaxierRec
+            .pzn = "18774506"   ' Space$(Len(.pzn))
+            .kurz = Left$("Honorierung des Sichtbezuges der Opioidsubstitution " + Space$(100), 100) '+ Space$(Len(.kurz)), Len(.kurz))
+
+            .menge = Space$(Len(.menge))
+            .Meh = Space$(Len(.Meh))
+            .kp = 0
+            .GStufe = 0
+            
+            .ActMenge = SumSubstitutionsAbgabenSichtbezug
+            .ActPreis = 5.7 * SumSubstitutionsAbgabenSichtbezug
+            .kp = .ActPreis
+
+            .flag = MAG_PREISEINGABE
+        End With
+        Call frmTaxieren.ZeigeTaxierZeile(.row)
+    End If
+
 End With
     
 Call DefErrPop
@@ -3082,7 +3116,19 @@ With frmTaxieren.flxTaxSumme
 '            TeilPreis# = TeilPreis# + ActPreis#
 '        End If
         
-        ActPreis = TeilPreis# * (AktMwSt% / 100#)
+        Dim TeilPreis2#
+        TeilPreis2 = TeilPreis
+        With frmTaxieren.flxTaxieren
+            For i = 1 To (.Rows - 1)
+                If (InStr(UCase(.TextMatrix(i, 3)), UCase("Honorierung des Sichtbezuges")) > 0) Then
+                    TeilPreis2 = TeilPreis2 - iCDbl(.TextMatrix(i%, 0))
+                    Exit For
+                End If
+            Next i
+        End With
+        ActPreis = TeilPreis2# * (AktMwSt% / 100#)
+'        ActPreis = TeilPreis# * (AktMwSt% / 100#)
+        
         h$ = Format(ActPreis, "0.00")
         .AddItem h$ + vbTab + " " + vbTab + "+" + Format(AktMwSt%, "0") + "%"
         TeilPreis# = TeilPreis# + ActPreis#

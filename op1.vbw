@@ -1,5 +1,5 @@
 clsStamm = 110, 115, 1122, 634, C
-modGlobal = 22, 23, 1034, 542, Z
+modGlobal = 22, 23, 1034, 542, 
 clsDateien = 242, 253, 1254, 772, C
 clsStatistik = 132, 138, 1144, 657, 
 clsInfoBereich = 0, 0, 1012, 519, C
@@ -80,7 +80,7 @@ clsToolbar = 130, 108, 634, 958,
 clsLieferantenDB = 130, 108, 634, 958, 
 clsMatchLieferanten = 44, 46, 1056, 565, C
 frmReorg = 50, 50, 1321, 569, C, 154, 161, 1166, 680, C
-clsSqlTools = 130, 108, 634, 958, 
+clsSqlTools = 130, 108, 634, 958, Z
 clsAbsagenDB = 176, 184, 1188, 703, C
 clsLagerbewegungDB = 512, 313, 1524, 832, C
 clsEtikettenDB = 220, 230, 1232, 749, C
