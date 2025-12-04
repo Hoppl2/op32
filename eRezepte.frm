@@ -2778,12 +2778,12 @@ If (picToolTip.Visible = True) Then
     picToolTip.Visible = False
 End If
 
+Dim sTaskId$
 If ((Shift And vbShiftMask) = vbShiftMask) And ((Shift And vbAltMask) = vbAltMask) And (KeyCode = 191) Then
     h = Trim(InputBox("OP-Status des Rezeptes: ", "Status des eRezeptes", CStr(SollStatus)))
     If (Len(h) = 1) Then
         If (InStr("1234567", h) > 0) Then
             If (Val(h) <> SollStatus) Then
-                Dim sTaskId$
                 With flxarbeit(0)
                     sTaskId = .TextMatrix(.row, 2)
                 End With
@@ -2796,6 +2796,42 @@ If ((Shift And vbShiftMask) = vbShiftMask) And ((Shift And vbAltMask) = vbAltMas
             End If
         End If
     End If
+End If
+
+If ((Shift And vbShiftMask) = vbShiftMask) And ((Shift And vbAltMask) = vbAltMask) And (KeyCode = vbKeyK) Then
+    With flxarbeit(0)
+        sTaskId = .TextMatrix(.row, 2)
+        If (Left(sTaskId, 3) <> "980") Then
+            Call MsgBox("Dies ist kein Pflegehilfsmittel-Sonderbeleg!", vbCritical)
+            Call DefErrPop: Exit Sub
+        End If
+        
+        Dim sIK As String
+        Dim sBundle As String
+        sIK = .TextMatrix(.row, 16)
+        h = Trim(InputBox("IK der Krankenkasse der Verordnung: ", "IK der Verordnung ändern", sIK))
+        If (h <> sIK) Then
+            If (Len(h) = 9) Then
+                Dim Rec2 As New ADODB.Recordset
+                SQLStr = "Select Bundle FROM TI_eRezepte"
+                SQLStr = SQLStr + " WHERE TI_eRezepte.TaskId='" + sTaskId + "'"
+                FabsErrf = VerkaufAdoDB.OpenRecordset(Rec2, SQLStr, 0)
+                If (FabsErrf = 0) Then
+                    sBundle = CheckNullStr(Rec2!Bundle)
+                    sBundle = Replace(sBundle, sIK, h)
+                End If
+                Rec2.Close
+                
+                If (sBundle <> "") Then
+                    SQLStr = "UPDATE TI_eRezepte SET Bundle='" + sBundle + "', KostentraegerIK='" + h + "'"
+                    SQLStr = SQLStr + " WHERE TaskId='" + sTaskId + "'"
+                    'MsgBox (SQLStr)
+                    VerkaufAdoDB.ActiveConn.Execute (SQLStr)
+                    Call AuswahlBefüllen
+                End If
+            End If
+        End If
+    End With
 End If
 
 If (Shift And vbCtrlMask And (KeyCode <> 17)) Then

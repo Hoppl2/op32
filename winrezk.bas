@@ -1,4 +1,5 @@
 Attribute VB_Name = "modWinRezK"
+'6.3.06 251204  AE  Shift+Alt+K: Ändern des IK bei Pflegehilfsmittel
 '6.3.05 251129  AE  Einbau Honorierung für Sichtbezug (PZN 18774506): Nichtberücksictigung bei USt, Hashcode
 '6.3.04 251126  AE  PZN 06461334 (Stoffe ohne PZN) für den HashCode berücksichtigen: Faktor=1, PreisKz=11
 '6.3.03 251016  AE  Selbsterklätung: Abfrage, ob elektronisch oder Ausdruck
